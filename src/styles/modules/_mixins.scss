@@ -1,0 +1,257 @@
+@mixin defaults {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@mixin box-shadow($x: 0, $y: 0, $blur: 0, $spread: 0, $color: #000) {
+  -moz-box-shadow: $x $y $blur $spread $color;
+  -webkit-box-shadow: $x $y $blur $spread $color;
+  box-shadow: $x $y $blur $spread $color;
+}
+
+@mixin border-box($args) {
+  box-sizing: $args;
+}
+
+@mixin align-right {
+  float: right;
+}
+
+@mixin transition($prop, $duration: 0.2s, $timing: ease, $delay: 0s) {
+  -webkit-transition: $prop $duration $timing $delay;
+  -moz-transition: $prop $duration $timing $delay;
+  -o-transition: $prop $duration $timing $delay;
+  transition: $prop $duration $timing $delay;
+  transition-property: $prop;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+
+@mixin transform($args) {
+  -webkit-transform: $args;
+   -moz-transform: $args;
+   -o-transform: $args;
+   -ms-transform: $args;
+   transform: $args;
+}
+
+@mixin afterIcon($url,$bgW,$bgH){
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  content: '';
+  width: $bgW;
+  height: $bgH;
+  background: url($url) no-repeat center center;
+}
+
+@mixin animation($name,$propStart,$valStart,$propEnd,$valEnd){
+  @-webkit-keyframes $name {
+    0%   { $propStart: $valStart; }
+    100% { $propEnd: $valEnd; }
+  }
+  @-moz-keyframes $name {
+    0%   { $propStart: $valStart; }
+    100% { $propEnd: $valEnd; }
+  }
+  @-o-keyframes $name {
+    0%   { $propStart: $valStart; }
+    100% { $propEnd: $valEnd; }
+  }
+  @keyframes $name {
+    0%   { $propStart: $valStart; }
+    100% { $propEnd: $valEnd; }
+  }
+}
+
+@mixin implementAnim($name,$timing,$repeat){
+  -webkit-animation: $name $timing $repeat; /* Safari 4+ */
+  -moz-animation:    $name $timing $repeat; /* Fx 5+ */
+  -o-animation:      $name $timing $repeat; /* Opera 12+ */
+  animation:         $name $timing $repeat; /* IE 10+, Fx 29+ */
+}
+
+@mixin notification {
+  position:absolute;
+  top: 70px;
+  right: 10px;
+  width: auto;
+  height: auto;
+  background-color: $white;
+  padding: 6px 20px;
+  @include box-shadow(0,0,10px,0,#000);
+}
+
+@mixin input($borderwidth, $borderstyle, $bordercolor, $radius){
+  border: $borderwidth $borderstyle $bordercolor;
+  border-radius: $radius;
+}
+
+@mixin button($bgcolor, $font-color, $border-radius) {
+  background-color: $bgcolor;
+  color: $font-color;
+  border-radius: $border-radius;
+  padding: 10px;
+  margin: 5px auto;
+  text-decoration: none;
+  width: auto;
+  display: inline-block;
+}
+
+@mixin inline-list {
+  display: inline-block;
+  list-style: none;
+}
+
+@mixin flexbox() {
+  // create a flexbox layout context
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-flow($direction: row, $wrap: wrap){
+  // shorthand for flex-direction and flex-wrap
+  // direction args: row, row-reverse, column, column-reverse
+  // wrap args: nowrap, wrap, wrap-reverse
+  -webkit-flex-flow: $direction $wrap;
+  -ms-flex-flow: $direction $wrap;
+  flex-flow: $direction $wrap;
+}
+
+@mixin flex-justify($args){
+  // spaces items along the main axis
+  // acceptable args: flex-start, flex-end,center,space-between,space-around
+  -webkit-justify-content: $args;
+  -ms-flex-pack: $args;
+  justify-content: $args;
+}
+
+@mixin flex-align-items($args){
+  // how items align along the cross axis of the current line
+  // acceptable arguments: flex-start, flex-end, center, baseline, stretch
+  -webkit-align-items: $args;
+  -ms-align-items: $args;
+  align-items: $args;
+}
+
+@mixin flex-align-content($args){
+  // acceptable args: flex-start, flex-end,center,space-between,space-around
+  -webkit-align-content: $args;
+  -ms-flex-line-pack: $args;
+  -ms-align-content: $args;
+  -moz-align-content: $args;
+  -o-align-content: $args;
+  align-content: $args;
+}
+
+@mixin flex($args) {
+  // shorthand for flex-grow, flex-shrink, flex-basis. default is 0 1 auto
+  -webkit-box-flex: $args;
+  -moz-box-flex:  $args;
+  -webkit-flex:  $args;
+  -ms-flex:  $args;
+  flex:  $args;
+}
+
+@mixin align-self($args){
+  -webkit-align-self: $args;
+  -ms-flex-item-align: $args;
+  -moz-align-self: $args;
+  align-self: $args;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+  order: $val;
+}
+
+@-webkit-keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@-moz-keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@-ms-keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@keyframes whale {
+  0% {
+    transform: translate3d(500px,275%,0) rotateZ(60deg);
+  }
+
+  50% {
+    transform: translate3d(500px,150%,0) rotateZ(45deg);
+  }
+
+  100% {
+    transform: translate3d(500px,275%,0) rotateZ(60deg);
+  }
+}
+
+@mixin animation($name,$time: 1s,$delay: .1s,$repeat: infinite, $ease: linear){
+  -webkit-animation: $name $time $delay $repeat $ease;
+  -moz-animation: $name $time $delay $repeat $ease;
+  animation: $name $time $delay $repeat $ease;
+}
+
+
+
+
+
