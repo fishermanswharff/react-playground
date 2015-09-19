@@ -1,8 +1,9 @@
+'use strict';
+/* globals require, console */
 var gulp = require('gulp'),
     minifyHtml = require('gulp-minify-html'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin'),
     sourcemaps = require('gulp-sourcemaps'),
     react = require('gulp-react'),
     browserSync = require('browser-sync'),

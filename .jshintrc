@@ -1,0 +1,10 @@
+{
+  "undef": true,
+  "unused": true,
+  "predef": [ "MY_GLOBAL" ],
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "latedef": true
+}
