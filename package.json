@@ -26,5 +26,10 @@
     "browser-sync": "^2.9.3",
     "gulp-ruby-sass": "^2.0.3",
     "gulp-minify-html": "^1.0.4"
+  },
+  "dependencies": {
+    "marked": "^0.3.5",
+    "gulp-plumber": "^1.0.1",
+    "gulp-util": "^3.0.6"
   }
 }
