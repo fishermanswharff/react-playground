@@ -11,12 +11,13 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     gutil = require('gulp-util'),
     del = require('del'),
+    webpack = require('gulp-webpack'),
     reload = browserSync.reload;
 
 var paths = {
   html: 'app/src/**/*.html',
   styles: 'app/src/styles/**/*.scss',
-  scripts: ['app/src/js/**/*.jsx'],
+  scripts: ['app/src/js/components/*.jsx','app/src/js/**/*.jsx'],
   vendors: ['app/src/vendor/**/*.js'],
   data: ['app/src/data/**/*.json'],
   tmp: ['.module-cache','.sass-cache','.tmp','app/build/js'],
@@ -62,7 +63,7 @@ gulp.task('data',function(){
 });
 
 gulp.task('minify-html', function () {
-  gulp.src(paths.html)
+  return gulp.src(paths.html)
     .pipe(minifyHtml())
     .pipe(gulp.dest(paths.destroot));
 });
@@ -78,12 +79,14 @@ gulp.task('reactify',['clean'], function() {
   // with sourcemaps all the way down
   return gulp.src(paths.scripts)
     .pipe(react())
+    .pipe(concat('app.min.js'))
     .pipe(gulp.dest(paths.destjs));
 });
 
 gulp.task('compileVendors', function(){
   return gulp.src(paths.vendors)
-    .pipe(concat('vendor.min.js'))
+    // .pipe(react())
+    // .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest(paths.destvendor));
 });
 
