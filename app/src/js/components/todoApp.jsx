@@ -1,33 +1,33 @@
 var TodoApp = React.createClass({
-  loadListsFromServer: function(){
+  mixins: [ReactFireMixin],
+  firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com/projects/'),
+  loadListsFromServer(){
     this.items = [];
-    this.firebaseRef = new Firebase('https://jwtodoapp.firebaseio.com/projects/');
     this.firebaseRef.on('child_added', function(dataSnapshot) {
       this.items.push(dataSnapshot.val());
       this.setState({ items: this.items });
     }.bind(this));
   },
-  getInitialState: function() {
+  getInitialState() {
     return { items: [], name: '' };
   },
-  onChange: function(e) {
+  onChange(e) {
     this.setState({ name: e.target.value });
   },
-  handleSubmit: function(e) {
+  handleSubmit(e) {
     e.preventDefault();
     this.firebaseRef.push({
-      name: this.state.name
+      name: this.state.name,
+      timestamp: Date.now()
     });
     this.setState({ name: '' });
-    // var nextItems = this.state.items.concat([{text: this.state.text, id: Date.now()}]);
-    // var nextText = '';
-    // this.setState({items: nextItems, text: nextText});
   },
-  componentDidMount: function(){
+  componentDidMount(){
     this.loadListsFromServer();
-    // setInterval(this.loadCommentsFromServer, this.props.pollInterval)
+    this.bindAsArray(this.firebaseRef, 'items');
   },
-  render: function() {
+  componentWillUnmount() {},
+  render() {
     return (
       <div>
         <LoginForm />
@@ -40,5 +40,3 @@ var TodoApp = React.createClass({
     );
   }
 });
-
-
