@@ -12,12 +12,17 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     del = require('del'),
     webpack = require('gulp-webpack'),
+    browserify = require('browserify'),
+    babel = require('gulp-babel'),
+    babelify = require('babelify'),
+    source = require('vinyl-source-stream'),
     reload = browserSync.reload;
 
 var paths = {
   html: 'app/src/**/*.html',
   styles: 'app/src/styles/**/*.scss',
-  scripts: ['app/src/js/components/*.jsx','app/src/js/**/*.jsx'],
+  mainScript: 'app/src/js/app.jsx',
+  scripts: ['app/src/js/**/*.jsx'],
   vendors: ['app/src/vendor/**/*.js'],
   data: ['app/src/data/**/*.json'],
   tmp: ['.module-cache','.sass-cache','.tmp','app/build/js'],
@@ -75,18 +80,15 @@ gulp.task('sass', function() {
 });
 
 gulp.task('reactify',['clean'], function() {
-  // Minify and copy all JavaScript (except vendor scripts)
-  // with sourcemaps all the way down
-  return gulp.src(paths.scripts)
-    .pipe(react())
-    .pipe(concat('app.min.js'))
-    .pipe(gulp.dest(paths.destjs));
+  return browserify({entries: paths.mainScript, extensions: ['.jsx'], debug: true})
+    .transform('babelify', {presets: ['es2015', 'react']})
+    .bundle()
+    .pipe(source('app.min.js'))
+    .pipe(gulp.dest('app/build/js'));
 });
 
 gulp.task('compileVendors', function(){
   return gulp.src(paths.vendors)
-    // .pipe(react())
-    // .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest(paths.destvendor));
 });
 

@@ -1,5 +1,11 @@
-var TodoItem = React.createClass({
-  render: function() {
-    return <li>{this.props.data.name}</li>;
+import React from 'react';
+
+class TodoItem extends React.Component {
+  render() {
+    return (
+      <li>{this.props.data.name}</li>
+    )
   }
-});
+}
+
+export default TodoItem;
