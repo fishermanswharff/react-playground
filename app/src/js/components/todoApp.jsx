@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoList from './TodoList'
-import LoginForm from './LoginForm'
+import TodoList from './todoList'
+import LoginForm from './loginForm'
 
 class TodoApp extends React.Component {
 
