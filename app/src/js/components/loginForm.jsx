@@ -7,19 +7,12 @@ export default class LoginForm extends React.Component {
     this.state = {
       email: '',
       password: '',
-      authData: this.props.authData
+      authData: this.props.authData,
     }
-    this.authState = this.authState.bind(this);
     this.onEmailStateChange = this.onEmailStateChange.bind(this);
     this.onPasswordStateChange = this.onPasswordStateChange.bind(this);
     this.unAuth = this.unAuth.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.authState();
-  }
-
-  authState() {
-    var auth = this.props.firebaseRef.getAuth();
-    return this.setState({ authData: auth });
   }
 
   onEmailStateChange(e) {
@@ -33,7 +26,7 @@ export default class LoginForm extends React.Component {
   unAuth(e) {
     e.preventDefault();
     this.props.firebaseRef.unauth();
-    return this.authState();
+    this.setState({ authData: this.props.firebaseRef.getAuth() });
   }
 
   handleSubmit(e) {
