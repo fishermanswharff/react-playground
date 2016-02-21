@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoItem from './todoItem'
 
-export default class TodoList extends React.Component {
+export default class TodoLists extends React.Component {
 
   contructor(props) {
     this.state = {};
@@ -17,6 +17,6 @@ export default class TodoList extends React.Component {
   }
 }
 
-TodoList.defaultProps = {
+TodoLists.defaultProps = {
   items: []
 }

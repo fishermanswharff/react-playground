@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoList from './todoList'
+import TodoLists from './todoLists'
 import LoginForm from './loginForm'
 
 class TodoApp extends React.Component {
@@ -39,14 +39,13 @@ class TodoApp extends React.Component {
   authState() {
     var auth = this.props.firebaseRef.getAuth();
     this.setState({authData: auth})
-    // return this.setState({ authData: auth });
   }
 
   render() {
     return (
       <div>
         <LoginForm authData={ this.state.authData }/>
-        <TodoList items={ this.state.items } />
+        <TodoLists items={ this.state.items } />
         <form onSubmit={ this.handleSubmit }>
           <input onChange={ this.onChange } value={ this.state.name } />
           <button>Add List</button>
