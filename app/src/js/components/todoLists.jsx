@@ -1,5 +1,7 @@
 import React from 'react';
-import TodoItem from './todoItem'
+import TodoItem from './todoItem';
+import { render } from 'react-dom';
+import { Router, Route, Link, browserHistory } from 'react-router';
 
 export default class TodoLists extends React.Component {
 
@@ -9,12 +11,20 @@ export default class TodoLists extends React.Component {
   }
 
   createItem(item) {
-    return <TodoItem key={item.id} data={item} />
+    return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
   }
 
   render() {
-    return <ul>{ this.props.items.map(this.createItem) }</ul>
+    return(
+      <ul>
+        {this.props.items.map((item,idx) => {
+          return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
+        })}
+        {this.props.children}
+      </ul>
+    )
   }
+
 }
 
 TodoLists.defaultProps = {

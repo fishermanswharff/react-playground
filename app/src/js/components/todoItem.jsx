@@ -1,11 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router'
 
-class TodoItem extends React.Component {
+export default class TodoItem extends React.Component {
+
   render() {
-    return (
-      <li>{this.props.data.name}</li>
-    )
+    return (<li key={this.props.data.name}><Link activeStyle={{ color: 'red' }} to={`/lists/${this.props.firebaseKey}`}>{this.props.data.name}</Link></li>)
   }
 }
-
-export default TodoItem;

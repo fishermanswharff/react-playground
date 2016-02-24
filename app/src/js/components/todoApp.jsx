@@ -12,13 +12,12 @@ class TodoApp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.state = { items: [], name: '' };
-    this.loadListsFromServer();
   }
 
   loadListsFromServer() {
     this.items = [];
     this.props.firebaseListsRef.on('child_added', (dataSnapshot) => {
-      this.items.push(dataSnapshot.val());
+      this.items.push({key: dataSnapshot.key(), list: dataSnapshot.val()});
       this.setState({ items: this.items });
     })
   }
@@ -41,6 +40,14 @@ class TodoApp extends React.Component {
     this.setState({authData: auth})
   }
 
+  componentDidMount() {
+    this.loadListsFromServer();
+  }
+
+  componentWillUnmount () {
+    // remove state, props, etc.
+  }
+
   render() {
     return (
       <div>
@@ -50,6 +57,7 @@ class TodoApp extends React.Component {
           <input onChange={ this.onChange } value={ this.state.name } />
           <button>Add List</button>
         </form>
+        {this.props.children}
       </div>
     );
   }
