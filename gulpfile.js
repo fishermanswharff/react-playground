@@ -33,16 +33,6 @@ var paths = {
   destvendor: 'app/build/vendor'
 };
 
-var gulp_src = gulp.src;
-gulp.src = function(){
-  return gulp_src.apply(gulp, arguments)
-    .pipe(plumber(function(error){
-      gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
-      this.emit('end');
-    })
-  );
-};
-
 // watch files for changes and reload
 gulp.task('serve',['clean','minify-html','sass','reactify','compileVendors','data','watch'], function() {
   browserSync({
@@ -83,6 +73,10 @@ gulp.task('reactify',['clean'], function() {
   return browserify({entries: paths.mainScript, extensions: ['.jsx'], debug: true})
     .transform('babelify', {presets: ['es2015', 'react']})
     .bundle()
+    .on('error', function(error) {
+      console.log('————————————————————   ERROR: ' + error.toString() + '————————————————————————');
+      this.emit("end");
+    })
     .pipe(source('app.min.js'))
     .pipe(gulp.dest('app/build/js'));
 });

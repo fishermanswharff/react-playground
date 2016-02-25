@@ -13,15 +13,15 @@ export default class TodoList extends React.Component {
     this.createItem = this.createItem.bind(this);
   }
 
-  createItem(item,index,array) {
-    return <li>{item.text}</li>
+  createItem(object,index,array) {
+    return <li key={object.key}>{object.item.text}</li>
   }
 
   loadListFromServer() {
     this.items = [];
     var firebaseRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
     firebaseRef.orderByKey().on('child_added', (snapshot, prev) => {
-      this.items.push(snapshot.val());
+      this.items.push({key: snapshot.key(), item: snapshot.val()});
       this.setState({ items: this.items });
     });
   }
