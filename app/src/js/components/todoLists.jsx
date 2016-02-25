@@ -16,12 +16,14 @@ export default class TodoLists extends React.Component {
 
   render() {
     return(
-      <ul>
-        {this.props.items.map((item,idx) => {
-          return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
-        })}
+      <div>
+        <ul>
+          {this.props.items.map((item,idx) => {
+            return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
+          })}
+        </ul>
         {this.props.children}
-      </ul>
+      </div>
     )
   }
 

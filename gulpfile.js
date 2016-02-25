@@ -74,7 +74,7 @@ gulp.task('reactify',['clean'], function() {
     .transform('babelify', {presets: ['es2015', 'react']})
     .bundle()
     .on('error', function(error) {
-      console.log('————————————————————   ERROR: ' + error.toString() + '————————————————————————');
+      console.log('ERROR: ' + error.toString());
       this.emit("end");
     })
     .pipe(source('app.min.js'))
