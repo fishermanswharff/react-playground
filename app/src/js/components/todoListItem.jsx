@@ -21,12 +21,13 @@ export default class TodoListItem extends React.Component {
 
   handleChecked(event) {
     event.preventDefault();
-    this.setState({done: !this.state.done});
     var doneRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}/done`);
-    doneRef.set(this.state.done, (error) => {
+    doneRef.set(!this.state.done, (error) => {
       if(error){
         console.log('synchronization failed')
       } else {
+        this.setState({done: !this.state.done});
+        this.forceUpdate()
         console.log('synchro succeeded!!');
       }
     });
