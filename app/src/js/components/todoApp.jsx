@@ -1,20 +1,20 @@
 import React from 'react';
-import TodoLists from './todoLists'
-import LoginForm from './loginForm'
+import TodoLists from './todoLists';
+import LoginForm from './loginForm';
 
 class TodoApp extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { items: [], authData: this.props.authData }
     this.loadListsFromServer = this.loadListsFromServer.bind(this);
     this.authState = this.authState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.state = { items: [], name: '' };
+    this.state = { items: [], authData: this.props.authData }
   }
 
   loadListsFromServer() {
+    this.setState({items: []});
     this.items = [];
     this.props.firebaseListsRef.on('child_added', (dataSnapshot) => {
       this.items.push({key: dataSnapshot.key(), list: dataSnapshot.val()});
@@ -42,6 +42,9 @@ class TodoApp extends React.Component {
 
   componentDidMount() {
     this.loadListsFromServer();
+  }
+
+  componentDidUpdate(prevProps) {
   }
 
   componentWillUnmount () {

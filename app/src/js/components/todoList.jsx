@@ -1,4 +1,5 @@
 import React from 'react';
+import TodoListItem from './todoListItem'
 import { Link } from 'react-router'
 
 export default class TodoList extends React.Component {
@@ -14,7 +15,7 @@ export default class TodoList extends React.Component {
   }
 
   createItem(object,index,array) {
-    return <li key={object.key}>{object.item.text}</li>
+    return <TodoListItem key={object.key} data={object.item} id={object.key} />
   }
 
   loadListFromServer() {
@@ -27,15 +28,15 @@ export default class TodoList extends React.Component {
   }
 
   componentDidMount() {
-    console.log('TodoItem did mount');
+    // console.log('TodoItem did mount');
     this.loadListFromServer();
   }
 
   componentDidUpdate(prevProps) {
-    let oldId = prevProps.params.listId
-    let newId = this.props.params.listId
+    let oldId = prevProps.params.listId;
+    let newId = this.props.params.listId;
     if (newId !== oldId)
-      this.loadListFromServer()
+      this.loadListFromServer();
   }
 
   componentWillUnmount() {
