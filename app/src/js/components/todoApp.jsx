@@ -57,7 +57,7 @@ class TodoApp extends React.Component {
         <LoginForm authData={ this.state.authData }/>
         <TodoLists items={ this.state.items } />
         <form onSubmit={ this.handleSubmit }>
-          <input onChange={ this.onChange } value={ this.state.name } />
+          <input onChange={ this.onChange } value={ this.state.name } placeholder='Create a new todo list'/>
           <button>Add List</button>
         </form>
         {this.props.children}
