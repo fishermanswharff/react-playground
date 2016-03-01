@@ -2,20 +2,16 @@
 /* globals require, console */
 var gulp = require('gulp'),
     minifyHtml = require('gulp-minify-html'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    sourcemaps = require('gulp-sourcemaps'),
     react = require('gulp-react'),
-    browserSync = require('browser-sync'),
+    browserSync = require('browser-sync').create('chuck norris'),
     sass = require('gulp-ruby-sass'),
-    plumber = require('gulp-plumber'),
-    gutil = require('gulp-util'),
     del = require('del'),
     webpack = require('gulp-webpack'),
     browserify = require('browserify'),
     babel = require('gulp-babel'),
     babelify = require('babelify'),
     source = require('vinyl-source-stream'),
+    historyApiFallback = require('connect-history-api-fallback'),
     reload = browserSync.reload;
 
 var paths = {
@@ -35,9 +31,11 @@ var paths = {
 
 // watch files for changes and reload
 gulp.task('serve',['clean','minify-html','sass','reactify','compileVendors','data','watch'], function() {
-  browserSync({
+  browserSync.init({
     server: {
-      baseDir: paths.destroot
+      baseDir: paths.destroot,
+      index: 'index.html',
+      middleware: [ historyApiFallback() ],
     }
   });
   gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js'], {cwd: 'app/build'}, reload);
@@ -97,5 +95,3 @@ gulp.task('watch', function() {
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['watch', 'reactify', 'sass', 'minify-html','compileVendors']);
-
-
