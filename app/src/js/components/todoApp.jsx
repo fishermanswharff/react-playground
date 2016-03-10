@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoLists from './todoLists';
 import LoginForm from './loginForm';
+import Navbar from './navbar';
 
 class TodoApp extends React.Component {
 
@@ -54,7 +55,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div>
-        <LoginForm authData={ this.state.authData }/>
+        <Navbar authData={ this.state.authData }/>
         <TodoLists items={ this.state.items } />
         <form onSubmit={ this.handleSubmit }>
           <input onChange={ this.onChange } value={ this.state.name } placeholder='Create a new todo list'/>
@@ -76,3 +77,4 @@ TodoApp.defaultProps = {
 }
 
 export default TodoApp;
+// <LoginForm authData={ this.state.authData }/>

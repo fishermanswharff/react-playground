@@ -47,16 +47,8 @@ export default class TodoList extends React.Component {
 
   newItemSubmit(e) {
     e.preventDefault();
-    // var messageListRef = new Firebase('https://samplechat.firebaseio-demo.com/message_list');
-    // var newMessageRef = messageListRef.push();
-    // newMessageRef.set({ 'user_id': 'fred', 'text': 'Yabba Dabba Doo!' });
-    // // We've appended a new message to the message_list location.
-    // var path = newMessageRef.toString();
-    // path will be something like
-    // 'https://samplechat.firebaseio-demo.com/message_list/-IKo28nwJLH0Nc5XeFmj'
-
     var todoRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    var newItemRef = todoRef.push({
+    todoRef.push({
       done: false,
       project: this.props.params.listId,
       text: this.state.newItemText,

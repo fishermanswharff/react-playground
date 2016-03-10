@@ -27,7 +27,7 @@ export default class TodoListItem extends React.Component {
         console.log('synchronization failed')
       } else {
         this.setState({done: !this.state.done});
-        this.forceUpdate()
+        this.forceUpdate();
         console.log('synchro succeeded!!');
       }
     });
