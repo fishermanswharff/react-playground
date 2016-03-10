@@ -5,7 +5,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 
 export default class TodoLists extends React.Component {
 
-  contructor(props) {
+  contructor() {
     this.state = {};
     this.createItem = this.createItem.bind(this);
   }
@@ -17,7 +17,7 @@ export default class TodoLists extends React.Component {
   render() {
     return(
       <div>
-        <ul>
+        <ul className='todo-lists'>
           {this.props.items.map((item,idx) => {
             return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
           })}

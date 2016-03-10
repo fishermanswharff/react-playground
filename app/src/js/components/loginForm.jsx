@@ -47,7 +47,7 @@ export default class LoginForm extends React.Component {
   render() {
     var authForm;
     if(this.state.authData){
-      authForm = <a onClick={this.unAuth}>Logout</a>
+      authForm = <a href='#' onClick={this.unAuth}>Logout</a>
     } else {
       authForm = <form onSubmit={this.handleSubmit}>
         <h3>Login</h3>

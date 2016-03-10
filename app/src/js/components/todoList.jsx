@@ -68,13 +68,13 @@ export default class TodoList extends React.Component {
 
   render() {
     return (
-      <div>
-        <ul>
+      <div className='todo-list-container'>
+        <ul className='todo-list'>
           { this.state.items.map(this.createItem) }
         </ul>
         <form onSubmit={ this.newItemSubmit }>
           <input onChange={ this.newItemChange } value={ this.state.newItemText } placeholder='Create a new item'/>
-          <button>Add List</button>
+          <button>Add Item</button>
         </form>
       </div>
     )
