@@ -22,6 +22,7 @@ export default class TodoList extends React.Component {
   }
 
   loadListFromServer() {
+    this.setState({ items: [] });
     this.items = [];
     var firebaseRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
     firebaseRef.orderByKey().on('child_added', (snapshot, prev) => {
@@ -37,12 +38,11 @@ export default class TodoList extends React.Component {
   componentDidUpdate(prevProps) {
     let oldId = prevProps.params.listId;
     let newId = this.props.params.listId;
-    if (newId !== oldId)
-      this.loadListFromServer();
+    if (newId !== oldId) this.loadListFromServer();
   }
 
   componentWillUnmount() {
-    console.log('TodoItem will unmount');
+    // console.log('TodoItem will unmount');
   }
 
   newItemSubmit(e) {
