@@ -899,7 +899,7 @@ section.todo-list-container {
           -webkit-flex: 3 1 0;
           -ms-flex: 3 1 0;
           flex: 3 1 0;
-          max-width: 80%;
+          max-width: 70%;
           padding: 3px; }
         section.todo-list-container ul.todo-list li span.done-true {
           text-decoration: line-through; }
@@ -924,6 +924,7 @@ section.todo-list-container {
             width: 16px;
             fill: #dddddd; }
         section.todo-list-container ul.todo-list li span.timestamp {
+          background-color: transparent;
           color: #999999;
           font-family: "ff-meta-web-pro";
           font-size: .7em;

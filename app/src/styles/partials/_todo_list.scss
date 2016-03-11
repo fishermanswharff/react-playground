@@ -78,7 +78,7 @@ section.todo-list-container {
 
         &.label {
           @include flex(3 1 0);
-          max-width: 80%;
+          max-width: 70%;
           padding: 3px;
         }
 
@@ -111,6 +111,7 @@ section.todo-list-container {
         }
 
         &.timestamp {
+          background-color: transparent;
           color: $aluminum;
           font-family: $font-family-sans-serif;
           font-size: .7em;

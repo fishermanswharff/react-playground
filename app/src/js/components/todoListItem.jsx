@@ -6,11 +6,12 @@ export default class TodoListItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleChecked = this.handleChecked.bind(this);
+    this.convertTimestamp = this.convertTimestamp.bind(this);
 
     this.state = {
       done: this.props.data.done,
       text: this.props.data.text,
-      createdAt: this.props.data.created_at,
+      timestamp: this.props.data.timestamp,
       project: this.props.data.project,
       id: this.props.id
     };
@@ -36,6 +37,21 @@ export default class TodoListItem extends React.Component {
     });
   }
 
+  convertTimestamp(timestamp){
+    var date = new Date(timestamp);
+    // var time = date.toTimeString().toString().replace(/GMT-\d+\s\(\w+\)/,'');
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var day = date.getDate() + 1;
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    if(minutes < 10){
+      var string = '0'+minutes;
+      minutes = string;
+    }
+    return hours+':'+minutes+' '+month+'/'+day;
+  }
+
   componentDidMount(){}
   componentDidUpdate(prevProps){}
   componentWillUnmount(){}
@@ -55,6 +71,7 @@ export default class TodoListItem extends React.Component {
             defaultValue={this.state.done}
           />
           <span className={textClasses} dangerouslySetInnerHTML={this.createMarkup(this.state.text)}></span>
+          <span className='timestamp'>{this.convertTimestamp(this.state.timestamp)}</span>
         </label>
       </li>
     )
