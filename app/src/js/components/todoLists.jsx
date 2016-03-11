@@ -5,8 +5,8 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 
 export default class TodoLists extends React.Component {
 
-  contructor() {
-    this.state = {};
+  constructor(props) {
+    super(props);
     this.createItem = this.createItem.bind(this);
   }
 
@@ -16,17 +16,20 @@ export default class TodoLists extends React.Component {
 
   render() {
     return(
-      <div>
-        <ul className='todo-lists'>
-          {this.props.items.map((item,idx) => {
-            return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
-          })}
-        </ul>
-        {this.props.children}
-      </div>
+      <section>
+        <div className='todo-lists-container'>
+          <ul className='todo-lists'>
+            {this.props.items.map((item,idx) => {
+              return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
+            })}
+          </ul>
+        </div>
+        <div className='todo-lists-children'>
+          {this.props.children}
+        </div>
+      </section>
     )
   }
-
 }
 
 TodoLists.defaultProps = {

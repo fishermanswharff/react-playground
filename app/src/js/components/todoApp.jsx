@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoLists from './todoLists';
+import TodoListsForm from './todoListsForm'
 import LoginForm from './loginForm';
 import Navbar from './navbar';
 
@@ -9,9 +10,10 @@ class TodoApp extends React.Component {
     super(props);
     this.loadListsFromServer = this.loadListsFromServer.bind(this);
     this.authState = this.authState.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.state = { items: [], authData: this.props.authData }
+    this.state = {
+      items: [],
+      authData: this.props.authData,
+    };
   }
 
   loadListsFromServer() {
@@ -20,32 +22,21 @@ class TodoApp extends React.Component {
     this.props.firebaseListsRef.on('child_added', (dataSnapshot) => {
       this.items.push({key: dataSnapshot.key(), list: dataSnapshot.val()});
       this.setState({ items: this.items });
-    })
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.firebaseRef.push({
-      name: this.state.name,
-      timestamp: Date.now()
     });
-    this.setState({ name: '' });
-  }
-
-  onChange(e) {
-    this.setState({ name: e.target.value });
   }
 
   authState() {
     var auth = this.props.firebaseRef.getAuth();
-    this.setState({authData: auth})
+    this.setState({authData: auth});
   }
 
   componentDidMount() {
+    // the component is all set
     this.loadListsFromServer();
   }
 
   componentDidUpdate(prevProps) {
+    // the properties changed
   }
 
   componentWillUnmount () {
@@ -55,13 +46,12 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div>
-        <Navbar authData={ this.state.authData }/>
+        <Navbar authData={ this.state.authData } />
         <TodoLists items={ this.state.items } />
-        <form onSubmit={ this.handleSubmit }>
-          <input onChange={ this.onChange } value={ this.state.name } placeholder='Create a new todo list'/>
-          <button>Add List</button>
-        </form>
-        {this.props.children}
+        <TodoListsForm />
+        <div className='todo-app-children'>
+          {this.props.children}
+        </div>
       </div>
     );
   }
@@ -72,7 +62,7 @@ TodoApp.propTypes = {
 }
 
 TodoApp.defaultProps = {
-  firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com/projects/'),
+  firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com/'),
   firebaseListsRef: new Firebase('https://jwtodoapp.firebaseio.com/projects/'),
 }
 
