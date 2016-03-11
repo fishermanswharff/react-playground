@@ -37,11 +37,6 @@ section.todo-list-container {
 
     li {
       @include transition(all,0.25s,ease,0);
-      @include flexbox();
-      @include flex-flow(row);
-      @include flex-justify(space-between);
-      @include flex-align-items(center);
-      @include flex-align-content(center);
       background-color: $white-smoke;
       margin: .25em;
       position: relative;
@@ -53,6 +48,11 @@ section.todo-list-container {
       }
 
       label {
+        @include flexbox();
+        @include flex-flow(row);
+        @include flex-justify(space-between);
+        @include flex-align-items(center);
+        @include flex-align-content(center);
         &:before {
           background-image: url(../images/checkbox-default.svg);
           content: '';

@@ -6,3 +6,27 @@ html, body {
   height: 100%;
   background-color: #fff;
 }
+
+main#main-content {
+  padding-top: 50px;
+  height: auto;
+  overflow: auto;
+
+  section#main-container {
+    @include transition(all, .25s, ease, 0);
+
+    .home-container {
+      font-family: $font-family-sans-serif;
+
+      header {
+        margin: 0 .5em;
+      }
+    }
+  }
+
+  &.sideNavOpen {
+    height: 100vh;
+    overflow-y: hidden;
+  }
+}
+

@@ -1,0 +1,94 @@
+form {
+  font-family: $font-family-sans-serif;
+}
+
+a.button,
+input[type=submit],
+button,
+.btn {
+  @include button($primary-color, $white, 4px);
+  @include transition(all, .25s, ease, 0s);
+
+  border: 0;
+
+  &.success { @include button($success-color, $white, 4px); }
+  &.info { @include button($info-color, $white, 4px); }
+  &.warning { @include button($warning-color, $white, 4px); }
+  &.alert { @include button($alert-color, $white, 4px); }
+}
+
+label {
+  font-family: $font-family-sans-serif;
+  font-size: .8em;
+  font-weight: normal;
+  font-weight: 400;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=tel] {
+  @include transition(all, .25s, ease, 0s);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid $darkblue;
+  border-radius: 4px;
+  box-shadow: inset 0 0 3px rgba(0,0,0,.7);
+  box-sizing: border-box;
+  font-family: $font-family-sans-serif;
+  padding: .75em;
+  width: 100%;
+
+  &:focus {
+    box-shadow: 0 0 5px $lightblue;
+  }
+}
+
+textarea[name="project-notes"] {
+  background-color: $white;
+  border: 0 none $white;
+  box-shadow: none;
+  font-family: $font-family-serif;
+  font-size: 0.75rem;
+  outline: none;
+  overflow: hidden;
+  padding: 0;
+  resize: none;
+  width: 100%;
+}
+
+select {
+  display: block;
+  font-size: 20px;
+  width: 100%;
+}
+
+form#new-project-form,
+form.new-task {
+  background-color: $charcoal;
+  color: $white;
+  // margin: .5em;
+  padding: .5em;
+
+  label {
+    // color: $white;
+  }
+
+  input[type=text] {
+    color: $darkblue;
+  }
+
+  input[type=submit] {
+    @include button($secondary-color, $darkblue, 4px);
+  }
+}
+
+.firebase-auth-form {
+
+  input[type=submit] {
+    background-color: $success-color;
+    display: block;
+    width: 100%;
+  }
+}

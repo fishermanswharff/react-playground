@@ -30,8 +30,6 @@ export default class TodoListItem extends React.Component {
       } else {
         this.setState({done: !this.state.done});
         this.forceUpdate();
-        setTimeout(()=>{
-        }, 100)
         console.log('synchro succeeded!!');
       }
     });
@@ -70,7 +68,7 @@ export default class TodoListItem extends React.Component {
             defaultChecked={this.state.done}
             defaultValue={this.state.done}
           />
-          <span className={textClasses} dangerouslySetInnerHTML={this.createMarkup(this.state.text)}></span>
+          <span contentEditable className={textClasses} dangerouslySetInnerHTML={this.createMarkup(this.state.text)}></span>
           <span className='timestamp'>{this.convertTimestamp(this.state.timestamp)}</span>
         </label>
       </li>
