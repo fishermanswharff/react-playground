@@ -21,8 +21,10 @@ var paths = {
   scripts: ['app/src/js/**/*.jsx'],
   vendors: ['app/src/vendor/**/*.js'],
   data: ['app/src/data/**/*.json'],
+  images: ['app/src/images/**/*.{ttf,woff,eof,svg,png,jpg}'],
   tmp: ['.module-cache','.sass-cache','.tmp','app/build/js'],
   destroot: 'app/build',
+  destimages: 'app/build/images',
   destjs: 'app/build/js',
   destcss: 'app/build/css',
   destdata: 'app/build/data',
@@ -30,7 +32,7 @@ var paths = {
 };
 
 // watch files for changes and reload
-gulp.task('serve',['clean','minify-html','sass','reactify','compileVendors','data','watch'], function() {
+gulp.task('serve',['clean','minify-html','sass','reactify','copyImages','compileVendors','data','watch'], function() {
   browserSync.init({
     server: {
       baseDir: paths.destroot,
@@ -38,7 +40,7 @@ gulp.task('serve',['clean','minify-html','sass','reactify','compileVendors','dat
       middleware: [ historyApiFallback() ],
     }
   });
-  gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js'], {cwd: 'app/build'}, reload);
+  gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js', 'images/**/*.{ttf,woff,eof,svg,png,jpg}'], {cwd: 'app/build'}, reload);
 });
 
 // Not all tasks need to use streams
@@ -48,6 +50,11 @@ gulp.task('clean', function() {
   return del(paths.tmp).then(function (paths) {
     console.log('Deleted files/folders:\n', paths.join('\n'));
   });
+});
+
+gulp.task('copyImages', function() {
+  gulp.src(paths.images)
+  .pipe(gulp.dest(paths.destimages));
 });
 
 gulp.task('data',function(){
@@ -91,7 +98,8 @@ gulp.task('watch', function() {
   gulp.watch(paths.styles, ['sass']);
   gulp.watch(paths.html, ['minify-html']);
   gulp.watch(paths.data, ['data']);
+  gulp.watch(paths.images, ['copyImages']);
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'reactify', 'sass', 'minify-html','compileVendors']);
+gulp.task('default', ['watch', 'reactify', 'sass', 'copyImages', 'minify-html','compileVendors']);

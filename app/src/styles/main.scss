@@ -1,8 +1,12 @@
 @import
   'modules/variables',
   'modules/mixins',
-  'utilities/grid',
-  'vendor/normalize',
+  'utilities/grid';
+
+@import
+  'vendor/normalize';
+
+@import
   'partials/base',
   'partials/todo_lists',
   'partials/todo_list';

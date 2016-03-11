@@ -68,7 +68,8 @@ export default class TodoList extends React.Component {
 
   render() {
     return (
-      <div className='todo-list-container'>
+      <section className='todo-list-container'>
+        <header></header>
         <ul className='todo-list'>
           { this.state.items.map(this.createItem) }
         </ul>
@@ -76,7 +77,7 @@ export default class TodoList extends React.Component {
           <input onChange={ this.newItemChange } value={ this.state.newItemText } placeholder='Create a new item'/>
           <button>Add Item</button>
         </form>
-      </div>
+      </section>
     )
   }
 }

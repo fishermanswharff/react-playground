@@ -1,5 +1,155 @@
-.todo-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+section.todo-list-container {
+  font-family: $font-family-sans-serif;
+
+  header {
+    // box-shadow: 0 1px 10px 1px black;
+    padding: .25em .5em;
+
+    h2 {
+      font-family: $font-family-serif;
+      font-weight: 400;
+      margin: 0 auto;
+      text-align: center;
+
+      small {
+        display: block;
+        font-weight: 400;
+      }
+    }
+  }
+
+  p {
+    span.archive-span {
+      display: inline;
+      a {
+        // @include button($button-tny,$secondary-color,4px);
+      }
+    }
+  }
+
+  ul.todo-list {
+    @include defaults();
+    @include flexbox();
+    @include flex-flow(column);
+
+    list-style: none;
+    margin: 1em 0;
+
+    li {
+      @include transition(all,0.25s,ease,0);
+      @include flexbox();
+      @include flex-flow(row);
+      @include flex-justify(space-between);
+      @include flex-align-items(center);
+      @include flex-align-content(center);
+      background-color: $white-smoke;
+      margin: .25em;
+      position: relative;
+
+      @for $item from 1 through 40{
+        &:nth-child(#{$item}){
+          transition-delay: #{$item * .03}s;
+        }
+      }
+
+      label {
+        &:before {
+          background-image: url(../images/checkbox-default.svg);
+          content: '';
+          display: inline-block;
+          height: 42px;
+          width: 42px;
+        }
+
+        &.checked:before {
+          background-image: url(../images/checkbox-checked.svg);
+        }
+      }
+
+      input[type=checkbox] {
+        left: -9999px;
+        position: absolute;
+        visibility: hidden;
+      }
+
+      span {
+        @include transition(all,0.25s,ease,0);
+        display: inline-block;
+
+        &.label {
+          @include flex(3 1 0);
+          max-width: 80%;
+          padding: 3px;
+        }
+
+        &.done-true {
+          text-decoration: line-through;
+        }
+
+        &[contenteditable='true']:hover{
+          background: #E6E6E6;
+        }
+
+        &:focus {}
+
+        &.x-icon {
+          display: inline-block;
+          cursor: pointer;
+          float: right;
+          text-align: right;
+
+          svg#x-icon {
+            @include transition(all,0.25s,ease,0);
+            height: 16px;
+            margin-right: 1em;
+            width: 16px;
+            fill: $gainsboro;
+
+            &:hover {
+            }
+          }
+        }
+
+        &.timestamp {
+          color: $aluminum;
+          font-family: $font-family-sans-serif;
+          font-size: .7em;
+          margin: 0 .5em;
+        }
+      }
+    }
+  }
 }
+
+section.supplemental {
+
+  margin: 0 .5em;
+
+  div {
+    margin-bottom: 10px;
+    border-bottom: 1px solid $charcoal;
+  }
+
+  svg {
+    position: relative;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+
+    li {
+      font-family: $font-family-serif;
+      font-size: 0.85rem;
+    }
+  }
+
+  h1,h2,h3,h4,h5,h6,p {
+    font-family: $font-family-sans-serif;
+  }
+}
+

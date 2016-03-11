@@ -1,66 +1,50 @@
 /*—————————————————————————————————————————
-*****************Z-Index********************
-——————————————————————————————————————————*/
-$z-featured-image: -1;
-$z-body: 0;
-$z-post-images: 1;
-$z-contact-form-input: 2;
-$z-post-gallery-nav: 3;
-$z-dropdown: 997;
-$z-nav: 998;
-$z-alerts: 1001;
-$z-nav-icon: 999;
-$z-ajax-preloader: 1000;
-/*—————————————————————————————————————————
 *****************Colors********************
 ——————————————————————————————————————————*/
 // gray scale
-$black: #000000;
-$black-90: #414042;
-$black-80: #58595b;
-$black-70: #6d6e71;
-$black-60: #808184;
-$black-50: #929497;
-$black-40: #a6a8ab;
-$black-30: #bbbdbf;
-$black-20: #d0d2d3;
-$black-10: #e5e6e7;
-$white: #ffffff;
 
-$shitty: #a6b4a7;
-$green: #00a66e;
-$red: #aa3b22;
+$white         : #ffffff !default;
+$ghost         : #fafafa !default;
+$snow          : #f9f9f9 !default;
+$vapor         : #f6f6f6 !default;
+$white-smoke   : #f5f5f5 !default;
+$silver        : #efefef !default;
+$smoke         : #eeeeee !default;
+$gainsboro     : #dddddd !default;
+$iron          : #cccccc !default;
+$base          : #aaaaaa !default;
+$aluminum      : #999999 !default;
+$jumbo         : #888888 !default;
+$monsoon       : #777777 !default;
+$steel         : #666666 !default;
+$charcoal      : #555555 !default;
+$tuatara       : #444444 !default;
+$oil           : #333333 !default;
+$jet           : #222222 !default;
+$black         : #000000 !default;
+
+$primary-color: #008cba !default;   // bondi-blue
+$secondary-color: #e7e7e7 !default; // white-lilac
+$alert-color: #f04124 !default;     // cinnabar
+$success-color: #43ac6a !default;   // sea-green
+$warning-color: #f08a24 !default;   // carrot
+$info-color: #a0d3e8 !default;      // cornflower
+
+$darkblue: #193549;
+$lightblue: #0088ff;
+$yellow: #3ad900;
+$lightyellow: #9eff80;
+$orange: #ff9d00;
+$lightgreen: #80ffbb;
+$pink: #ff628c;
+$codewhite: #e1efff;
+
+$z-nav: 10;
+
 
 /*——————————————————————————————————————————
 ***************TYPOGRAPHY*****************
 ——————————————————————————————————————————*/
-
-$header-font: 'chaparral-pro','Times New Roman', Times, serif;
-$body-font: 'chaparral-pro','Times New Roman', Times, serif;
-$mono-spaced-font: "ubuntu-mono",monospace;
-
-$header-light: 300;
-$header-heavy: 800;
-
-$body-light: 300;
-$body-regular: 400;
-$body-bold: 700;
-
-$base-font-size: 14px;
-$large-font-size: 1.2em;
-$xlarge-font-size: 1.5em;
-$xxlarge-font-size: 2em;
-$xxxlarge-font-size: 3.3em;
-
-$base-line-height: 20px;
-$large-line-height: 24px;
-
-$z-parallax-shadow: 1;
-$z-parallax-login: 2;
-$z-parallax-scene: 0;
-$z-dial-button: 3;
-$z-alert-box: 10;
-$z-draggable: 9;
-$starting-dial-degree: 24;
-
+$font-family-sans-serif: 'ff-meta-web-pro';
+$font-family-serif: 'ff-tisa-web-pro';
 

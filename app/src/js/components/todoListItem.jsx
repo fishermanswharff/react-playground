@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 export default class TodoListItem extends React.Component {
 
@@ -28,38 +29,37 @@ export default class TodoListItem extends React.Component {
       } else {
         this.setState({done: !this.state.done});
         this.forceUpdate();
+        setTimeout(()=>{
+        }, 100)
         console.log('synchro succeeded!!');
       }
     });
   }
 
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps) {}
-
-  componentWillUnmount() {}
+  componentDidMount(){}
+  componentDidUpdate(prevProps){}
+  componentWillUnmount(){}
 
   render() {
+    let textClasses = classnames('label', {'done-true': this.state.done == true});
+    let labelClasses = classnames({'checked': this.state.done == true});
     return (
-      <div>
-        <label>
+      <li>
+        <label className={labelClasses}>
           <input
             type="checkbox"
             value={this.state.done}
             checked={this.state.done}
             onChange={this.handleChecked}
+            defaultChecked={this.state.done}
+            defaultValue={this.state.done}
           />
-          <span dangerouslySetInnerHTML={this.createMarkup(this.state.text)}></span>
+          <span className={textClasses} dangerouslySetInnerHTML={this.createMarkup(this.state.text)}></span>
         </label>
-      </div>
+      </li>
     )
   }
 }
 
 TodoListItem.propTypes = {}
-TodoListItem.defaultProps = {
-  // firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com/projects/'),
-}
-
-
-// <input type='checkbox' value={this.state.done} checked={this.state.done} onChange={this.handleChecked} />
+TodoListItem.defaultProps = {}
