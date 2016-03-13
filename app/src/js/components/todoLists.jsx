@@ -19,9 +19,7 @@ export default class TodoLists extends React.Component {
       <section className='todo-lists-container'>
         <header></header>
         <ul className='todo-lists'>
-          {this.props.items.map((item,idx) => {
-            return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
-          })}
+          {this.props.items.map(this.createItem)}
         </ul>
         <div className='todo-lists-children'>
           {this.props.children}
