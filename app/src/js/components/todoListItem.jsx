@@ -61,15 +61,16 @@ export default class TodoListItem extends React.Component {
   }
 
   updateItemText(event){
+    this.setState({inProgress: true});
     var textRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}/text`);
     textRef.set(event.target.textContent, this.onItemTextUpdate);
   }
 
   onItemTextUpdate(error){
     if(error){
-      this.setState({ itemUpdated: false, ajaxFail: true });
+      this.setState({ itemUpdated: false, ajaxFail: true, inProgress: false });
     } else {
-      this.setState({ itemUpdated: true, ajaxSuccess: true });
+      this.setState({ itemUpdated: true, ajaxSuccess: true, inProgress: false });
     }
   }
 
@@ -102,6 +103,12 @@ export default class TodoListItem extends React.Component {
       'in-progress': this.state.inProgress
     })
 
+    let iconClasses = classnames('fa', {
+      'fa-check': this.state.ajaxSuccess,
+      'fa-close': this.state.ajaxFail,
+      'fa-cog fa-spin': this.state.inProgress
+    });
+
     return (
       <li className='todo-list-item'>
         <label className={labelClasses}>
@@ -116,12 +123,13 @@ export default class TodoListItem extends React.Component {
           <span
             contentEditable
             onClick={this.editTodoListItemText}
+            onFocus={this.editTodoListItemText}
             className={textClasses}
             dangerouslySetInnerHTML={this.createMarkup(this.state.text)}
           ></span>
           <div className='todo-list-item-metadata'>
             <span className='timestamp'>{this.convertTimestamp(this.state.timestamp)}</span>
-            <span className={ajaxClasses}>&nbsp;</span>
+            <span className={ajaxClasses}><i className={iconClasses}></i></span>
           </div>
         </label>
       </li>

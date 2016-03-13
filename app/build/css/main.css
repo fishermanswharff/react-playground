@@ -971,11 +971,11 @@ section.todo-list-container {
           flex: 1 0 0;
           height: 1em; }
           section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.success {
-            background-color: green; }
+            color: #43ac6a; }
           section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.fail {
-            background-color: red; }
+            color: #f08a24; }
           section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.in-progress {
-            background-color: yellow; }
+            color: #a0d3e8; }
 
 section.supplemental {
   margin: 0 .5em; }
