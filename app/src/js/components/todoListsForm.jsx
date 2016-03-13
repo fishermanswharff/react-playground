@@ -27,7 +27,7 @@ export default class TodoListsForm extends React.Component {
 
   render(){
     return(
-      <form onSubmit={ this.handleSubmit } >
+      <form id='new-todo-list-form' onSubmit={ this.handleSubmit } >
         <input type='text' onChange={ this.onChange } value={ this.state.newListName } placeholder='Create a new todo list'/>
         <button>Add List</button>
       </form>

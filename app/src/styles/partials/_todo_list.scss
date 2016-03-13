@@ -1,131 +1,101 @@
-section.todo-list-container {
-  font-family: $font-family-sans-serif;
+ul.todo-list {
+  @include defaults();
+  @include flexbox();
+  @include flex-flow(column);
 
-  header {
-    // box-shadow: 0 1px 10px 1px black;
-    padding: .25em .5em;
+  list-style: none;
+  margin: 1em 0;
 
-    h2 {
-      font-family: $font-family-serif;
-      font-weight: 400;
-      margin: 0 auto;
-      text-align: center;
+  li.todo-list-item {
+    @include transition(all,0.25s,ease,0);
+    background-color: $white-smoke;
+    margin: .25em;
+    position: relative;
 
-      small {
-        display: block;
-        font-weight: 400;
+    @for $item from 1 through 40{
+      &:nth-child(#{$item}){
+        transition-delay: #{$item * .03}s;
       }
     }
-  }
 
-  p {
-    span.archive-span {
-      display: inline;
-      a {
-        // @include button($button-tny,$secondary-color,4px);
-      }
-    }
-  }
+    label {
+      @include flexbox();
+      @include flex-flow(row);
+      @include flex-justify(space-between);
+      @include flex-align-items(center);
+      @include flex-align-content(center);
 
-  ul.todo-list {
-    @include defaults();
-    @include flexbox();
-    @include flex-flow(column);
-
-    list-style: none;
-    margin: 1em 0;
-
-    li.todo-list-item {
-      @include transition(all,0.25s,ease,0);
-      background-color: $white-smoke;
-      margin: .25em;
-      position: relative;
-
-      @for $item from 1 through 40{
-        &:nth-child(#{$item}){
-          transition-delay: #{$item * .03}s;
-        }
-      }
-
-      label {
+      div.todo-list-item-metadata {
+        @include defaults();
         @include flexbox();
-        @include flex-flow(row);
-        @include flex-justify(space-between);
+        @include flex-flow(column);
+        @include flex-justify(justify);
         @include flex-align-items(center);
         @include flex-align-content(center);
-
-        div.todo-list-item-metadata {
-          @include defaults();
-          @include flexbox();
-          @include flex-flow(column);
-          @include flex-justify(justify);
-          @include flex-align-items(center);
-          @include flex-align-content(center);
-        }
-
-        &:before {
-          background-image: url(../images/checkbox-default.svg);
-          content: '';
-          display: inline-block;
-          height: 42px;
-          width: 42px;
-        }
-
-        &.checked:before {
-          background-image: url(../images/checkbox-checked.svg);
-        }
       }
 
-      input[type=checkbox] {
-        left: -9999px;
-        position: absolute;
-        visibility: hidden;
-      }
-
-      span {
-        @include transition(all,0.25s,ease,0);
+      &:before {
+        background-image: url(../images/checkbox-default.svg);
+        content: '';
         display: inline-block;
+        height: 42px;
+        width: 42px;
+      }
 
-        &.label {
-          @include flex(3 1 0);
-          max-width: 70%;
-          padding: 3px;
+      &.checked:before {
+        background-image: url(../images/checkbox-checked.svg);
+      }
+    }
+
+    input[type=checkbox] {
+      left: -9999px;
+      position: absolute;
+      visibility: hidden;
+    }
+
+    span {
+      @include transition(all,0.25s,ease,0);
+      display: inline-block;
+
+      &.label {
+        @include flex(3 1 0);
+        max-width: 70%;
+        padding: 3px;
+      }
+
+      &.done-true {
+        text-decoration: line-through;
+      }
+
+      &[contenteditable='true']:hover{
+        background: #E6E6E6;
+      }
+
+      &:focus {}
+
+      &.timestamp {
+        @include flex(1 0 0);
+        background-color: transparent;
+        color: $aluminum;
+        font-family: $font-family-sans-serif;
+        font-size: .7em;
+        margin: 0 .5em;
+      }
+
+      &.ajax-status {
+        @include flex(1 0 0);
+        height: 1em;
+
+        &.success {
+          color: $success-color;
         }
 
-        &.done-true {
-          text-decoration: line-through;
+        &.fail {
+          color: $warning-color;
         }
 
-        &[contenteditable='true']:hover{
-          background: #E6E6E6;
-        }
-
-        &:focus {}
-
-        &.timestamp {
-          @include flex(1 0 0);
-          background-color: transparent;
-          color: $aluminum;
-          font-family: $font-family-sans-serif;
-          font-size: .7em;
-          margin: 0 .5em;
-        }
-
-        &.ajax-status {
-          @include flex(1 0 0);
-          height: 1em;
-
-          &.success {
-            color: $success-color;
-          }
-
-          &.fail {
-            color: $warning-color;
-          }
-
-          &.in-progress {
-            color: $info-color;
-          }
+        &.in-progress {
+          color: $info-color;
         }
       }
     }

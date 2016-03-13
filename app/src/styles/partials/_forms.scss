@@ -37,7 +37,7 @@ input[type=tel] {
   box-shadow: inset 0 0 3px rgba(0,0,0,.7);
   box-sizing: border-box;
   font-family: $font-family-sans-serif;
-  padding: .75em;
+  padding: .25em;
   width: 100%;
 
   &:focus {
@@ -64,8 +64,8 @@ select {
   width: 100%;
 }
 
-form#new-project-form,
-form.new-task {
+#new-todo-list-form,
+form.new-list-item {
   background-color: $charcoal;
   color: $white;
   // margin: .5em;

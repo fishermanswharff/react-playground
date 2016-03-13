@@ -764,125 +764,165 @@ section.todo-list-container {
         font-weight: 400; }
   section.todo-list-container p span.archive-span {
     display: inline; }
-  section.todo-list-container ul.todo-list {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    box-sizing: border-box;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: column wrap;
-    -ms-flex-flow: column wrap;
-    flex-flow: column wrap;
-    list-style: none;
-    margin: 1em 0; }
-    section.todo-list-container ul.todo-list li.todo-list-item {
-      -webkit-transition: all 0.25s ease 0;
-      -moz-transition: all 0.25s ease 0;
-      -o-transition: all 0.25s ease 0;
-      transition: all 0.25s ease 0;
-      transition-property: all;
-      transition-duration: 0.25s;
-      transition-timing-function: ease;
-      transition-delay: 0;
-      background-color: #f5f5f5;
-      margin: .25em;
-      position: relative; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(1) {
-        transition-delay: 0.03s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(2) {
-        transition-delay: 0.06s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(3) {
-        transition-delay: 0.09s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(4) {
-        transition-delay: 0.12s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(5) {
-        transition-delay: 0.15s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(6) {
-        transition-delay: 0.18s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(7) {
-        transition-delay: 0.21s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(8) {
-        transition-delay: 0.24s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(9) {
-        transition-delay: 0.27s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(10) {
-        transition-delay: 0.3s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(11) {
-        transition-delay: 0.33s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(12) {
-        transition-delay: 0.36s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(13) {
-        transition-delay: 0.39s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(14) {
-        transition-delay: 0.42s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(15) {
-        transition-delay: 0.45s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(16) {
-        transition-delay: 0.48s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(17) {
-        transition-delay: 0.51s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(18) {
-        transition-delay: 0.54s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(19) {
-        transition-delay: 0.57s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(20) {
-        transition-delay: 0.6s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(21) {
-        transition-delay: 0.63s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(22) {
-        transition-delay: 0.66s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(23) {
-        transition-delay: 0.69s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(24) {
-        transition-delay: 0.72s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(25) {
-        transition-delay: 0.75s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(26) {
-        transition-delay: 0.78s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(27) {
-        transition-delay: 0.81s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(28) {
-        transition-delay: 0.84s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(29) {
-        transition-delay: 0.87s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(30) {
-        transition-delay: 0.9s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(31) {
-        transition-delay: 0.93s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(32) {
-        transition-delay: 0.96s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(33) {
-        transition-delay: 0.99s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(34) {
-        transition-delay: 1.02s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(35) {
-        transition-delay: 1.05s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(36) {
-        transition-delay: 1.08s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(37) {
-        transition-delay: 1.11s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(38) {
-        transition-delay: 1.14s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(39) {
-        transition-delay: 1.17s; }
-      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(40) {
-        transition-delay: 1.2s; }
-      section.todo-list-container ul.todo-list li.todo-list-item label {
+
+ul.todo-lists {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: column wrap;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap; }
+
+ul.todo-list {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: column wrap;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap;
+  list-style: none;
+  margin: 1em 0; }
+  ul.todo-list li.todo-list-item {
+    -webkit-transition: all 0.25s ease 0;
+    -moz-transition: all 0.25s ease 0;
+    -o-transition: all 0.25s ease 0;
+    transition: all 0.25s ease 0;
+    transition-property: all;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+    transition-delay: 0;
+    background-color: #f5f5f5;
+    margin: .25em;
+    position: relative; }
+    ul.todo-list li.todo-list-item:nth-child(1) {
+      transition-delay: 0.03s; }
+    ul.todo-list li.todo-list-item:nth-child(2) {
+      transition-delay: 0.06s; }
+    ul.todo-list li.todo-list-item:nth-child(3) {
+      transition-delay: 0.09s; }
+    ul.todo-list li.todo-list-item:nth-child(4) {
+      transition-delay: 0.12s; }
+    ul.todo-list li.todo-list-item:nth-child(5) {
+      transition-delay: 0.15s; }
+    ul.todo-list li.todo-list-item:nth-child(6) {
+      transition-delay: 0.18s; }
+    ul.todo-list li.todo-list-item:nth-child(7) {
+      transition-delay: 0.21s; }
+    ul.todo-list li.todo-list-item:nth-child(8) {
+      transition-delay: 0.24s; }
+    ul.todo-list li.todo-list-item:nth-child(9) {
+      transition-delay: 0.27s; }
+    ul.todo-list li.todo-list-item:nth-child(10) {
+      transition-delay: 0.3s; }
+    ul.todo-list li.todo-list-item:nth-child(11) {
+      transition-delay: 0.33s; }
+    ul.todo-list li.todo-list-item:nth-child(12) {
+      transition-delay: 0.36s; }
+    ul.todo-list li.todo-list-item:nth-child(13) {
+      transition-delay: 0.39s; }
+    ul.todo-list li.todo-list-item:nth-child(14) {
+      transition-delay: 0.42s; }
+    ul.todo-list li.todo-list-item:nth-child(15) {
+      transition-delay: 0.45s; }
+    ul.todo-list li.todo-list-item:nth-child(16) {
+      transition-delay: 0.48s; }
+    ul.todo-list li.todo-list-item:nth-child(17) {
+      transition-delay: 0.51s; }
+    ul.todo-list li.todo-list-item:nth-child(18) {
+      transition-delay: 0.54s; }
+    ul.todo-list li.todo-list-item:nth-child(19) {
+      transition-delay: 0.57s; }
+    ul.todo-list li.todo-list-item:nth-child(20) {
+      transition-delay: 0.6s; }
+    ul.todo-list li.todo-list-item:nth-child(21) {
+      transition-delay: 0.63s; }
+    ul.todo-list li.todo-list-item:nth-child(22) {
+      transition-delay: 0.66s; }
+    ul.todo-list li.todo-list-item:nth-child(23) {
+      transition-delay: 0.69s; }
+    ul.todo-list li.todo-list-item:nth-child(24) {
+      transition-delay: 0.72s; }
+    ul.todo-list li.todo-list-item:nth-child(25) {
+      transition-delay: 0.75s; }
+    ul.todo-list li.todo-list-item:nth-child(26) {
+      transition-delay: 0.78s; }
+    ul.todo-list li.todo-list-item:nth-child(27) {
+      transition-delay: 0.81s; }
+    ul.todo-list li.todo-list-item:nth-child(28) {
+      transition-delay: 0.84s; }
+    ul.todo-list li.todo-list-item:nth-child(29) {
+      transition-delay: 0.87s; }
+    ul.todo-list li.todo-list-item:nth-child(30) {
+      transition-delay: 0.9s; }
+    ul.todo-list li.todo-list-item:nth-child(31) {
+      transition-delay: 0.93s; }
+    ul.todo-list li.todo-list-item:nth-child(32) {
+      transition-delay: 0.96s; }
+    ul.todo-list li.todo-list-item:nth-child(33) {
+      transition-delay: 0.99s; }
+    ul.todo-list li.todo-list-item:nth-child(34) {
+      transition-delay: 1.02s; }
+    ul.todo-list li.todo-list-item:nth-child(35) {
+      transition-delay: 1.05s; }
+    ul.todo-list li.todo-list-item:nth-child(36) {
+      transition-delay: 1.08s; }
+    ul.todo-list li.todo-list-item:nth-child(37) {
+      transition-delay: 1.11s; }
+    ul.todo-list li.todo-list-item:nth-child(38) {
+      transition-delay: 1.14s; }
+    ul.todo-list li.todo-list-item:nth-child(39) {
+      transition-delay: 1.17s; }
+    ul.todo-list li.todo-list-item:nth-child(40) {
+      transition-delay: 1.2s; }
+    ul.todo-list li.todo-list-item label {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: space-between;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      -ms-align-items: center;
+      align-items: center;
+      -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+      -ms-align-content: center;
+      -moz-align-content: center;
+      -o-align-content: center;
+      align-content: center; }
+      ul.todo-list li.todo-list-item label div.todo-list-item-metadata {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        box-sizing: border-box;
         display: -webkit-box;
         display: -moz-box;
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
-        -webkit-flex-flow: row wrap;
-        -ms-flex-flow: row wrap;
-        flex-flow: row wrap;
-        -webkit-justify-content: space-between;
-        -ms-flex-pack: space-between;
-        justify-content: space-between;
+        -webkit-flex-flow: column wrap;
+        -ms-flex-flow: column wrap;
+        flex-flow: column wrap;
+        -webkit-justify-content: justify;
+        -ms-flex-pack: justify;
+        justify-content: justify;
         -webkit-align-items: center;
         -ms-align-items: center;
         align-items: center;
@@ -892,89 +932,64 @@ section.todo-list-container {
         -moz-align-content: center;
         -o-align-content: center;
         align-content: center; }
-        section.todo-list-container ul.todo-list li.todo-list-item label div.todo-list-item-metadata {
-          margin: 0;
-          padding: 0;
-          position: relative;
-          box-sizing: border-box;
-          display: -webkit-box;
-          display: -moz-box;
-          display: -ms-flexbox;
-          display: -webkit-flex;
-          display: flex;
-          -webkit-flex-flow: column wrap;
-          -ms-flex-flow: column wrap;
-          flex-flow: column wrap;
-          -webkit-justify-content: justify;
-          -ms-flex-pack: justify;
-          justify-content: justify;
-          -webkit-align-items: center;
-          -ms-align-items: center;
-          align-items: center;
-          -webkit-align-content: center;
-          -ms-flex-line-pack: center;
-          -ms-align-content: center;
-          -moz-align-content: center;
-          -o-align-content: center;
-          align-content: center; }
-        section.todo-list-container ul.todo-list li.todo-list-item label:before {
-          background-image: url(../images/checkbox-default.svg);
-          content: '';
-          display: inline-block;
-          height: 42px;
-          width: 42px; }
-        section.todo-list-container ul.todo-list li.todo-list-item label.checked:before {
-          background-image: url(../images/checkbox-checked.svg); }
-      section.todo-list-container ul.todo-list li.todo-list-item input[type=checkbox] {
-        left: -9999px;
-        position: absolute;
-        visibility: hidden; }
-      section.todo-list-container ul.todo-list li.todo-list-item span {
-        -webkit-transition: all 0.25s ease 0;
-        -moz-transition: all 0.25s ease 0;
-        -o-transition: all 0.25s ease 0;
-        transition: all 0.25s ease 0;
-        transition-property: all;
-        transition-duration: 0.25s;
-        transition-timing-function: ease;
-        transition-delay: 0;
-        display: inline-block; }
-        section.todo-list-container ul.todo-list li.todo-list-item span.label {
-          -webkit-box-flex: 3 1 0;
-          -moz-box-flex: 3 1 0;
-          -webkit-flex: 3 1 0;
-          -ms-flex: 3 1 0;
-          flex: 3 1 0;
-          max-width: 70%;
-          padding: 3px; }
-        section.todo-list-container ul.todo-list li.todo-list-item span.done-true {
-          text-decoration: line-through; }
-        section.todo-list-container ul.todo-list li.todo-list-item span[contenteditable='true']:hover {
-          background: #E6E6E6; }
-        section.todo-list-container ul.todo-list li.todo-list-item span.timestamp {
-          -webkit-box-flex: 1 0 0;
-          -moz-box-flex: 1 0 0;
-          -webkit-flex: 1 0 0;
-          -ms-flex: 1 0 0;
-          flex: 1 0 0;
-          background-color: transparent;
-          color: #999999;
-          font-family: "ff-meta-web-pro";
-          font-size: .7em;
-          margin: 0 .5em; }
-        section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status {
-          -webkit-box-flex: 1 0 0;
-          -moz-box-flex: 1 0 0;
-          -webkit-flex: 1 0 0;
-          -ms-flex: 1 0 0;
-          flex: 1 0 0;
-          height: 1em; }
-          section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.success {
-            color: #43ac6a; }
-          section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.fail {
-            color: #f08a24; }
-          section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.in-progress {
-            color: #a0d3e8; }
+      ul.todo-list li.todo-list-item label:before {
+        background-image: url(../images/checkbox-default.svg);
+        content: '';
+        display: inline-block;
+        height: 42px;
+        width: 42px; }
+      ul.todo-list li.todo-list-item label.checked:before {
+        background-image: url(../images/checkbox-checked.svg); }
+    ul.todo-list li.todo-list-item input[type=checkbox] {
+      left: -9999px;
+      position: absolute;
+      visibility: hidden; }
+    ul.todo-list li.todo-list-item span {
+      -webkit-transition: all 0.25s ease 0;
+      -moz-transition: all 0.25s ease 0;
+      -o-transition: all 0.25s ease 0;
+      transition: all 0.25s ease 0;
+      transition-property: all;
+      transition-duration: 0.25s;
+      transition-timing-function: ease;
+      transition-delay: 0;
+      display: inline-block; }
+      ul.todo-list li.todo-list-item span.label {
+        -webkit-box-flex: 3 1 0;
+        -moz-box-flex: 3 1 0;
+        -webkit-flex: 3 1 0;
+        -ms-flex: 3 1 0;
+        flex: 3 1 0;
+        max-width: 70%;
+        padding: 3px; }
+      ul.todo-list li.todo-list-item span.done-true {
+        text-decoration: line-through; }
+      ul.todo-list li.todo-list-item span[contenteditable='true']:hover {
+        background: #E6E6E6; }
+      ul.todo-list li.todo-list-item span.timestamp {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+        background-color: transparent;
+        color: #999999;
+        font-family: "ff-meta-web-pro";
+        font-size: .7em;
+        margin: 0 .5em; }
+      ul.todo-list li.todo-list-item span.ajax-status {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+        height: 1em; }
+        ul.todo-list li.todo-list-item span.ajax-status.success {
+          color: #43ac6a; }
+        ul.todo-list li.todo-list-item span.ajax-status.fail {
+          color: #f08a24; }
+        ul.todo-list li.todo-list-item span.ajax-status.in-progress {
+          color: #a0d3e8; }
 
 section.supplemental {
   margin: 0 .5em; }
@@ -1095,7 +1110,7 @@ input[type=tel] {
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.7);
   box-sizing: border-box;
   font-family: "ff-meta-web-pro";
-  padding: .75em;
+  padding: .25em;
   width: 100%; }
   input[type=text]:focus,
   input[type=password]:focus,
@@ -1120,16 +1135,16 @@ select {
   font-size: 20px;
   width: 100%; }
 
-form#new-project-form,
-form.new-task {
+#new-todo-list-form,
+form.new-list-item {
   background-color: #555555;
   color: #ffffff;
   padding: .5em; }
-  form#new-project-form input[type=text],
-  form.new-task input[type=text] {
+  #new-todo-list-form input[type=text],
+  form.new-list-item input[type=text] {
     color: #193549; }
-  form#new-project-form input[type=submit],
-  form.new-task input[type=submit] {
+  #new-todo-list-form input[type=submit],
+  form.new-list-item input[type=submit] {
     background-color: #e7e7e7;
     color: #193549;
     border-radius: 4px;

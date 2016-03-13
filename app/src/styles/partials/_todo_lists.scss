@@ -1,0 +1,38 @@
+section.todo-list-container {
+  font-family: $font-family-sans-serif;
+
+  header {
+    // box-shadow: 0 1px 10px 1px black;
+    padding: .25em .5em;
+
+    h2 {
+      font-family: $font-family-serif;
+      font-weight: 400;
+      margin: 0 auto;
+      text-align: center;
+
+      small {
+        display: block;
+        font-weight: 400;
+      }
+    }
+  }
+
+  p {
+    span.archive-span {
+      display: inline;
+      a {
+        // @include button($button-tny,$secondary-color,4px);
+      }
+    }
+  }
+}
+
+ul.todo-lists {
+  @include defaults();
+  @include flexbox();
+  @include flex-flow(column);
+
+  li {
+  }
+}
