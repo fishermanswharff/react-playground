@@ -731,7 +731,6 @@ html, body {
   background-color: #fff; }
 
 main#main-content {
-  padding-top: 50px;
   height: auto;
   overflow: auto; }
   main#main-content section#main-container {
@@ -1144,3 +1143,17 @@ form.new-task {
   background-color: #43ac6a;
   display: block;
   width: 100%; }
+
+.navbar .nav-list {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: column wrap;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap; }

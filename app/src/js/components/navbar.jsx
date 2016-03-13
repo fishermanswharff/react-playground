@@ -10,8 +10,8 @@ export default class Navbar extends React.Component {
 
   render(){
     return(
-      <nav>
-        <ul>
+      <nav className='navbar'>
+        <ul className='nav-list'>
           <li><LoginForm authData={ this.props.authData } /></li>
           <IndexLink to="/">Home</IndexLink>
         </ul>

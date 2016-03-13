@@ -1,0 +1,7 @@
+.navbar {
+  .nav-list {
+    @include defaults();
+    @include flexbox();
+    @include flex-flow(column);
+  }
+}

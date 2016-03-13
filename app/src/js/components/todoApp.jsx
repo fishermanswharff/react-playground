@@ -12,7 +12,7 @@ class TodoApp extends React.Component {
     this.authState = this.authState.bind(this);
     this.state = {
       items: [],
-      authData: this.props.authData,
+      authData: null,
     };
   }
 
@@ -33,6 +33,7 @@ class TodoApp extends React.Component {
   componentDidMount() {
     // the component is all set
     this.loadListsFromServer();
+    this.authState();
   }
 
   componentDidUpdate(prevProps) {

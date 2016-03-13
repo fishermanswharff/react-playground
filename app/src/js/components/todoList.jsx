@@ -75,7 +75,10 @@ export default class TodoList extends React.Component {
         </ul>
         <form onSubmit={ this.newItemSubmit }>
           <input type='text' onChange={ this.newItemChange } value={ this.state.newItemText } placeholder='Create a new item'/>
-          <button>Add Item</button>
+          <button type='submit'>Add Item</button>
+        </form>
+        <form onSubmit={ this.archiveDoneItems } >
+          <input type='submit' value='Remove Done Items' />
         </form>
       </section>
     )
