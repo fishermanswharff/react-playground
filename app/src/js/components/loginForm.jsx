@@ -44,8 +44,6 @@ export default class LoginForm extends React.Component {
     });
   }
 
-  componentDidMount(){}
-
   componentDidUpdate(prevprops){
     let oldauth = prevprops.authData;
     let newauth = this.props.authData;
