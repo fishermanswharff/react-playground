@@ -780,7 +780,7 @@ section.todo-list-container {
     flex-flow: column wrap;
     list-style: none;
     margin: 1em 0; }
-    section.todo-list-container ul.todo-list li {
+    section.todo-list-container ul.todo-list li.todo-list-item {
       -webkit-transition: all 0.25s ease 0;
       -moz-transition: all 0.25s ease 0;
       -o-transition: all 0.25s ease 0;
@@ -792,87 +792,87 @@ section.todo-list-container {
       background-color: #f5f5f5;
       margin: .25em;
       position: relative; }
-      section.todo-list-container ul.todo-list li:nth-child(1) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(1) {
         transition-delay: 0.03s; }
-      section.todo-list-container ul.todo-list li:nth-child(2) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(2) {
         transition-delay: 0.06s; }
-      section.todo-list-container ul.todo-list li:nth-child(3) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(3) {
         transition-delay: 0.09s; }
-      section.todo-list-container ul.todo-list li:nth-child(4) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(4) {
         transition-delay: 0.12s; }
-      section.todo-list-container ul.todo-list li:nth-child(5) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(5) {
         transition-delay: 0.15s; }
-      section.todo-list-container ul.todo-list li:nth-child(6) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(6) {
         transition-delay: 0.18s; }
-      section.todo-list-container ul.todo-list li:nth-child(7) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(7) {
         transition-delay: 0.21s; }
-      section.todo-list-container ul.todo-list li:nth-child(8) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(8) {
         transition-delay: 0.24s; }
-      section.todo-list-container ul.todo-list li:nth-child(9) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(9) {
         transition-delay: 0.27s; }
-      section.todo-list-container ul.todo-list li:nth-child(10) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(10) {
         transition-delay: 0.3s; }
-      section.todo-list-container ul.todo-list li:nth-child(11) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(11) {
         transition-delay: 0.33s; }
-      section.todo-list-container ul.todo-list li:nth-child(12) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(12) {
         transition-delay: 0.36s; }
-      section.todo-list-container ul.todo-list li:nth-child(13) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(13) {
         transition-delay: 0.39s; }
-      section.todo-list-container ul.todo-list li:nth-child(14) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(14) {
         transition-delay: 0.42s; }
-      section.todo-list-container ul.todo-list li:nth-child(15) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(15) {
         transition-delay: 0.45s; }
-      section.todo-list-container ul.todo-list li:nth-child(16) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(16) {
         transition-delay: 0.48s; }
-      section.todo-list-container ul.todo-list li:nth-child(17) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(17) {
         transition-delay: 0.51s; }
-      section.todo-list-container ul.todo-list li:nth-child(18) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(18) {
         transition-delay: 0.54s; }
-      section.todo-list-container ul.todo-list li:nth-child(19) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(19) {
         transition-delay: 0.57s; }
-      section.todo-list-container ul.todo-list li:nth-child(20) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(20) {
         transition-delay: 0.6s; }
-      section.todo-list-container ul.todo-list li:nth-child(21) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(21) {
         transition-delay: 0.63s; }
-      section.todo-list-container ul.todo-list li:nth-child(22) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(22) {
         transition-delay: 0.66s; }
-      section.todo-list-container ul.todo-list li:nth-child(23) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(23) {
         transition-delay: 0.69s; }
-      section.todo-list-container ul.todo-list li:nth-child(24) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(24) {
         transition-delay: 0.72s; }
-      section.todo-list-container ul.todo-list li:nth-child(25) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(25) {
         transition-delay: 0.75s; }
-      section.todo-list-container ul.todo-list li:nth-child(26) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(26) {
         transition-delay: 0.78s; }
-      section.todo-list-container ul.todo-list li:nth-child(27) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(27) {
         transition-delay: 0.81s; }
-      section.todo-list-container ul.todo-list li:nth-child(28) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(28) {
         transition-delay: 0.84s; }
-      section.todo-list-container ul.todo-list li:nth-child(29) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(29) {
         transition-delay: 0.87s; }
-      section.todo-list-container ul.todo-list li:nth-child(30) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(30) {
         transition-delay: 0.9s; }
-      section.todo-list-container ul.todo-list li:nth-child(31) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(31) {
         transition-delay: 0.93s; }
-      section.todo-list-container ul.todo-list li:nth-child(32) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(32) {
         transition-delay: 0.96s; }
-      section.todo-list-container ul.todo-list li:nth-child(33) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(33) {
         transition-delay: 0.99s; }
-      section.todo-list-container ul.todo-list li:nth-child(34) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(34) {
         transition-delay: 1.02s; }
-      section.todo-list-container ul.todo-list li:nth-child(35) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(35) {
         transition-delay: 1.05s; }
-      section.todo-list-container ul.todo-list li:nth-child(36) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(36) {
         transition-delay: 1.08s; }
-      section.todo-list-container ul.todo-list li:nth-child(37) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(37) {
         transition-delay: 1.11s; }
-      section.todo-list-container ul.todo-list li:nth-child(38) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(38) {
         transition-delay: 1.14s; }
-      section.todo-list-container ul.todo-list li:nth-child(39) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(39) {
         transition-delay: 1.17s; }
-      section.todo-list-container ul.todo-list li:nth-child(40) {
+      section.todo-list-container ul.todo-list li.todo-list-item:nth-child(40) {
         transition-delay: 1.2s; }
-      section.todo-list-container ul.todo-list li label {
+      section.todo-list-container ul.todo-list li.todo-list-item label {
         display: -webkit-box;
         display: -moz-box;
         display: -ms-flexbox;
@@ -893,19 +893,44 @@ section.todo-list-container {
         -moz-align-content: center;
         -o-align-content: center;
         align-content: center; }
-        section.todo-list-container ul.todo-list li label:before {
+        section.todo-list-container ul.todo-list li.todo-list-item label div.todo-list-item-metadata {
+          margin: 0;
+          padding: 0;
+          position: relative;
+          box-sizing: border-box;
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-flex-flow: column wrap;
+          -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+          -webkit-justify-content: justify;
+          -ms-flex-pack: justify;
+          justify-content: justify;
+          -webkit-align-items: center;
+          -ms-align-items: center;
+          align-items: center;
+          -webkit-align-content: center;
+          -ms-flex-line-pack: center;
+          -ms-align-content: center;
+          -moz-align-content: center;
+          -o-align-content: center;
+          align-content: center; }
+        section.todo-list-container ul.todo-list li.todo-list-item label:before {
           background-image: url(../images/checkbox-default.svg);
           content: '';
           display: inline-block;
           height: 42px;
           width: 42px; }
-        section.todo-list-container ul.todo-list li label.checked:before {
+        section.todo-list-container ul.todo-list li.todo-list-item label.checked:before {
           background-image: url(../images/checkbox-checked.svg); }
-      section.todo-list-container ul.todo-list li input[type=checkbox] {
+      section.todo-list-container ul.todo-list li.todo-list-item input[type=checkbox] {
         left: -9999px;
         position: absolute;
         visibility: hidden; }
-      section.todo-list-container ul.todo-list li span {
+      section.todo-list-container ul.todo-list li.todo-list-item span {
         -webkit-transition: all 0.25s ease 0;
         -moz-transition: all 0.25s ease 0;
         -o-transition: all 0.25s ease 0;
@@ -915,7 +940,7 @@ section.todo-list-container {
         transition-timing-function: ease;
         transition-delay: 0;
         display: inline-block; }
-        section.todo-list-container ul.todo-list li span.label {
+        section.todo-list-container ul.todo-list li.todo-list-item span.label {
           -webkit-box-flex: 3 1 0;
           -moz-box-flex: 3 1 0;
           -webkit-flex: 3 1 0;
@@ -923,34 +948,34 @@ section.todo-list-container {
           flex: 3 1 0;
           max-width: 70%;
           padding: 3px; }
-        section.todo-list-container ul.todo-list li span.done-true {
+        section.todo-list-container ul.todo-list li.todo-list-item span.done-true {
           text-decoration: line-through; }
-        section.todo-list-container ul.todo-list li span[contenteditable='true']:hover {
+        section.todo-list-container ul.todo-list li.todo-list-item span[contenteditable='true']:hover {
           background: #E6E6E6; }
-        section.todo-list-container ul.todo-list li span.x-icon {
-          display: inline-block;
-          cursor: pointer;
-          float: right;
-          text-align: right; }
-          section.todo-list-container ul.todo-list li span.x-icon svg#x-icon {
-            -webkit-transition: all 0.25s ease 0;
-            -moz-transition: all 0.25s ease 0;
-            -o-transition: all 0.25s ease 0;
-            transition: all 0.25s ease 0;
-            transition-property: all;
-            transition-duration: 0.25s;
-            transition-timing-function: ease;
-            transition-delay: 0;
-            height: 16px;
-            margin-right: 1em;
-            width: 16px;
-            fill: #dddddd; }
-        section.todo-list-container ul.todo-list li span.timestamp {
+        section.todo-list-container ul.todo-list li.todo-list-item span.timestamp {
+          -webkit-box-flex: 1 0 0;
+          -moz-box-flex: 1 0 0;
+          -webkit-flex: 1 0 0;
+          -ms-flex: 1 0 0;
+          flex: 1 0 0;
           background-color: transparent;
           color: #999999;
           font-family: "ff-meta-web-pro";
           font-size: .7em;
           margin: 0 .5em; }
+        section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status {
+          -webkit-box-flex: 1 0 0;
+          -moz-box-flex: 1 0 0;
+          -webkit-flex: 1 0 0;
+          -ms-flex: 1 0 0;
+          flex: 1 0 0;
+          height: 1em; }
+          section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.success {
+            background-color: green; }
+          section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.fail {
+            background-color: red; }
+          section.todo-list-container ul.todo-list li.todo-list-item span.ajax-status.in-progress {
+            background-color: yellow; }
 
 section.supplemental {
   margin: 0 .5em; }
