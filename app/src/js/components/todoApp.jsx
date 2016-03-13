@@ -4,7 +4,7 @@ import TodoListsForm from './todoListsForm'
 import LoginForm from './loginForm';
 import Navbar from './navbar';
 
-class TodoApp extends React.Component {
+export default class TodoApp extends React.Component {
 
   constructor(props) {
     super(props);
@@ -66,6 +66,3 @@ TodoApp.defaultProps = {
   firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com/'),
   firebaseListsRef: new Firebase('https://jwtodoapp.firebaseio.com/projects/'),
 }
-
-export default TodoApp;
-// <LoginForm authData={ this.state.authData }/>

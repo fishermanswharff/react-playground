@@ -50,7 +50,6 @@ export default class LoginForm extends React.Component {
     let oldauth = prevprops.authData;
     let newauth = this.props.authData;
     if (newauth !== oldauth) this.setState({authData: this.props.authData});
-    // this.setState({authData: this.props.authData});
   }
 
   render() {
