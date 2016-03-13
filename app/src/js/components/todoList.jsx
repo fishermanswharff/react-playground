@@ -53,7 +53,7 @@ export default class TodoList extends React.Component {
       project: this.props.params.listId,
       text: this.state.newItemText,
       timestamp: Date.now()
-    }, function(error){
+    }, (error) => {
       if(error){
         console.log('sync failed :(');
       } else {
