@@ -45,7 +45,7 @@ export default class TodoListItem extends React.Component {
     var date = new Date(timestamp);
     var hours = date.getHours();
     var minutes = date.getMinutes();
-    var day = date.getDate() + 1;
+    var day = date.getDate();
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
     if(minutes < 10){
