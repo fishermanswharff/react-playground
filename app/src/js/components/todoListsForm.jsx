@@ -27,10 +27,17 @@ export default class TodoListsForm extends React.Component {
 
   render(){
     return(
-      <form id='new-todo-list-form' onSubmit={ this.handleSubmit } >
-        <input type='text' onChange={ this.onChange } value={ this.state.newListName } placeholder='Create a new todo list'/>
-        <button>Add List</button>
-      </form>
+      <div className='form-container'>
+        <form id='new-todo-list-form' onSubmit={ this.handleSubmit } >
+          <div className='form-group'>
+            <input id='new-todo-list' type='text' onChange={ this.onChange } value={ this.state.newListName } required />
+            <label htmlFor='new-todo-list'>Todo List Name</label>
+          </div>
+          <div className='form-group'>
+            <button type='submit'>Add List</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

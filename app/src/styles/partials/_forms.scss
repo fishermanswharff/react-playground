@@ -1,3 +1,7 @@
+.form-container {
+  background-color: $primary-color;
+}
+
 input, select, textarea, button{font-family:$header-font;}
 
 input {
@@ -60,9 +64,10 @@ label {
   display: block;
 }
 
-
 form#login-form,
-form#logout-form {
+form#logout-form,
+form#new-list-item,
+form#new-todo-list-form {
   form:invalid{ border:none; }
   form:valid{ border:none; }
   h5 { color: $lightgreen; }

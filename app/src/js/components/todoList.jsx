@@ -73,10 +73,17 @@ export default class TodoList extends React.Component {
         <ul className='todo-list'>
           { this.state.items.map(this.createItem) }
         </ul>
-        <form className='new-list-item' onSubmit={ this.newItemSubmit }>
-          <input type='text' onChange={ this.newItemChange } value={ this.state.newItemText } placeholder='Create a new item'/>
-          <button type='submit'>Add Item</button>
-        </form>
+        <div className='form-container'>
+          <form id='new-list-item' onSubmit={ this.newItemSubmit }>
+            <div className='form-group'>
+              <input id='new-list-item' type='text' onChange={ this.newItemChange } value={ this.state.newItemText } required/>
+              <label htmlFor='new-list-item'>New todo</label>
+            </div>
+            <div className='form-group'>
+              <button type='submit'>Add Item</button>
+            </div>
+          </form>
+        </div>
         <form onSubmit={ this.archiveDoneItems } >
           <input type='submit' value='Remove Done Items' />
         </form>
