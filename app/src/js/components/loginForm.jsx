@@ -51,13 +51,20 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
-    var authForm;
+    var authForm, authMessage;
+
     if(this.state.authData){
-      authForm = <a href='#' onClick={this.unAuth}>Logout</a>
+      authForm = (<a className='auth' href='#' onClick={this.unAuth}>Logout</a>)
     } else {
-      authForm = <form onSubmit={this.handleSubmit}>
-        <label htmlFor='email'>Email: <input type='email' id='email' onChange={this.onEmailStateChange} value={this.state.email}></input></label>
-        <label htmlFor='password'>Password: <input type='password' id='password' onChange={this.onPasswordStateChange} value={this.state.password}></input></label>
+      authForm = <form className='auth inline' onSubmit={this.handleSubmit}>
+        <div className='form-group'>
+          <input type='email' id='email' onChange={this.onEmailStateChange} value={this.state.email} required />
+          <label htmlFor='email'>Email: </label>
+        </div>
+        <div className='form-group'>
+          <input type='password' id='password' onChange={this.onPasswordStateChange} value={this.state.password} required />
+          <label htmlFor='password'>Password:</label>
+        </div>
         <button type='submit'>Submit</button>
       </form>
     }

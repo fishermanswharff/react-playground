@@ -985,11 +985,11 @@ ul.todo-list {
         flex: 1 0 0;
         height: 1em; }
         ul.todo-list li.todo-list-item span.ajax-status.success {
-          color: #43ac6a; }
+          color: #80ffbb; }
         ul.todo-list li.todo-list-item span.ajax-status.fail {
-          color: #f08a24; }
+          color: #ff628c; }
         ul.todo-list li.todo-list-item span.ajax-status.in-progress {
-          color: #a0d3e8; }
+          color: #0088ff; }
 
 section.supplemental {
   margin: 0 .5em; }
@@ -1011,14 +1011,24 @@ section.supplemental {
   section.supplemental h1, section.supplemental h2, section.supplemental h3, section.supplemental h4, section.supplemental h5, section.supplemental h6, section.supplemental p {
     font-family: "ff-meta-web-pro"; }
 
-form {
+input, select, textarea, button {
   font-family: "ff-meta-web-pro"; }
+
+input {
+  -webkit-transition: all 0.25s ease 0;
+  -moz-transition: all 0.25s ease 0;
+  -o-transition: all 0.25s ease 0;
+  transition: all 0.25s ease 0;
+  transition-property: all;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+  transition-delay: 0; }
 
 a.button,
 input[type=submit],
 button,
 .btn {
-  background-color: #008cba;
+  background-color: #193549;
   color: #ffffff;
   border-radius: 4px;
   padding: 10px;
@@ -1039,7 +1049,7 @@ button,
   input[type=submit].success,
   button.success,
   .btn.success {
-    background-color: #43ac6a;
+    background-color: #80ffbb;
     color: #ffffff;
     border-radius: 4px;
     padding: 10px;
@@ -1051,7 +1061,7 @@ button,
   input[type=submit].info,
   button.info,
   .btn.info {
-    background-color: #a0d3e8;
+    background-color: #0088ff;
     color: #ffffff;
     border-radius: 4px;
     padding: 10px;
@@ -1063,7 +1073,7 @@ button,
   input[type=submit].warning,
   button.warning,
   .btn.warning {
-    background-color: #f08a24;
+    background-color: #ff628c;
     color: #ffffff;
     border-radius: 4px;
     padding: 10px;
@@ -1075,7 +1085,7 @@ button,
   input[type=submit].alert,
   button.alert,
   .btn.alert {
-    background-color: #f04124;
+    background-color: #9eff80;
     color: #ffffff;
     border-radius: 4px;
     padding: 10px;
@@ -1084,82 +1094,285 @@ button,
     width: auto;
     display: inline-block; }
 
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"] {
+  height: 30px;
+  min-width: 200px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-family: "ff-meta-web-pro";
+  font-size: 16px; }
+
+input[type="submit"].btn.btn-default {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 6px 10px 8px;
+  cursor: pointer; }
+  input[type="submit"].btn.btn-default:hover {
+    background-color: #000000;
+    color: #ffffff; }
+
 label {
   font-family: "ff-meta-web-pro";
+  display: block; }
+
+form.auth.inline form:invalid {
+  border: none; }
+form.auth.inline form:valid {
+  border: none; }
+form.auth.inline h5 {
+  color: #80ffbb; }
+form.auth.inline div.form-group {
+  position: relative; }
+  form.auth.inline div.form-group label {
+    -webkit-transition: all 0.25s ease-out 0;
+    -moz-transition: all 0.25s ease-out 0;
+    -o-transition: all 0.25s ease-out 0;
+    transition: all 0.25s ease-out 0;
+    transition-property: all;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+    transition-delay: 0;
+    bottom: 0;
+    color: #80ffbb;
+    font-family: "ff-meta-web-pro";
+    font-size: 2em;
+    height: 35px;
+    left: 0;
+    opacity: 0.2;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    top: 15px;
+    width: 100%;
+    z-index: 0; }
+  form.auth.inline div.form-group input[type="text"],
+  form.auth.inline div.form-group input[type="email"],
+  form.auth.inline div.form-group input[type="password"] {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    outline: solid transparent;
+    width: 100%;
+    height: 50px;
+    font-family: "ff-meta-web-pro";
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    color: #3ad900;
+    background: none;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #80ffbb; }
+    form.auth.inline div.form-group input[type="text"]:focus + label, form.auth.inline div.form-group input[type="text"]:valid + label,
+    form.auth.inline div.form-group input[type="email"]:focus + label,
+    form.auth.inline div.form-group input[type="email"]:valid + label,
+    form.auth.inline div.form-group input[type="password"]:focus + label,
+    form.auth.inline div.form-group input[type="password"]:valid + label {
+      top: 100%;
+      left: 0;
+      font-size: 1em; }
+    form.auth.inline div.form-group input[type="text"]:not(:focus):valid,
+    form.auth.inline div.form-group input[type="email"]:not(:focus):valid,
+    form.auth.inline div.form-group input[type="password"]:not(:focus):valid {
+      background: none; }
+    form.auth.inline div.form-group input[type="text"]:focus:valid,
+    form.auth.inline div.form-group input[type="email"]:focus:valid,
+    form.auth.inline div.form-group input[type="password"]:focus:valid {
+      background: none; }
+    form.auth.inline div.form-group input[type="text"]:not(:focus),
+    form.auth.inline div.form-group input[type="email"]:not(:focus),
+    form.auth.inline div.form-group input[type="password"]:not(:focus) {
+      background: linear-gradient(to top, #000 -15%, transparent 15%); }
+    form.auth.inline div.form-group input[type="text"]:not(:focus):invalid + label:after,
+    form.auth.inline div.form-group input[type="email"]:not(:focus):invalid + label:after,
+    form.auth.inline div.form-group input[type="password"]:not(:focus):invalid + label:after {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      content: ' required';
+      color: #ff628c; }
+  form.auth.inline div.form-group textarea#post-body-textarea {
+    box-sizing: border-box;
+    background: #193549;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    min-height: 300px;
+    border: 1px solid #80ffbb;
+    border-radius: 4px;
+    overflow: auto;
+    margin-top: 30px;
+    padding: 5px;
+    font-family: "ff-meta-web-pro";
+    font-size: 1.2em;
+    color: #e1efff; }
+  form.auth.inline div.form-group input[type="submit"],
+  form.auth.inline div.form-group button[type='submit'] {
+    margin: 0;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    background: none;
+    color: #80ffbb;
+    border: 1px solid #80ffbb;
+    margin-top: 40px;
+    opacity: 1; }
+    form.auth.inline div.form-group input[type="submit"]:hover,
+    form.auth.inline div.form-group button[type='submit']:hover {
+      background: #80ffbb;
+      color: #193549; }
+    form.auth.inline div.form-group input[type="submit"][disabled="disabled"],
+    form.auth.inline div.form-group button[type='submit'][disabled="disabled"] {
+      cursor: not-allowed;
+      opacity: 0.2; }
+  form.auth.inline div.form-group div.checkbox-group {
+    display: inline-block;
+    margin: 5px 0 5px 15px; }
+    form.auth.inline div.form-group div.checkbox-group label {
+      margin: 0;
+      padding: 0;
+      position: relative;
+      box-sizing: border-box;
+      opacity: 1;
+      position: static;
+      width: auto;
+      height: 25px;
+      display: inline;
+      font-size: inherit; }
+      form.auth.inline div.form-group div.checkbox-group label input[type="checkbox"] {
+        display: inline;
+        width: auto;
+        height: auto; }
+
+div.checkbox-group {
+  display: inline-block;
+  margin: 5px 0 5px 15px; }
+
+select[name="categories"] {
+  background: #193549;
+  color: #9eff80;
+  border: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  font-family: "ff-meta-web-pro"; }
+
+/* form {
+  font-family: $font-family-sans-serif;
+
+  &.inline {
+
+    label {}
+  }
+}
+
+a.button,
+input[type=submit],
+button,
+.btn {
+  @include button($primary-color, $white, 4px);
+  @include transition(all, .25s, ease, 0s);
+
+  border: 0;
+
+  &.success { @include button($success-color, $white, 4px); }
+  &.info { @include button($info-color, $white, 4px); }
+  &.warning { @include button($warning-color, $white, 4px); }
+  &.alert { @include button($alert-color, $white, 4px); }
+}
+
+label {
+  font-family: $font-family-sans-serif;
   font-size: .8em;
   font-weight: normal;
-  font-weight: 400; }
+  font-weight: 400;
+}
 
 input[type=text],
 input[type=password],
 input[type=email],
 input[type=tel] {
-  -webkit-transition: all 0.25s ease 0s;
-  -moz-transition: all 0.25s ease 0s;
-  -o-transition: all 0.25s ease 0s;
-  transition: all 0.25s ease 0s;
-  transition-property: all;
-  transition-duration: 0.25s;
-  transition-timing-function: ease;
-  transition-delay: 0s;
+  @include transition(all, .25s, ease, 0s);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border: 1px solid #193549;
+  border: 1px solid $darkblue;
   border-radius: 4px;
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 3px rgba(0,0,0,.7);
   box-sizing: border-box;
-  font-family: "ff-meta-web-pro";
+  font-family: $font-family-sans-serif;
   padding: .25em;
-  width: 100%; }
-  input[type=text]:focus,
-  input[type=password]:focus,
-  input[type=email]:focus,
-  input[type=tel]:focus {
-    box-shadow: 0 0 5px #0088ff; }
+  width: 100%;
+
+  &:focus {
+    box-shadow: 0 0 5px $lightblue;
+  }
+}
 
 textarea[name="project-notes"] {
-  background-color: #ffffff;
-  border: 0 none #ffffff;
+  background-color: $white;
+  border: 0 none $white;
   box-shadow: none;
-  font-family: "ff-tisa-web-pro";
+  font-family: $font-family-serif;
   font-size: 0.75rem;
   outline: none;
   overflow: hidden;
   padding: 0;
   resize: none;
-  width: 100%; }
+  width: 100%;
+}
 
 select {
   display: block;
   font-size: 20px;
-  width: 100%; }
+  width: 100%;
+}
 
 #new-todo-list-form,
 form.new-list-item {
-  background-color: #555555;
-  color: #ffffff;
-  padding: .5em; }
-  #new-todo-list-form input[type=text],
-  form.new-list-item input[type=text] {
-    color: #193549; }
-  #new-todo-list-form input[type=submit],
-  form.new-list-item input[type=submit] {
-    background-color: #e7e7e7;
-    color: #193549;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 5px auto;
-    text-decoration: none;
-    width: auto;
-    display: inline-block; }
+  background-color: $charcoal;
+  color: $white;
+  // margin: .5em;
+  padding: .5em;
 
-.firebase-auth-form input[type=submit] {
-  background-color: #43ac6a;
-  display: block;
-  width: 100%; }
+  label {
+    // color: $white;
+  }
 
-.navbar .nav-list {
+  input[type=text] {
+    color: $darkblue;
+  }
+
+  input[type=submit] {
+    @include button($secondary-color, $darkblue, 4px);
+  }
+}
+
+.firebase-auth-form {
+
+  input[type=submit] {
+    background-color: $success-color;
+    display: block;
+    width: 100%;
+  }
+}
+ */
+.navbar {
   margin: 0;
   padding: 0;
   position: relative;
@@ -1172,3 +1385,46 @@ form.new-list-item {
   -webkit-flex-flow: column wrap;
   -ms-flex-flow: column wrap;
   flex-flow: column wrap; }
+  .navbar .nav-list {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    background-color: #193549;
+    color: #ffffff;
+    list-style: none; }
+    .navbar .nav-list li {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0; }
+      .navbar .nav-list li a, .navbar .nav-list li form {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+        color: #ffffff;
+        font-family: "ff-meta-web-pro"; }
+      .navbar .nav-list li a {
+        padding: 0 1em; }
+      .navbar .nav-list li.spacer {
+        -webkit-box-flex: 3 0 0;
+        -moz-box-flex: 3 0 0;
+        -webkit-flex: 3 0 0;
+        -ms-flex: 3 0 0;
+        flex: 3 0 0; }
+    .navbar .nav-list.links {
+      background-color: #555555;
+      font-size: 1.5em; }
+    .navbar .nav-list.auth {
+      font-size: .9em; }

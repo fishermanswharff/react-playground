@@ -1,7 +1,46 @@
 .navbar {
+  @include defaults();
+  @include flexbox();
+  @include flex-flow(column);
+
   .nav-list {
     @include defaults();
     @include flexbox();
-    @include flex-flow(column);
+    @include flex-flow(row);
+    background-color: $primary-color;
+    color: $white;
+    list-style: none;
+
+    li {
+      @include flex(1 0 0);
+
+      a, form {
+        @include flex(1 0 0);
+        color: $white;
+        font-family: $font-family-sans-serif;
+      }
+
+      a {
+        padding: 0 1em;
+      }
+
+      &.spacer {
+        @include flex(3 0 0);
+      }
+    }
+
+    &.links {
+      background-color: $charcoal;
+      font-size: 1.5em;
+
+      a {
+        &.home {}
+        &.settings {}
+      }
+    }
+
+    &.auth {
+      font-size: .9em;
+    }
   }
 }

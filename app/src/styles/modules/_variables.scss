@@ -1,34 +1,31 @@
+$z-contact-form-input: 2;
+$z-body: 0;
+$z-nav: 10;
+
 /*—————————————————————————————————————————
 *****************Colors********************
 ——————————————————————————————————————————*/
 // gray scale
 
-$white         : #ffffff !default;
-$ghost         : #fafafa !default;
-$snow          : #f9f9f9 !default;
-$vapor         : #f6f6f6 !default;
-$white-smoke   : #f5f5f5 !default;
-$silver        : #efefef !default;
-$smoke         : #eeeeee !default;
-$gainsboro     : #dddddd !default;
-$iron          : #cccccc !default;
-$base          : #aaaaaa !default;
-$aluminum      : #999999 !default;
-$jumbo         : #888888 !default;
-$monsoon       : #777777 !default;
-$steel         : #666666 !default;
-$charcoal      : #555555 !default;
-$tuatara       : #444444 !default;
-$oil           : #333333 !default;
-$jet           : #222222 !default;
-$black         : #000000 !default;
-
-$primary-color: #008cba !default;   // bondi-blue
-$secondary-color: #e7e7e7 !default; // white-lilac
-$alert-color: #f04124 !default;     // cinnabar
-$success-color: #43ac6a !default;   // sea-green
-$warning-color: #f08a24 !default;   // carrot
-$info-color: #a0d3e8 !default;      // cornflower
+$white: #ffffff !default;
+$ghost: #fafafa !default;
+$snow: #f9f9f9 !default;
+$vapor: #f6f6f6 !default;
+$whitesmoke: #f5f5f5 !default;
+$silver: #efefef !default;
+$smoke: #eeeeee !default;
+$gainsboro: #dddddd !default;
+$iron: #cccccc !default;
+$base: #aaaaaa !default;
+$aluminum: #999999 !default;
+$jumbo: #888888 !default;
+$monsoon: #777777 !default;
+$steel: #666666 !default;
+$charcoal: #555555 !default;
+$tuatara: #444444 !default;
+$oil: #333333 !default;
+$jet: #222222 !default;
+$black: #000000 !default;
 
 $darkblue: #193549;
 $lightblue: #0088ff;
@@ -39,12 +36,33 @@ $lightgreen: #80ffbb;
 $pink: #ff628c;
 $codewhite: #e1efff;
 
-$z-nav: 10;
-
+$primary-color: $darkblue !default;
+$secondary-color: $lightblue !default;
+$alert-color: $lightyellow !default;
+$success-color: $lightgreen !default;
+$warning-color: $pink !default;
+$info-color: $lightblue !default;
 
 /*——————————————————————————————————————————
 ***************TYPOGRAPHY*****************
 ——————————————————————————————————————————*/
 $font-family-sans-serif: 'ff-meta-web-pro';
 $font-family-serif: 'ff-tisa-web-pro';
+$header-font: $font-family-sans-serif;
+$body-font: $font-family-sans-serif;
+$mono-spaced-font: $font-family-sans-serif;
 
+$header-light: 300;
+$header-heavy: 800;
+
+$body-light: 300;
+$body-bold: 700;
+
+$base-font-size: 14px;
+$large-font-size: 1.2em;
+$xlarge-font-size: 1.5em;
+$xxlarge-font-size: 2em;
+$xxxlarge-font-size: 3.3em;
+
+$base-line-height: 20px;
+$large-line-height: 24px;
