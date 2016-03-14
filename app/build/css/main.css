@@ -985,7 +985,7 @@ ul.todo-list {
         flex: 1 0 0;
         height: 1em; }
         ul.todo-list li.todo-list-item span.ajax-status.success {
-          color: #80ffbb; }
+          color: #ff9d00; }
         ul.todo-list li.todo-list-item span.ajax-status.fail {
           color: #ff628c; }
         ul.todo-list li.todo-list-item span.ajax-status.in-progress {
@@ -1049,7 +1049,7 @@ button,
   input[type=submit].success,
   button.success,
   .btn.success {
-    background-color: #80ffbb;
+    background-color: #ff9d00;
     color: #ffffff;
     border-radius: 4px;
     padding: 10px;
@@ -1124,15 +1124,20 @@ label {
   font-family: "ff-meta-web-pro";
   display: block; }
 
-form.auth.inline form:invalid {
+form#login-form form:invalid,
+form#logout-form form:invalid {
   border: none; }
-form.auth.inline form:valid {
+form#login-form form:valid,
+form#logout-form form:valid {
   border: none; }
-form.auth.inline h5 {
+form#login-form h5,
+form#logout-form h5 {
   color: #80ffbb; }
-form.auth.inline div.form-group {
+form#login-form div.form-group,
+form#logout-form div.form-group {
   position: relative; }
-  form.auth.inline div.form-group label {
+  form#login-form div.form-group label,
+  form#logout-form div.form-group label {
     -webkit-transition: all 0.25s ease-out 0;
     -moz-transition: all 0.25s ease-out 0;
     -o-transition: all 0.25s ease-out 0;
@@ -1154,9 +1159,12 @@ form.auth.inline div.form-group {
     top: 15px;
     width: 100%;
     z-index: 0; }
-  form.auth.inline div.form-group input[type="text"],
-  form.auth.inline div.form-group input[type="email"],
-  form.auth.inline div.form-group input[type="password"] {
+  form#login-form div.form-group input[type="text"],
+  form#login-form div.form-group input[type="email"],
+  form#login-form div.form-group input[type="password"],
+  form#logout-form div.form-group input[type="text"],
+  form#logout-form div.form-group input[type="email"],
+  form#logout-form div.form-group input[type="password"] {
     box-sizing: border-box;
     position: relative;
     z-index: 2;
@@ -1174,29 +1182,47 @@ form.auth.inline div.form-group {
     border: none;
     border-radius: 0;
     border-bottom: 1px solid #80ffbb; }
-    form.auth.inline div.form-group input[type="text"]:focus + label, form.auth.inline div.form-group input[type="text"]:valid + label,
-    form.auth.inline div.form-group input[type="email"]:focus + label,
-    form.auth.inline div.form-group input[type="email"]:valid + label,
-    form.auth.inline div.form-group input[type="password"]:focus + label,
-    form.auth.inline div.form-group input[type="password"]:valid + label {
+    form#login-form div.form-group input[type="text"]:focus + label, form#login-form div.form-group input[type="text"]:valid + label,
+    form#login-form div.form-group input[type="email"]:focus + label,
+    form#login-form div.form-group input[type="email"]:valid + label,
+    form#login-form div.form-group input[type="password"]:focus + label,
+    form#login-form div.form-group input[type="password"]:valid + label,
+    form#logout-form div.form-group input[type="text"]:focus + label,
+    form#logout-form div.form-group input[type="text"]:valid + label,
+    form#logout-form div.form-group input[type="email"]:focus + label,
+    form#logout-form div.form-group input[type="email"]:valid + label,
+    form#logout-form div.form-group input[type="password"]:focus + label,
+    form#logout-form div.form-group input[type="password"]:valid + label {
       top: 100%;
       left: 0;
       font-size: 1em; }
-    form.auth.inline div.form-group input[type="text"]:not(:focus):valid,
-    form.auth.inline div.form-group input[type="email"]:not(:focus):valid,
-    form.auth.inline div.form-group input[type="password"]:not(:focus):valid {
+    form#login-form div.form-group input[type="text"]:not(:focus):valid,
+    form#login-form div.form-group input[type="email"]:not(:focus):valid,
+    form#login-form div.form-group input[type="password"]:not(:focus):valid,
+    form#logout-form div.form-group input[type="text"]:not(:focus):valid,
+    form#logout-form div.form-group input[type="email"]:not(:focus):valid,
+    form#logout-form div.form-group input[type="password"]:not(:focus):valid {
       background: none; }
-    form.auth.inline div.form-group input[type="text"]:focus:valid,
-    form.auth.inline div.form-group input[type="email"]:focus:valid,
-    form.auth.inline div.form-group input[type="password"]:focus:valid {
+    form#login-form div.form-group input[type="text"]:focus:valid,
+    form#login-form div.form-group input[type="email"]:focus:valid,
+    form#login-form div.form-group input[type="password"]:focus:valid,
+    form#logout-form div.form-group input[type="text"]:focus:valid,
+    form#logout-form div.form-group input[type="email"]:focus:valid,
+    form#logout-form div.form-group input[type="password"]:focus:valid {
       background: none; }
-    form.auth.inline div.form-group input[type="text"]:not(:focus),
-    form.auth.inline div.form-group input[type="email"]:not(:focus),
-    form.auth.inline div.form-group input[type="password"]:not(:focus) {
+    form#login-form div.form-group input[type="text"]:not(:focus),
+    form#login-form div.form-group input[type="email"]:not(:focus),
+    form#login-form div.form-group input[type="password"]:not(:focus),
+    form#logout-form div.form-group input[type="text"]:not(:focus),
+    form#logout-form div.form-group input[type="email"]:not(:focus),
+    form#logout-form div.form-group input[type="password"]:not(:focus) {
       background: linear-gradient(to top, #000 -15%, transparent 15%); }
-    form.auth.inline div.form-group input[type="text"]:not(:focus):invalid + label:after,
-    form.auth.inline div.form-group input[type="email"]:not(:focus):invalid + label:after,
-    form.auth.inline div.form-group input[type="password"]:not(:focus):invalid + label:after {
+    form#login-form div.form-group input[type="text"]:not(:focus):invalid + label:after,
+    form#login-form div.form-group input[type="email"]:not(:focus):invalid + label:after,
+    form#login-form div.form-group input[type="password"]:not(:focus):invalid + label:after,
+    form#logout-form div.form-group input[type="text"]:not(:focus):invalid + label:after,
+    form#logout-form div.form-group input[type="email"]:not(:focus):invalid + label:after,
+    form#logout-form div.form-group input[type="password"]:not(:focus):invalid + label:after {
       position: relative;
       top: 0;
       left: 0;
@@ -1204,7 +1230,8 @@ form.auth.inline div.form-group {
       height: 40px;
       content: ' required';
       color: #ff628c; }
-  form.auth.inline div.form-group textarea#post-body-textarea {
+  form#login-form div.form-group textarea#post-body-textarea,
+  form#logout-form div.form-group textarea#post-body-textarea {
     box-sizing: border-box;
     background: #193549;
     border: none;
@@ -1219,8 +1246,10 @@ form.auth.inline div.form-group {
     font-family: "ff-meta-web-pro";
     font-size: 1.2em;
     color: #e1efff; }
-  form.auth.inline div.form-group input[type="submit"],
-  form.auth.inline div.form-group button[type='submit'] {
+  form#login-form div.form-group input[type="submit"],
+  form#login-form div.form-group button[type='submit'],
+  form#logout-form div.form-group input[type="submit"],
+  form#logout-form div.form-group button[type='submit'] {
     margin: 0;
     box-sizing: border-box;
     display: block;
@@ -1231,46 +1260,37 @@ form.auth.inline div.form-group {
     border: 1px solid #80ffbb;
     margin-top: 40px;
     opacity: 1; }
-    form.auth.inline div.form-group input[type="submit"]:hover,
-    form.auth.inline div.form-group button[type='submit']:hover {
+    form#login-form div.form-group input[type="submit"]:hover,
+    form#login-form div.form-group button[type='submit']:hover,
+    form#logout-form div.form-group input[type="submit"]:hover,
+    form#logout-form div.form-group button[type='submit']:hover {
       background: #80ffbb;
       color: #193549; }
-    form.auth.inline div.form-group input[type="submit"][disabled="disabled"],
-    form.auth.inline div.form-group button[type='submit'][disabled="disabled"] {
+    form#login-form div.form-group input[type="submit"][disabled="disabled"],
+    form#login-form div.form-group button[type='submit'][disabled="disabled"],
+    form#logout-form div.form-group input[type="submit"][disabled="disabled"],
+    form#logout-form div.form-group button[type='submit'][disabled="disabled"] {
       cursor: not-allowed;
       opacity: 0.2; }
-  form.auth.inline div.form-group div.checkbox-group {
-    display: inline-block;
-    margin: 5px 0 5px 15px; }
-    form.auth.inline div.form-group div.checkbox-group label {
-      margin: 0;
-      padding: 0;
-      position: relative;
-      box-sizing: border-box;
-      opacity: 1;
-      position: static;
-      width: auto;
-      height: 25px;
-      display: inline;
-      font-size: inherit; }
-      form.auth.inline div.form-group div.checkbox-group label input[type="checkbox"] {
-        display: inline;
-        width: auto;
-        height: auto; }
 
-div.checkbox-group {
-  display: inline-block;
-  margin: 5px 0 5px 15px; }
-
-select[name="categories"] {
-  background: #193549;
-  color: #9eff80;
-  border: 0;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 100%;
-  font-family: "ff-meta-web-pro"; }
+form#logout-form {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-items: baseline;
+  -ms-align-items: baseline;
+  align-items: baseline; }
+  form#logout-form {
+    padding: 0 1em; }
 
 /* form {
   font-family: $font-family-sans-serif;
@@ -1414,7 +1434,9 @@ form.new-list-item {
         -ms-flex: 1 0 0;
         flex: 1 0 0;
         color: #ffffff;
-        font-family: "ff-meta-web-pro"; }
+        display: block;
+        font-family: "ff-meta-web-pro";
+        text-align: center; }
       .navbar .nav-list li a {
         padding: 0 1em; }
       .navbar .nav-list li.spacer {
@@ -1425,6 +1447,11 @@ form.new-list-item {
         flex: 3 0 0; }
     .navbar .nav-list.links {
       background-color: #555555;
-      font-size: 1.5em; }
+      font-size: 1.5em;
+      line-height: 2; }
     .navbar .nav-list.auth {
       font-size: .9em; }
+      .navbar .nav-list.auth a {
+        border-right: 1px solid #0088ff;
+        display: inline-block;
+        line-height: 3; }

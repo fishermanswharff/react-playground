@@ -54,9 +54,12 @@ export default class LoginForm extends React.Component {
     var authForm, authMessage;
 
     if(this.state.authData){
-      authForm = (<a className='auth' href='#' onClick={this.unAuth}>Logout</a>)
+      authForm = <form id='logout-form' onSubmit={this.unAuth}>
+        <span><i className='fa fa-user'></i>: {this.props.authData.password.email}</span>
+        <input type='submit' className='info' value='Logout' />
+      </form>
     } else {
-      authForm = <form className='auth inline' onSubmit={this.handleSubmit}>
+      authForm = <form id='login-form' onSubmit={this.handleSubmit}>
         <div className='form-group'>
           <input type='email' id='email' onChange={this.onEmailStateChange} value={this.state.email} required />
           <label htmlFor='email'>Email: </label>
@@ -77,3 +80,5 @@ LoginForm.propTypes = {}
 LoginForm.defaultProps = {
   firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com'),
 }
+
+// <a className='auth' href='#' onClick={this.unAuth}>Logout</a>

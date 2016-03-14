@@ -17,7 +17,9 @@
       a, form {
         @include flex(1 0 0);
         color: $white;
+        display: block;
         font-family: $font-family-sans-serif;
+        text-align: center;
       }
 
       a {
@@ -32,6 +34,7 @@
     &.links {
       background-color: $charcoal;
       font-size: 1.5em;
+      line-height: 2;
 
       a {
         &.home {}
@@ -41,6 +44,12 @@
 
     &.auth {
       font-size: .9em;
+
+      a {
+        border-right: 1px solid $secondary-color;
+        display: inline-block;
+        line-height: 3;
+      }
     }
   }
 }

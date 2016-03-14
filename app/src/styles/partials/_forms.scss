@@ -60,7 +60,9 @@ label {
   display: block;
 }
 
-form.auth.inline {
+
+form#login-form,
+form#logout-form {
   form:invalid{ border:none; }
   form:valid{ border:none; }
   h5 { color: $lightgreen; }
@@ -175,44 +177,19 @@ form.auth.inline {
         opacity: 0.2;
       }
     }
-
-    div.checkbox-group {
-      display: inline-block;
-      margin: 5px 0 5px 15px;
-      label {
-        @include defaults;
-        opacity: 1;
-        position: static;
-        width: auto;
-        height: 25px;
-        display: inline;
-        font-size: inherit;
-
-        input[type="checkbox"] {
-          display: inline;
-          width: auto;
-          height: auto;
-        }
-      }
-    }
   }
 }
-div.checkbox-group {
-  display: inline-block;
-  margin: 5px 0 5px 15px;
-}
 
-select[name="categories"] {
-  background: $darkblue;
-  color: $lightyellow;
-  border: 0;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 100%;
-  font-family: $mono-spaced-font;
-}
+form#logout-form {
+  @include defaults();
+  @include flexbox();
+  @include flex-flow(row);
+  @include flex-align-items(baseline);
 
+  & {
+    padding: 0 1em;
+  }
+}
 
 
 
