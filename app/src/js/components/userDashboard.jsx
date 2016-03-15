@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UserAttributeForm from './userAttributeForm';
 import { render } from 'react-dom';
 
 export default class UserDashboard extends React.Component {
@@ -27,14 +28,14 @@ export default class UserDashboard extends React.Component {
 
     var attributes = [];
     for(var attr in this.state.user){
-      attributes.push(<li>{attr}: {this.state.user[attr]}</li>)
+      attributes.push(<UserAttributeForm attribute={attr} value={this.state.user[attr]} uid={this.props.params.userId} />)
     }
 
     return(
       <section id='userDashboard'>
         <header></header>
-        <ul>
-          {attributes}
+        <ul className='user-attributes'>
+          { attributes }
         </ul>
       </section>
     )

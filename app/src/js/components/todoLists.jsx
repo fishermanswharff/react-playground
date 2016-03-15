@@ -16,7 +16,6 @@ export default class TodoLists extends React.Component {
   render() {
     return(
       <section className='todo-lists-container'>
-        <header></header>
         <ul className='todo-lists'>
           {this.props.items.map(this.createItem)}
         </ul>

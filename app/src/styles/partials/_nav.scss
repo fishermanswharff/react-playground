@@ -8,6 +8,7 @@
     @include flexbox();
     @include flex-flow(row);
     background-color: $primary-color;
+    border-bottom: 2px solid $orange;
     color: $white;
     list-style: none;
 

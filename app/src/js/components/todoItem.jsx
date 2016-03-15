@@ -26,7 +26,7 @@ export default class TodoItem extends React.Component {
   render() {
     return (
       <li key={this.props.data.name}>
-        <Link activeStyle={{ color: '#0088ff' }} to={`/lists/${this.props.firebaseKey}`}>
+        <Link activeClassName="active" to={`/lists/${this.props.firebaseKey}`}>
           {this.props.data.name}
         </Link>
         {this.state.numTasks}

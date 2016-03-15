@@ -1,0 +1,8 @@
+section#userDashboard {
+  header {}
+
+  ul.user-attributes {
+    @include defaults();
+    background-color: $primary-color;
+  }
+}

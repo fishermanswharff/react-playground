@@ -67,7 +67,8 @@ label {
 form#login-form,
 form#logout-form,
 form#new-list-item,
-form#new-todo-list-form {
+form#new-todo-list-form,
+form.user-attributes {
   form:invalid{ border:none; }
   form:valid{ border:none; }
   h5 { color: $lightgreen; }
