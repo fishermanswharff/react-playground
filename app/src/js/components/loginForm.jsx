@@ -5,8 +5,6 @@ export default class LoginForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      email: '',
-      password: '',
       authData: this.props.authData
     }
     this.onEmailStateChange = this.onEmailStateChange.bind(this);
@@ -55,7 +53,7 @@ export default class LoginForm extends React.Component {
 
     if(this.state.authData){
       authForm = <form id='logout-form' onSubmit={this.unAuth}>
-        <span><i className='fa fa-user'></i>: {this.props.authData.password.email}</span>
+        <span><i className='fa fa-user'></i>: {this.state.authData.password.email}</span>
         <input type='submit' className='info' value='Logout' />
       </form>
     } else {
@@ -78,7 +76,7 @@ export default class LoginForm extends React.Component {
 LoginForm.propTypes = {}
 
 LoginForm.defaultProps = {
-  firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com'),
+  firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com/projects'),
 }
 
 // <a className='auth' href='#' onClick={this.unAuth}>Logout</a>

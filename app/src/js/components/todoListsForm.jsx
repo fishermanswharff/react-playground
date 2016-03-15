@@ -31,7 +31,7 @@ export default class TodoListsForm extends React.Component {
         <form id='new-todo-list-form' onSubmit={ this.handleSubmit } >
           <div className='form-group'>
             <input id='new-todo-list' type='text' onChange={ this.onChange } value={ this.state.newListName } required />
-            <label htmlFor='new-todo-list'>Todo List Name</label>
+            <label htmlFor='new-todo-list'>New List:</label>
           </div>
           <div className='form-group'>
             <button type='submit'>Add List</button>

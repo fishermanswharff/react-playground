@@ -1,7 +1,6 @@
 import React from 'react';
 import TodoItem from './todoItem';
 import { render } from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router';
 
 export default class TodoLists extends React.Component {
 
