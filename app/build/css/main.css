@@ -1331,13 +1331,14 @@ form.user-attributes .form-group input[type="password"] {
     border-bottom: 2px solid #ff9d00;
     color: #ffffff;
     list-style: none; }
-    .navbar .nav-list li {
+    .navbar .nav-list .nav-list-item {
       -webkit-box-flex: 1 0 0;
       -moz-box-flex: 1 0 0;
       -webkit-flex: 1 0 0;
       -ms-flex: 1 0 0;
-      flex: 1 0 0; }
-      .navbar .nav-list li a, .navbar .nav-list li form {
+      flex: 1 0 0;
+      text-align: center; }
+      .navbar .nav-list .nav-list-item a, .navbar .nav-list .nav-list-item form {
         -webkit-box-flex: 1 0 0;
         -moz-box-flex: 1 0 0;
         -webkit-flex: 1 0 0;
@@ -1347,12 +1348,70 @@ form.user-attributes .form-group input[type="password"] {
         display: inline-block;
         font-family: "ff-meta-web-pro";
         text-align: center; }
-      .navbar .nav-list li a {
+      .navbar .nav-list .nav-list-item form {
+        display: block; }
+      .navbar .nav-list .nav-list-item a {
         padding: 0 1em; }
-        .navbar .nav-list li a.settings {
+        .navbar .nav-list .nav-list-item a.settings {
           float: right; }
+        .navbar .nav-list .nav-list-item a.menu-icon {
+          color: #ffffff;
+          display: inline-block;
+          padding: 0;
+          position: relative;
+          top: 10px;
+          width: 40px;
+          -webkit-transform: translate3d(0, 0, 0);
+          -ms-transform: translate3d(0, 0, 0);
+          -moz-transform: translate3d(0, 0, 0);
+          -o-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+          .navbar .nav-list .nav-list-item a.menu-icon::before, .navbar .nav-list .nav-list-item a.menu-icon::after,
+          .navbar .nav-list .nav-list-item a.menu-icon .menu-icon__text {
+            background: #ffffff;
+            color: #000000;
+            content: '';
+            display: block;
+            height: 4px;
+            margin: 6px 0;
+            width: 100%;
+            border-radius: 3px;
+            -webkit-transition: all 0.25s ease-in-out 0s;
+            -moz-transition: all 0.25s ease-in-out 0s;
+            -o-transition: all 0.25s ease-in-out 0s;
+            transition: all 0.25s ease-in-out 0s; }
+          .navbar .nav-list .nav-list-item a.menu-icon .menu-icon__text {
+            text-indent: -9999px; }
+          .navbar .nav-list .nav-list-item a.menu-icon .display_text {
+            position: absolute;
+            top: -5px;
+            padding-left: 50px;
+            text-decoration: none;
+            color: #000000;
+            font-family: "ff-tisa-web-pro";
+            font-size: 1.1em;
+            font-style: normal; }
+          .navbar .nav-list .nav-list-item a.menu-icon.active .menu-icon__text {
+            opacity: 0; }
+          .navbar .nav-list .nav-list-item a.menu-icon.active:before {
+            -webkit-transform: rotate(45deg) translate3d(5px, 10px, 0);
+            -moz-transform: rotate(45deg) translate3d(5px, 10px, 0);
+            -o-transform: rotate(45deg) translate3d(5px, 10px, 0);
+            -ms-transform: rotate(45deg) translate3d(5px, 10px, 0);
+            transform: rotate(45deg) translate3d(5px, 10px, 0); }
+          .navbar .nav-list .nav-list-item a.menu-icon.active:after {
+            -webkit-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+            -moz-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+            -o-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+            -ms-transform: rotate(-45deg) translate3d(5px, -10px, 0);
+            transform: rotate(-45deg) translate3d(5px, -10px, 0); }
+      .navbar .nav-list .nav-list-item.large {
+        -webkit-box-flex: 3 0 0;
+        -moz-box-flex: 3 0 0;
+        -webkit-flex: 3 0 0;
+        -ms-flex: 3 0 0;
+        flex: 3 0 0; }
     .navbar .nav-list.links {
-      background-color: #cccccc;
       font-size: 1.5em;
       line-height: 3; }
     .navbar .nav-list.auth {
@@ -1365,13 +1424,14 @@ form.user-attributes .form-group input[type="password"] {
         display: inline-block;
         line-height: 3; }
 
-#todo-app > .todo-lists-container {
+/* #todo-app > section.list-and-form-container {
   position: fixed;
   top: -100%;
   width: 100%;
   z-index: 10;
-  height: 100vh; }
-
+  height: 100vh;
+}
+ */
 section#userDashboard ul.user-attributes {
   margin: 0;
   padding: 0;

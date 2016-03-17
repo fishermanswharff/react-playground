@@ -13,8 +13,9 @@
     color: $white;
     list-style: none;
 
-    li {
+    .nav-list-item {
       @include flex(1 0 0);
+      text-align: center;
 
       a, form {
         @include flex(1 0 0);
@@ -24,17 +25,80 @@
         text-align: center;
       }
 
+      form {
+        display: block;
+      }
+
       a {
         padding: 0 1em;
 
         &.settings {
           float: right;
         }
+
+        &.menu-icon {
+          color: $white;
+          display: inline-block;
+          padding: 0;
+          position: relative;
+          top: 10px;
+          width: 40px;
+          -webkit-transform: translate3d(0,0,0);
+          -ms-transform: translate3d(0,0,0);
+          -moz-transform: translate3d(0,0,0);
+          -o-transform: translate3d(0,0,0);
+          transform: translate3d(0,0,0);
+
+          &::before,
+          &::after,
+          .menu-icon__text {
+            background: $white;
+            color: $black;
+            content: '';
+            display: block;
+            height: 4px;
+            margin: 6px 0;
+            width: 100%;
+            border-radius: 3px;
+            -webkit-transition: all 0.25s ease-in-out 0s;
+            -moz-transition: all 0.25s ease-in-out 0s;
+            -o-transition: all 0.25s ease-in-out 0s;
+            transition: all 0.25s ease-in-out 0s;
+          }
+
+          .menu-icon__text {
+            text-indent: -9999px;
+          }
+          .display_text {
+            position: absolute;
+            top: -5px;
+            padding-left: 50px;
+            text-decoration: none;
+            color: $black;
+            font-family: "ff-tisa-web-pro";
+            font-size: 1.1em;
+            font-style: normal;
+          }
+
+          &.active .menu-icon__text {
+            opacity: 0;
+          }
+
+          &.active:before {
+            @include transform(rotate(45deg) translate3d(5px,10px,0));
+          }
+          &.active:after {
+            @include transform(rotate(-45deg) translate3d(5px,-10px,0));
+          }
+        }
+      }
+
+      &.large {
+        @include flex(3 0 0);
       }
     }
 
     &.links {
-      background-color: $iron;
       font-size: 1.5em;
       line-height: 3;
 

@@ -18,7 +18,7 @@ export default class TodoLists extends React.Component {
   render() {
 
     let classes = classnames('todo-lists-container', {
-      'open': this.state.open,
+      'active': this.state.open,
     });
 
     return(

@@ -48,8 +48,10 @@ export default class TodoApp extends React.Component {
     return (
       <div id='todo-app'>
         <Navbar authData={ this.state.authData } />
-        <TodoLists items={ this.state.items } />
-        <TodoListsForm />
+        <section className='list-and-form-container'>
+          <TodoLists items={ this.state.items } />
+          <TodoListsForm />
+        </section>
         <div className='todo-app-children'>
           {this.props.children}
         </div>
