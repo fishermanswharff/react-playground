@@ -1,11 +1,13 @@
 import React from 'react';
 import TodoItem from './todoItem';
 import { render } from 'react-dom';
+import classnames from 'classnames';
 
 export default class TodoLists extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {};
     this.createItem = this.createItem.bind(this);
   }
 
@@ -14,8 +16,13 @@ export default class TodoLists extends React.Component {
   }
 
   render() {
+
+    let classes = classnames('todo-lists-container', {
+      'open': this.state.open,
+    });
+
     return(
-      <section className='todo-lists-container'>
+      <section className={classes}>
         <ul className='todo-lists'>
           {this.props.items.map(this.createItem)}
         </ul>

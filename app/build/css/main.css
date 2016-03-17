@@ -1352,7 +1352,7 @@ form.user-attributes .form-group input[type="password"] {
         .navbar .nav-list li a.settings {
           float: right; }
     .navbar .nav-list.links {
-      background-color: #555555;
+      background-color: #cccccc;
       font-size: 1.5em;
       line-height: 3; }
     .navbar .nav-list.auth {
@@ -1364,6 +1364,13 @@ form.user-attributes .form-group input[type="password"] {
         border-right: 1px solid #0088ff;
         display: inline-block;
         line-height: 3; }
+
+#todo-app > .todo-lists-container {
+  position: fixed;
+  top: -100%;
+  width: 100%;
+  z-index: 10;
+  height: 100vh; }
 
 section#userDashboard ul.user-attributes {
   margin: 0;
