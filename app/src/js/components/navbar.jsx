@@ -24,7 +24,6 @@ export default class Navbar extends React.Component {
               <i className='fa fa-home'></i>
             </IndexLink>
           </li>
-          <li className='spacer'></li>
           <li className='nav-list-item'>
             <Link className='settings' to={this.generateUserPath()}>
               <i className='fa fa-cogs'></i>

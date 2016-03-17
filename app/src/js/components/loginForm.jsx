@@ -52,12 +52,12 @@ export default class LoginForm extends React.Component {
     var authForm, authMessage;
 
     if(this.state.authData){
-      authForm = <form id='logout-form' onSubmit={this.unAuth}>
+      authForm = <form id='logoutForm' onSubmit={this.unAuth}>
         <span><i className='fa fa-user'></i>: {this.state.authData.password.email}</span>
         <input type='submit' className='info' value='Logout' />
       </form>
     } else {
-      authForm = <form id='login-form' onSubmit={this.handleSubmit}>
+      authForm = <form id='loginForm' className='login-form' onSubmit={this.handleSubmit}>
         <div className='form-group'>
           <input type='email' id='email' onChange={this.onEmailStateChange} value={this.state.email} required />
           <label htmlFor='email'>Email: </label>

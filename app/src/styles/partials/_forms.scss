@@ -12,8 +12,9 @@ input {
 a.button,
 input[type=submit],
 button,
+button[type=submit],
 .btn {
-  @include button($primary-color, $white, 4px);
+  @include button($primary-color, $white, 0px);
   @include transition(all, .25s, ease, 0s);
 
   border: 0;
@@ -32,31 +33,8 @@ input[type="number"],
 input[type="search"],
 input[type="tel"],
 input[type="url"] {
-  height: 30px;
-  min-width: 200px;
-  border: 1px solid $black;
-  border-radius: 4px;
-  padding: 0 5px;
   font-family: $header-font;
-  font-size: 16px;
-}
-
-input[type="submit"] {
-  &.btn {
-    &.btn-default {
-      border: 1px solid $black;
-      border-radius: 4px;
-      color: $black;
-      background-color: $white;
-      padding: 6px 10px 8px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: $black;
-        color: $white;
-      }
-    }
-  }
+  font-size: $large-font-size;
 }
 
 label {
@@ -64,13 +42,9 @@ label {
   display: block;
 }
 
-form#login-form,
-form#logout-form,
-form#new-list-item,
-form#new-todo-list-form,
-form.user-attributes {
-  form:invalid{ border:none; }
-  form:valid{ border:none; }
+form {
+  &:invalid{ border:none; }
+  &:valid{ border:none; }
   h5 { color: $lightgreen; }
   div.form-group {
     position: relative;
@@ -79,15 +53,15 @@ form.user-attributes {
       @include transition(all,0.25s,ease-out,0);
       bottom: 0;
       color: $lightgreen;
-      font-family: $mono-spaced-font;
+      font-family: $font-family-serif;
       font-size: $xxlarge-font-size;
-      height: 35px;
+      height: 40px;
       left: 0;
       opacity: 0.2;
       overflow: hidden;
       position: absolute;
       text-align: left;
-      top: 15px;
+      top: 10px;
       width: 100%;
       z-index: $z-body;
     }
@@ -95,23 +69,25 @@ form.user-attributes {
     input[type="text"],
     input[type="email"],
     input[type="password"] {
-      box-sizing: border-box;
-      position: relative;
-      z-index: $z-contact-form-input;
-      outline: solid transparent;
-      width: 100%;
-      height: 50px;
-      font-family: $mono-spaced-font;
+      appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
       -o-appearance: none;
       -ms-appearance: none;
-      appearance: none;
-      color: $yellow;
       background: none;
       border: none;
       border-radius: 0;
       border-bottom: 1px solid $lightgreen;
+      box-sizing: border-box;
+      color: $yellow;
+      font-family: $font-family-serif;
+      font-size: $xlarge-font-size;
+      height: 50px;
+      outline: solid transparent;
+      padding: 0 5px;
+      position: relative;
+      width: 100%;
+      z-index: $z-contact-form-input;
 
       &:focus + label,
       &:valid + label {
@@ -162,16 +138,15 @@ form.user-attributes {
 
     input[type="submit"],
     button[type='submit'] {
-      margin: 0;
+      background-color: none;
+      border: 1px solid $lightgreen;
+      color: $lightgreen;
       box-sizing: border-box;
       display: block;
-      width: 100%;
-      max-width: 250px;
-      background: none;
-      color: $lightgreen;
-      border: 1px solid $lightgreen;
+      margin: 0;
       margin-top: 40px;
       opacity: 1;
+      width: 100%;
 
       &:hover {
         background: $lightgreen;
@@ -184,118 +159,46 @@ form.user-attributes {
       }
     }
   }
+
+  &.user-attributes {
+
+    .form-group {
+      label {
+        top: 28px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        padding: 0 5px 5px 10px;
+
+        &:focus + label {
+          top: 100%;
+        }
+        &:valid + label {
+          top: 28px;
+        }
+      }
+    }
+
+  }
 }
 
-form#logout-form {
+#logoutForm {
   @include defaults();
   @include flexbox();
   @include flex-flow(row);
+  @include flex-justify(space-between);
   @include flex-align-items(baseline);
 
   & {
-    padding: 0 1em;
-  }
-}
-
-
-
-/* form {
-  font-family: $font-family-sans-serif;
-
-  &.inline {
-
-    label {}
-  }
-}
-
-a.button,
-input[type=submit],
-button,
-.btn {
-  @include button($primary-color, $white, 4px);
-  @include transition(all, .25s, ease, 0s);
-
-  border: 0;
-
-  &.success { @include button($success-color, $white, 4px); }
-  &.info { @include button($info-color, $white, 4px); }
-  &.warning { @include button($warning-color, $white, 4px); }
-  &.alert { @include button($alert-color, $white, 4px); }
-}
-
-label {
-  font-family: $font-family-sans-serif;
-  font-size: .8em;
-  font-weight: normal;
-  font-weight: 400;
-}
-
-input[type=text],
-input[type=password],
-input[type=email],
-input[type=tel] {
-  @include transition(all, .25s, ease, 0s);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 1px solid $darkblue;
-  border-radius: 4px;
-  box-shadow: inset 0 0 3px rgba(0,0,0,.7);
-  box-sizing: border-box;
-  font-family: $font-family-sans-serif;
-  padding: .25em;
-  width: 100%;
-
-  &:focus {
-    box-shadow: 0 0 5px $lightblue;
-  }
-}
-
-textarea[name="project-notes"] {
-  background-color: $white;
-  border: 0 none $white;
-  box-shadow: none;
-  font-family: $font-family-serif;
-  font-size: 0.75rem;
-  outline: none;
-  overflow: hidden;
-  padding: 0;
-  resize: none;
-  width: 100%;
-}
-
-select {
-  display: block;
-  font-size: 20px;
-  width: 100%;
-}
-
-#new-todo-list-form,
-form.new-list-item {
-  background-color: $charcoal;
-  color: $white;
-  // margin: .5em;
-  padding: .5em;
-
-  label {
-    // color: $white;
-  }
-
-  input[type=text] {
-    color: $darkblue;
+    padding: 0 0 0 1em;
   }
 
   input[type=submit] {
-    @include button($secondary-color, $darkblue, 4px);
+    border-radius: 0;
+    float: right;
+    margin: 0;
+    background-color: $warning-color;
   }
 }
-
-.firebase-auth-form {
-
-  input[type=submit] {
-    background-color: $success-color;
-    display: block;
-    width: 100%;
-  }
-}
- */

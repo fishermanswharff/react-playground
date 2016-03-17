@@ -77,7 +77,7 @@ export default class TodoList extends React.Component {
           <form id='new-list-item' onSubmit={ this.newItemSubmit }>
             <div className='form-group'>
               <input id='new-list-item' type='text' onChange={ this.newItemChange } value={ this.state.newItemText } required/>
-              <label htmlFor='new-list-item'>New todo</label>
+              <label htmlFor='new-list-item'>new todo:</label>
             </div>
             <div className='form-group'>
               <button type='submit'>Add Item</button>
@@ -93,5 +93,4 @@ export default class TodoList extends React.Component {
 }
 
 TodoList.propTypes = {}
-
 TodoList.defaultProps = {}

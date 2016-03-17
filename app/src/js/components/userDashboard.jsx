@@ -28,7 +28,7 @@ export default class UserDashboard extends React.Component {
 
     var attributes = [];
     for(var attr in this.state.user){
-      attributes.push(<UserAttributeForm attribute={attr} value={this.state.user[attr]} uid={this.props.params.userId} />)
+      attributes.push(<UserAttributeForm key={attr} attribute={attr} value={this.state.user[attr]} uid={this.props.params.userId} />)
     }
 
     return(

@@ -7,6 +7,7 @@
     @include defaults();
     @include flexbox();
     @include flex-flow(row);
+    @include flex-justify(space-between);
     background-color: $primary-color;
     border-bottom: 2px solid $orange;
     color: $white;
@@ -18,24 +19,24 @@
       a, form {
         @include flex(1 0 0);
         color: $white;
-        display: block;
+        display: inline-block;
         font-family: $font-family-sans-serif;
         text-align: center;
       }
 
       a {
         padding: 0 1em;
-      }
 
-      &.spacer {
-        @include flex(3 0 0);
+        &.settings {
+          float: right;
+        }
       }
     }
 
     &.links {
       background-color: $charcoal;
       font-size: 1.5em;
-      line-height: 2;
+      line-height: 3;
 
       a {
         &.home {}
@@ -44,6 +45,7 @@
     }
 
     &.auth {
+      @include flex-justify(space-between);
       font-size: .9em;
 
       a {
