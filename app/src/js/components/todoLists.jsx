@@ -12,7 +12,7 @@ export default class TodoLists extends React.Component {
   }
 
   createItem(item) {
-    return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} />
+    return <TodoItem key={item.key} data={item.list} firebaseKey={item.key} authData={this.props.authData} />
   }
 
   render() {

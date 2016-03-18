@@ -17,7 +17,14 @@ export default class TodoItem extends React.Component {
     todoItemsRef.once('value', (dataSnapshot) => {
       // console.log('todoItem.getChildren(): ', this.props.data.name, dataSnapshot.numChildren());
       this.setState({numTasks: dataSnapshot.numChildren()});
+      this.forceUpdate();
     });
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.authData !== this.props.authData){
+      this.getChildren();
+    }
   }
 
   componentDidMount(){
