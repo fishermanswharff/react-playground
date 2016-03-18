@@ -17,18 +17,16 @@ export default class TodoLists extends React.Component {
 
   render() {
 
+    var view;
+
     let classes = classnames('todo-lists-container', {
       'active': this.state.open,
     });
 
     return(
       <section className={classes}>
-        <ul className='todo-lists'>
-          {this.props.items.map(this.createItem)}
-        </ul>
-        <div className='todo-lists-children'>
-          {this.props.children}
-        </div>
+        <ul className='todo-lists'>{this.props.items.map(this.createItem)}</ul>
+        <div className='todo-lists-children'>{this.props.children}</div>
       </section>
     )
   }

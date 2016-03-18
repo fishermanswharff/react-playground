@@ -8,6 +8,8 @@ export default class Navbar extends React.Component {
     super(props);
     this.generateUserPath = this.generateUserPath.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleAuth = this.handleAuth.bind(this);
+    this.handleUnAuth = this.handleUnAuth.bind(this);
     this.state = {
       active: false
     }
@@ -22,6 +24,14 @@ export default class Navbar extends React.Component {
     var path = ''
     !!this.props.authData ? path = `/user/${this.props.authData.uid}` : path = '/';
     return path;
+  }
+
+  handleUnAuth(authData){
+    this.props.onAuthEvent(authData);
+  }
+
+  handleAuth(authData){
+    this.props.onAuthEvent(authData);
   }
 
   render(){
@@ -52,7 +62,12 @@ export default class Navbar extends React.Component {
         </ul>
         <ul className='nav-list auth'>
           <li className='nav-list-item'>
-            <LoginForm authData={ this.props.authData } />
+            <LoginForm
+              authData={ this.props.authData }
+              onUnAuth={this.handleUnAuth}
+              onAuth={this.handleAuth}
+              {...this.props}
+            />
           </li>
         </ul>
       </nav>

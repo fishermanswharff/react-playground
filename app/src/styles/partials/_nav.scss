@@ -99,7 +99,7 @@
     }
 
     &.links {
-      font-size: 1.5em;
+      font-size: $xlarge-font-size;
       line-height: 3;
 
       a {
@@ -110,7 +110,7 @@
 
     &.auth {
       @include flex-justify(space-between);
-      font-size: .9em;
+      font-size: $medium-font-size;
 
       a {
         border-right: 1px solid $secondary-color;

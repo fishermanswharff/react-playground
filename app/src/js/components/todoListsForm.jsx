@@ -26,8 +26,11 @@ export default class TodoListsForm extends React.Component {
   }
 
   render(){
-    return(
-      <div className='form-container'>
+
+    var view;
+
+    if(this.props.authData){
+      view = <div className='form-container'>
         <form id='new-todo-list-form' onSubmit={ this.handleSubmit } >
           <div className='form-group'>
             <input id='new-todo-list' type='text' onChange={ this.onChange } value={ this.state.newListName } required />
@@ -38,7 +41,11 @@ export default class TodoListsForm extends React.Component {
           </div>
         </form>
       </div>
-    )
+    } else {
+      view = <div></div>
+    }
+
+    return view;
   }
 }
 

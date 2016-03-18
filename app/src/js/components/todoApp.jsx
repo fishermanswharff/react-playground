@@ -3,17 +3,21 @@ import TodoLists from './todoLists';
 import TodoListsForm from './todoListsForm'
 import LoginForm from './loginForm';
 import Navbar from './navbar';
+import { Router } from 'react-router';
 
 export default class TodoApp extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.loadListsFromServer = this.loadListsFromServer.bind(this);
     this.authState = this.authState.bind(this);
+    this.handleAuthEvent = this.handleAuthEvent.bind(this);
     this.state = {
       items: [],
       authData: null,
     };
+
+    this.context = context;
   }
 
   loadListsFromServer() {
@@ -37,20 +41,30 @@ export default class TodoApp extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // the properties changed
+    // this.forceUpdate();
+    // console.log('todoApp.componentDidUpdate: ', prevProps, this.props);
   }
 
   componentWillUnmount () {
     // remove state, props, etc.
   }
 
+  handleAuthEvent(authData){
+    if(authData){
+      this.setState({ authData: authData });
+    } else {
+      this.setState({ authData: null });
+      this.context.router.push('/')
+    }
+  }
+
   render() {
     return (
       <div id='todo-app'>
-        <Navbar authData={ this.state.authData } />
+        <Navbar authData={ this.state.authData } onAuthEvent={this.handleAuthEvent} {...this.props} />
         <section className='list-and-form-container'>
-          <TodoLists items={ this.state.items } />
-          <TodoListsForm />
+          <TodoLists items={ this.state.items } authData={this.state.authData} />
+          <TodoListsForm authData={this.state.authData} />
         </section>
         <div className='todo-app-children'>
           {this.props.children}
@@ -62,6 +76,10 @@ export default class TodoApp extends React.Component {
 
 TodoApp.propTypes = {
   items: React.PropTypes.array
+}
+
+TodoApp.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
 
 TodoApp.defaultProps = {

@@ -6,7 +6,9 @@ import { render } from 'react-dom';
 export default class UserDashboard extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      authData: null
+    };
     this.loadUser = this.loadUser.bind(this);
     this.userInfoCallback = this.userInfoCallback.bind(this);
   }
@@ -27,16 +29,14 @@ export default class UserDashboard extends React.Component {
   render(){
 
     var attributes = [];
+
     for(var attr in this.state.user){
       attributes.push(<UserAttributeForm key={attr} attribute={attr} value={this.state.user[attr]} uid={this.props.params.userId} />)
     }
 
     return(
-      <section id='userDashboard'>
-        <header></header>
-        <ul className='user-attributes'>
-          { attributes }
-        </ul>
+      <section id='userDashboard' >
+        <ul className='user-attributes'>{ attributes }</ul>
       </section>
     )
   }

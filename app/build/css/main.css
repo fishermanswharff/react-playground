@@ -752,16 +752,14 @@ main#main-content {
 
 section.todo-list-container {
   font-family: "ff-meta-web-pro"; }
-  section.todo-list-container header {
-    padding: .25em .5em; }
-    section.todo-list-container header h2 {
-      font-family: "ff-tisa-web-pro";
-      font-weight: 400;
-      margin: 0 auto;
-      text-align: center; }
-      section.todo-list-container header h2 small {
-        display: block;
-        font-weight: 400; }
+  section.todo-list-container header h2 {
+    font-family: "ff-tisa-web-pro";
+    font-weight: 400;
+    margin: 0 auto;
+    text-align: center; }
+    section.todo-list-container header h2 small {
+      display: block;
+      font-weight: 400; }
   section.todo-list-container p span.archive-span {
     display: inline; }
 
@@ -816,8 +814,7 @@ ul.todo-list {
   -webkit-flex-flow: column wrap;
   -ms-flex-flow: column wrap;
   flex-flow: column wrap;
-  list-style: none;
-  margin: 1em 0; }
+  list-style: none; }
   ul.todo-list li.todo-list-item {
     -webkit-transition: all 0.25s ease 0;
     -moz-transition: all 0.25s ease 0;
@@ -1418,7 +1415,7 @@ form.user-attributes .form-group input[type="password"] {
       -webkit-justify-content: space-between;
       -ms-flex-pack: space-between;
       justify-content: space-between;
-      font-size: .9em; }
+      font-size: 1em; }
       .navbar .nav-list.auth a {
         border-right: 1px solid #0088ff;
         display: inline-block;

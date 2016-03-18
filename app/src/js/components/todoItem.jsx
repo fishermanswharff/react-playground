@@ -15,6 +15,7 @@ export default class TodoItem extends React.Component {
   getChildren(){
     var todoItemsRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.firebaseKey}`);
     todoItemsRef.once('value', (dataSnapshot) => {
+      // console.log('todoItem.getChildren(): ', this.props.data.name, dataSnapshot.numChildren());
       this.setState({numTasks: dataSnapshot.numChildren()});
     });
   }

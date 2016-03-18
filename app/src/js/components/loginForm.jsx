@@ -25,6 +25,7 @@ export default class LoginForm extends React.Component {
     e.preventDefault();
     this.props.firebaseRef.unauth();
     this.setState({ authData: this.props.firebaseRef.getAuth() });
+    this.props.onUnAuth(this.props.firebaseRef.getAuth());
   }
 
   handleSubmit(e) {
@@ -38,6 +39,7 @@ export default class LoginForm extends React.Component {
         console.log("Login Failed!", error);
       } else {
         _this.setState({email: '', password: '', authData: authData});
+        this.props.onAuth(authData);
       }
     });
   }
