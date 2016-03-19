@@ -16,12 +16,6 @@ export default class TodoList extends React.Component {
     this.newItemSubmit = this.newItemSubmit.bind(this);
     this.newItemChange = this.newItemChange.bind(this);
 
-    var listRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    listRef.on('child_removed', (datasnapshot) => {
-      this.loadListFromServer(); // hack to make it work
-    }, (errorObject) => {
-      console.log(errorObject);
-    });
   }
 
   createItem(object,index,array) {
@@ -40,6 +34,12 @@ export default class TodoList extends React.Component {
 
   componentDidMount() {
     this.loadListFromServer();
+    var listRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
+    listRef.on('child_removed', (datasnapshot) => {
+      this.loadListFromServer();
+    }, (errorObject) => {
+      console.log(errorObject);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -55,7 +55,7 @@ export default class TodoList extends React.Component {
   newItemSubmit(e) {
     e.preventDefault();
     var todoRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    todoRef.push({
+    var promise = todoRef.push({
       done: false,
       project: this.props.params.listId,
       text: this.state.newItemText,
@@ -64,9 +64,15 @@ export default class TodoList extends React.Component {
       if(error){
         console.log('sync failed :(');
       } else {
-        this.setState({ newItemText: '' });
+        console.log('success');
       }
     });
+
+    promise.then(function(val){
+      console.log(val.key());
+    });
+
+    return false;
   }
 
   newItemChange(e) {

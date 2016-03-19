@@ -20,7 +20,12 @@ export default class TodoListItem extends React.Component {
       id: this.props.id
     };
 
-    var doneRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`)
+    var taskRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`)
+    taskRef.on('child_changed', (snapshot) => {
+      this.setState({[snapshot.key()]: snapshot.val()});
+    }, (error) => {
+      console.log(this, error);
+    });
   }
 
   createMarkup(string) {
