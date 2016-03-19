@@ -10,17 +10,15 @@ export default class TodoApp extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.loadListsFromServer = this.loadListsFromServer.bind(this);
-    this.authState = this.authState.bind(this);
-    this.handleAuthEvent = this.handleAuthEvent.bind(this);
-    this.state = {
-      items: [],
-      authData: null,
-    };
-
     this.context = context;
     this.permissions = new Permissions({props: this.props, state: this.state});
-    this.permissions.getAuth();
+    this.state = {
+      items: [],
+      authData: this.permissions.getAuth(),
+    };
+
+    this.loadListsFromServer = this.loadListsFromServer.bind(this);
+    this.handleAuthEvent = this.handleAuthEvent.bind(this);
   }
 
   loadListsFromServer() {
@@ -32,25 +30,14 @@ export default class TodoApp extends React.Component {
     });
   }
 
-  authState() {
-    var auth = this.props.firebaseRef.getAuth();
-    this.setState({authData: auth});
-  }
-
   componentDidMount() {
     // the component is all set
     this.loadListsFromServer();
-    this.authState();
   }
 
-  componentDidUpdate(prevProps) {
-    // this.forceUpdate();
-    // console.log('todoApp.componentDidUpdate: ', prevProps, this.props);
-  }
+  componentDidUpdate(prevProps) {}
 
-  componentWillUnmount () {
-    // remove state, props, etc.
-  }
+  componentWillUnmount () {}
 
   handleAuthEvent(authData){
     if(authData){

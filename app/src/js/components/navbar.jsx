@@ -17,7 +17,6 @@ export default class Navbar extends React.Component {
 
   handleMenuClick(e){
     this.setState({ active: !this.state.active });
-    this.forceUpdate();
   }
 
   generateUserPath(){

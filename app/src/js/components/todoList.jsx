@@ -27,7 +27,6 @@ export default class TodoList extends React.Component {
     var listitems = [];
     var firebaseRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
     var todos = firebaseRef.on('child_added', (snapshot, prev) => {
-      console.log('on child_added: ', snapshot.key(), snapshot.val(), prev);
       listitems.push({key: snapshot.key(), item: snapshot.val()});
       this.setState({ items: listitems });
       return snapshot;
@@ -51,6 +50,8 @@ export default class TodoList extends React.Component {
   }
 
   componentWillUnmount() {
+    var listRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
+    listRef.off();
     // console.log('TodoItem will unmount');
   }
 
@@ -66,13 +67,12 @@ export default class TodoList extends React.Component {
       if(error){
         console.log('sync failed :(');
       } else {
-        console.log(this);
         this.setState({newItemText: null});
       }
     });
 
     promise.then(function(val){
-      console.log(val.key());
+      console.log(val.key(), val);
     });
   }
 
