@@ -4,6 +4,7 @@ import TodoListsForm from './todoListsForm'
 import LoginForm from './loginForm';
 import Navbar from './navbar';
 import { Router } from 'react-router';
+import Permissions from '../modules/permissions';
 
 export default class TodoApp extends React.Component {
 
@@ -18,6 +19,8 @@ export default class TodoApp extends React.Component {
     };
 
     this.context = context;
+    this.permissions = new Permissions({props: this.props, state: this.state});
+    this.permissions.getAuth();
   }
 
   loadListsFromServer() {

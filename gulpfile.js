@@ -18,7 +18,7 @@ var paths = {
   html: 'app/src/**/*.html',
   styles: 'app/src/styles/**/*.scss',
   mainScript: 'app/src/js/app.jsx',
-  scripts: ['app/src/js/**/*.jsx'],
+  scripts: ['app/src/js/**/*.jsx', 'app/src/js/**/*.js'],
   vendors: ['app/src/vendor/**/*.js'],
   data: ['app/src/data/**/*.json'],
   images: ['app/src/images/**/*.{ttf,woff,eof,svg,png,jpg}'],

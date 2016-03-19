@@ -15,6 +15,13 @@ export default class TodoList extends React.Component {
     this.createItem = this.createItem.bind(this);
     this.newItemSubmit = this.newItemSubmit.bind(this);
     this.newItemChange = this.newItemChange.bind(this);
+
+    var listRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
+    listRef.on('child_removed', (datasnapshot) => {
+      this.loadListFromServer(); // hack to make it work
+    }, (errorObject) => {
+      console.log(errorObject);
+    });
   }
 
   createItem(object,index,array) {
@@ -23,11 +30,11 @@ export default class TodoList extends React.Component {
 
   loadListFromServer() {
     this.setState({ items: [] });
-    this.items = [];
+    var listitems = [];
     var firebaseRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
     firebaseRef.orderByKey().on('child_added', (snapshot, prev) => {
-      this.items.push({key: snapshot.key(), item: snapshot.val()});
-      this.setState({ items: this.items });
+      listitems.push({key: snapshot.key(), item: snapshot.val()});
+      this.setState({ items: listitems });
     });
   }
 

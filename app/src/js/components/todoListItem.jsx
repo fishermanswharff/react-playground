@@ -19,6 +19,8 @@ export default class TodoListItem extends React.Component {
       project: this.props.data.project,
       id: this.props.id
     };
+
+    var doneRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`)
   }
 
   createMarkup(string) {
