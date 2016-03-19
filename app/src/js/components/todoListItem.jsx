@@ -35,8 +35,6 @@ export default class TodoListItem extends React.Component {
     if(error){
       this.setState({ajaxFail: true})
     } else {
-      this.setState({done: !this.state.done});
-      this.forceUpdate();
       this.setState({ajaxSuccess: true})
     }
   }
@@ -74,7 +72,12 @@ export default class TodoListItem extends React.Component {
     }
   }
 
-  componentDidMount(){}
+  componentDidMount(){
+    var itemRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`);
+    itemRef.on('child_changed', (snapShot) => {
+      this.setState({[snapShot.key()]: snapShot.val()});
+    });
+  }
 
   componentDidUpdate(prevProps){}
 
