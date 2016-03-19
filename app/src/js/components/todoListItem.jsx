@@ -19,13 +19,6 @@ export default class TodoListItem extends React.Component {
       project: this.props.data.project,
       id: this.props.id
     };
-
-    var taskRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`)
-    taskRef.on('child_changed', (snapshot) => {
-      this.setState({[snapshot.key()]: snapshot.val()});
-    }, (error) => {
-      console.log(this, error);
-    });
   }
 
   createMarkup(string) {
@@ -81,17 +74,11 @@ export default class TodoListItem extends React.Component {
     }
   }
 
-  componentDidMount(){
-    // get the params and setup the firebase properties
-  }
+  componentDidMount(){}
 
-  componentDidUpdate(prevProps){
+  componentDidUpdate(prevProps){}
 
-  }
-
-  componentWillUnmount(){
-
-  }
+  componentWillUnmount(){}
 
   render() {
 

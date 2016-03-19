@@ -26,9 +26,11 @@ export default class TodoList extends React.Component {
     this.setState({ items: [] });
     var listitems = [];
     var firebaseRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    firebaseRef.orderByKey().on('child_added', (snapshot, prev) => {
+    var todos = firebaseRef.on('child_added', (snapshot, prev) => {
+      console.log('on child_added: ', snapshot.key(), snapshot.val(), prev);
       listitems.push({key: snapshot.key(), item: snapshot.val()});
       this.setState({ items: listitems });
+      return snapshot;
     });
   }
 
@@ -64,15 +66,14 @@ export default class TodoList extends React.Component {
       if(error){
         console.log('sync failed :(');
       } else {
-        console.log('success');
+        console.log(this);
+        this.setState({newItemText: null});
       }
     });
 
     promise.then(function(val){
       console.log(val.key());
     });
-
-    return false;
   }
 
   newItemChange(e) {
