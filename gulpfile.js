@@ -37,13 +37,14 @@ var paths = {
 
 gulp.task('scripts', function(){
   return gulp.src(webpackConfig.entry)
-    .pipe($.webpack(webpackConfig))
-    .pipe(isProduction ? $.uglify() : $.util.noop())
-    .pipe(gulp.dest(paths.destjs))
     .on('error', function(error) {
       console.log('ERROR: ' + error.toString());
       this.emit("end");
-    });
+    })
+    .pipe($.webpack(webpackConfig))
+    .pipe(isProduction ? $.uglify() : $.util.noop())
+    .pipe(gulp.dest(paths.destjs))
+    .pipe(reload({ stream:true }));
 });
 
 // watch files for changes and reload
