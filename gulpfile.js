@@ -19,10 +19,8 @@ var path = require('path'),
 // set variable via $ gulp --type production
 var environment = $.util.env.type || 'development';
 var isProduction = environment === 'production';
-var webpackConfig = require('./webpack.config.js').getConfig('development');
-var port = $.util.env.port || 1337;
-var app = 'app/';
-var dist = 'dist/';
+var webpackConfig = require('./webpack.config.js').getConfig(environment);
+var port = $.util.env.port || 8080;
 
 var paths = {
   html: 'app/**/*.html',
@@ -61,7 +59,11 @@ gulp.task('serve',['clean','minify-html','sass','scripts','copyImages','compileV
       baseDir: paths.destroot,
       index: 'index.html',
       middleware: [ historyApiFallback() ],
-    }
+    },
+    port: port,
+    ui: {
+      port: 8081
+    },
   });
   gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js', 'js/**/*.jsx', 'images/**/*.{ttf,woff,eof,svg,png,jpg}'], {cwd: 'app/build'}, reload);
 });
