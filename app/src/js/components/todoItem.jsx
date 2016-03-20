@@ -1,24 +1,26 @@
 import React from 'react';
+import FirebaseRequest from '../modules/FirebaseRequest';
 import { Link } from 'react-router'
 
 export default class TodoItem extends React.Component {
 
   constructor(props){
     super(props);
+    this.request = new FirebaseRequest({props: this.props});
     this.getChildren = this.getChildren.bind(this);
-
+    this.handleChildCountPromise = this.handleChildCountPromise.bind(this);
     this.state = {
       numTasks: 0
     }
   }
 
   getChildren(){
-    var todoItemsRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.firebaseKey}`);
-    todoItemsRef.once('value', (dataSnapshot) => {
-      // console.log('todoItem.getChildren(): ', this.props.data.name, dataSnapshot.numChildren());
-      this.setState({numTasks: dataSnapshot.numChildren()});
-      this.forceUpdate();
-    });
+    this.request.childCount(this.props.firebaseKey).then(this.handleChildCountPromise);
+  }
+
+  handleChildCountPromise(count){
+    this.setState({numTasks: count});
+    this.forceUpdate();
   }
 
   componentDidUpdate(prevProps){

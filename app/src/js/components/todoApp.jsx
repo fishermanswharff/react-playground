@@ -77,8 +77,3 @@ TodoApp.propTypes = {
 TodoApp.contextTypes = {
   router: React.PropTypes.func.isRequired
 }
-
-TodoApp.defaultProps = {
-  firebaseRef: new Firebase('https://jwtodoapp.firebaseio.com/'),
-  firebaseListsRef: new Firebase('https://jwtodoapp.firebaseio.com/projects/'),
-}

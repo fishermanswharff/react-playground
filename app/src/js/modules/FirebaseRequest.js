@@ -17,4 +17,16 @@ export default class FirebaseRequest {
       }
     );
   }
+
+  childCount(key){
+    var listRef = new Firebase(`${FIREBASE_REFS.tasksRef}/${key}`);
+    return new Promise(
+      (resolve, reject) => {
+        listRef.once('value', (dataSnapshot) => {
+          resolve(dataSnapshot.numChildren());
+        });
+      }
+    )
+
+  }
 }
