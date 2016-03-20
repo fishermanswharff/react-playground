@@ -1,3 +1,5 @@
+import { FIREBASE_REFS } from '../constants/FirebaseRefs';
+
 export default class Permissions {
   constructor(options){
     for(var key in options){
@@ -11,7 +13,7 @@ export default class Permissions {
   }
 
   getAuth(){
-    return new Firebase(refs.firebaseRef).getAuth();
+    return new Firebase(FIREBASE_REFS.rootRef).getAuth();
   }
   authorized(){}
   getProjects(){}
@@ -19,13 +21,4 @@ export default class Permissions {
   getMembers(projectId){}
   getUsers(){}
   getUser(userId){}
-}
-
-const refs = {
-  firebaseRef: 'https://jwtodoapp.firebaseio.com/',
-  projectsRef: 'https://jwtodoapp.firebaseio.com/projects',
-  tasksRef: 'https://jwtodoapp.firebaseio.com/tasks',
-  notesRef: 'https://jwtodoapp.firebaseio.com/notes',
-  membersRef: 'https://jwtodoapp.firebaseio.com/members',
-  usersRef: 'https://jwtodoapp.firebaseio.com/users'
 }

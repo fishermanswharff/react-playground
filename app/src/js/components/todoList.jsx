@@ -52,7 +52,6 @@ export default class TodoList extends React.Component {
   componentWillUnmount() {
     var listRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
     listRef.off();
-    // console.log('TodoItem will unmount');
   }
 
   newItemSubmit(e) {

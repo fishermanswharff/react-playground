@@ -4,14 +4,16 @@ import TodoListsForm from './todoListsForm'
 import LoginForm from './loginForm';
 import Navbar from './navbar';
 import { Router } from 'react-router';
-import Permissions from '../modules/permissions';
+import FirebaseRequest from '../modules/FirebaseRequest';
+import Permissions from '../modules/Permissions';
 
 export default class TodoApp extends React.Component {
 
   constructor(props, context) {
     super(props, context);
     this.context = context;
-    this.permissions = new Permissions({props: this.props, state: this.state});
+    this.permissions = new Permissions({props: this.props});
+    this.requests = new FirebaseRequest({props: this.props});
     this.state = {
       items: [],
       authData: this.permissions.getAuth(),
@@ -19,19 +21,23 @@ export default class TodoApp extends React.Component {
 
     this.loadListsFromServer = this.loadListsFromServer.bind(this);
     this.handleAuthEvent = this.handleAuthEvent.bind(this);
+    this.listsPromiseHandler = this.listsPromiseHandler.bind(this);
   }
 
   loadListsFromServer() {
     this.setState({items: []});
-    this.items = [];
-    this.props.firebaseListsRef.on('child_added', (dataSnapshot) => {
-      this.items.push({key: dataSnapshot.key(), list: dataSnapshot.val()});
-      this.setState({ items: this.items });
-    });
+    this.requests.getAllLists().then(this.listsPromiseHandler);
+  }
+
+  listsPromiseHandler(object){
+    var lists = []
+    for(var key in object)
+      lists.push({key: key, list: object[key]});
+    this.setState({items: lists});
   }
 
   componentDidMount() {
-    // the component is all set
+    // the component is all set, and you can access the component's props and initial state
     this.loadListsFromServer();
   }
 
