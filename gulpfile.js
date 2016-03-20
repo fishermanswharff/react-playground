@@ -1,6 +1,6 @@
 'use strict';
 
-var path = require('path'),
+let path = require('path'),
     gulp = require('gulp'),
     minifyHtml = require('gulp-minify-html'),
     browserSync = require('browser-sync').create('chuck norris'),
@@ -13,10 +13,10 @@ var path = require('path'),
     $ = require('gulp-load-plugins')();
 
 // set variable via $ gulp --type production
-var environment = $.util.env.type || 'development';
-var isProduction = environment === 'production';
-var webpackConfig = require('./webpack.config.js').getConfig(environment);
-var port = $.util.env.port || 8080;
+let environment = $.util.env.type || 'development';
+let isProduction = environment === 'production';
+let webpackConfig = require('./webpack.config.js').getConfig(environment);
+let port = $.util.env.port || 8080;
 
 var paths = {
   html: 'app/**/*.html',
@@ -43,7 +43,7 @@ gulp.task('scripts', function(){
     .on('error', function(error) {
       console.log('ERROR: ' + error.toString());
       this.emit("end");
-    })
+    });
 });
 
 // watch files for changes and reload
@@ -66,8 +66,8 @@ gulp.task('serve',['clean','minify-html','sass','scripts','copyImages','compileV
 // A gulpfile is just another node program and you can use any package available on npm
 gulp.task('clean', function() {
   // You can use multiple globbing patterns as you would with `gulp.src`
-  return del(paths.tmp).then(function (paths) {
-    console.log('Deleted files/folders:\n', paths.join('\n'));
+  return del(paths.tmp).then(function (deleted) {
+    console.log('Deleted files/folders:\n', deleted.join('\n'));
   });
 });
 

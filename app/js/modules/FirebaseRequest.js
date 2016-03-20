@@ -1,14 +1,17 @@
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
+import { Firebase } from '../../../node_modules/firebase/lib/firebase-web.js';
 
 export default class FirebaseRequest {
   constructor(options){
-    for(var key in options){
-      this[key] = options[key];
+    for(let key in options){
+      if(options.hasOwnProperty(key)){
+        this[key] = options[key];
+      }
     }
   }
 
   getAllLists(){
-    var listsRef = new Firebase(FIREBASE_REFS.projectsRef);
+    let listsRef = new Firebase(FIREBASE_REFS.projectsRef);
     return new Promise(
       (resolve, reject) => {
         listsRef.on('value', (dataSnapshot) => {
@@ -23,7 +26,7 @@ export default class FirebaseRequest {
   }
 
   listChildCount(key){
-    var listRef = new Firebase(`${FIREBASE_REFS.tasksRef}/${key}`);
+    let listRef = new Firebase(`${FIREBASE_REFS.tasksRef}/${key}`);
     return new Promise(
       (resolve, reject) => {
         listRef.once('value', (dataSnapshot) => {
@@ -34,14 +37,22 @@ export default class FirebaseRequest {
           }
         });
       }
-    )
+    );
   }
 
   genericGetRequest(){
+    let success = true;
     return new Promise(
       (resolve, reject) => {
+        setTimeout(() => {
+          if(success){
+            resolve('hello world');
+          } else {
+            reject('async failed');
+          }
+        }, 1000);
         // async op goes here
       }
-    )
+    );
   }
 }

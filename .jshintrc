@@ -13,7 +13,7 @@
   "globals": true,
   "iterator": true,
   "latedef": true,
-  "maxcomplexity": true,
+  "maxcomplexity": 3,
   "maxdepth": 2,
   "maxerr": 50,
   "maxparams": 3,
