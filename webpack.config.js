@@ -20,18 +20,12 @@ module.exports.getConfig = function(type){
           test: /\.jsx$/,
           loader: 'babel',
           exclude: /node_modules/,
-          query: {
-            presets: ['react', 'es2015']
-          }
-        },
+          query: { presets: ['react', 'es2015'] } },
         {
           test: /\.js$/,
           exclude: /node_moduels/,
           loader: 'babel-loader',
-          query: {
-            cacheDirectory: true,
-            presets: ['react', 'es2015']
-          }
+          query: { cacheDirectory: true, presets: ['react', 'es2015'] }
         }
       ]
     },

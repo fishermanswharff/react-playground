@@ -3,15 +3,11 @@
 var path = require('path'),
     gulp = require('gulp'),
     minifyHtml = require('gulp-minify-html'),
-    react = require('gulp-react'),
     browserSync = require('browser-sync').create('chuck norris'),
     sass = require('gulp-ruby-sass'),
     del = require('del'),
     webpack = require('gulp-webpack'),
-    browserify = require('browserify'),
     babel = require('gulp-babel'),
-    babelify = require('babelify'),
-    source = require('vinyl-source-stream'),
     historyApiFallback = require('connect-history-api-fallback'),
     reload = browserSync.reload,
     $ = require('gulp-load-plugins')();
@@ -48,8 +44,6 @@ gulp.task('scripts', function(){
       console.log('ERROR: ' + error.toString());
       this.emit("end");
     })
-    //.pipe($.size({title: 'js'}))
-    //.pipe($.connect.reload());
 });
 
 // watch files for changes and reload
