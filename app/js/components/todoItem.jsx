@@ -1,5 +1,5 @@
 import React from 'react';
-import FirebaseRequest from '../modules/FirebaseRequest';
+import FirebaseRequest from '../modules/FirebaseRequest.js';
 import { Link } from 'react-router'
 
 export default class TodoItem extends React.Component {

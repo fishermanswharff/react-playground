@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoListItem from './todoListItem'
+import TodoListItem from './todoListItem.jsx'
 import { Link } from 'react-router'
 
 export default class TodoList extends React.Component {

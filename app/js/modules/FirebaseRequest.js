@@ -36,4 +36,12 @@ export default class FirebaseRequest {
       }
     )
   }
+
+  genericGetRequest(){
+    return new Promise(
+      (resolve, reject) => {
+        // async op goes here
+      }
+    )
+  }
 }

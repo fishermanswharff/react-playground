@@ -3,14 +3,14 @@ import React from 'react';
 import { Router } from 'react-router';
 
 // custom react components
-import TodoLists from './todoLists';
-import TodoListsForm from './todoListsForm'
-import LoginForm from './loginForm';
-import Navbar from './navbar';
+import TodoLists from './todoLists.jsx';
+import TodoListsForm from './todoListsForm.jsx'
+import LoginForm from './loginForm.jsx';
+import Navbar from './navbar.jsx';
 
 // custom vanilla modules
-import FirebaseRequest from '../modules/FirebaseRequest';
-import Permissions from '../modules/Permissions';
+import FirebaseRequest from '../modules/FirebaseRequest.js';
+import Permissions from '../modules/Permissions.js';
 
 export default class TodoApp extends React.Component {
   constructor(props, context) {
@@ -26,6 +26,7 @@ export default class TodoApp extends React.Component {
     this.loadListsFromServer = this.loadListsFromServer.bind(this);
     this.handleAuthEvent = this.handleAuthEvent.bind(this);
     this.listsPromiseHandler = this.listsPromiseHandler.bind(this);
+
   }
 
   loadListsFromServer() {

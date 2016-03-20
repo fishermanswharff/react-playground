@@ -2,5 +2,5 @@ node_modules/
 bower_components
 .project
 .sass-cache/
-dist
+dist/
 .DS_Store

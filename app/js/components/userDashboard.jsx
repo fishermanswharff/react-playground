@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserAttributeForm from './userAttributeForm';
+import UserAttributeForm from './userAttributeForm.jsx';
 import { render } from 'react-dom';
 
 export default class UserDashboard extends React.Component {

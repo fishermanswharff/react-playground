@@ -1,6 +1,7 @@
 'use strict';
-/* globals require, console */
-var gulp = require('gulp'),
+
+var path = require('path'),
+    gulp = require('gulp'),
     minifyHtml = require('gulp-minify-html'),
     react = require('gulp-react'),
     browserSync = require('browser-sync').create('chuck norris'),
@@ -12,27 +13,49 @@ var gulp = require('gulp'),
     babelify = require('babelify'),
     source = require('vinyl-source-stream'),
     historyApiFallback = require('connect-history-api-fallback'),
-    reload = browserSync.reload;
+    reload = browserSync.reload,
+    $ = require('gulp-load-plugins')();
+
+// set variable via $ gulp --type production
+var environment = $.util.env.type || 'development';
+var isProduction = environment === 'production';
+var webpackConfig = require('./webpack.config.js').getConfig('development');
+var port = $.util.env.port || 1337;
+var app = 'app/';
+var dist = 'dist/';
 
 var paths = {
-  html: 'app/src/**/*.html',
-  styles: 'app/src/styles/**/*.scss',
-  mainScript: 'app/src/js/app.jsx',
-  scripts: ['app/src/js/**/*.jsx', 'app/src/js/**/*.js'],
-  vendors: ['app/src/vendor/**/*.js'],
-  data: ['app/src/data/**/*.json'],
-  images: ['app/src/images/**/*.{ttf,woff,eof,svg,png,jpg}'],
-  tmp: ['.module-cache','.sass-cache','.tmp','app/build/js'],
-  destroot: 'app/build',
-  destimages: 'app/build/images',
-  destjs: 'app/build/js',
-  destcss: 'app/build/css',
-  destdata: 'app/build/data',
-  destvendor: 'app/build/vendor'
+  html: 'app/**/*.html',
+  styles: 'app/styles/**/*.scss',
+  mainScript: 'app/js/app.jsx',
+  scripts: ['app/js/**/*.jsx', 'app/js/**/*.js'],
+  vendors: ['app/vendor/**/*.js'],
+  data: ['app/data/**/*.json'],
+  images: ['app/images/**/*.{ttf,woff,eof,svg,png,jpg}'],
+  tmp: ['.module-cache','.sass-cache','.tmp','dist/js'],
+  destroot: 'dist',
+  destimages: 'dist/images',
+  destjs: 'dist/js',
+  destcss: 'dist/css',
+  destdata: 'dist/data',
+  destvendor: 'dist/vendor'
 };
 
+gulp.task('scripts', function(){
+  return gulp.src(webpackConfig.entry)
+    .pipe($.webpack(webpackConfig))
+    .pipe(isProduction ? $.uglify() : $.util.noop())
+    .pipe(gulp.dest(paths.destjs))
+    .on('error', function(error) {
+      console.log('ERROR: ' + error.toString());
+      this.emit("end");
+    })
+    //.pipe($.size({title: 'js'}))
+    //.pipe($.connect.reload());
+});
+
 // watch files for changes and reload
-gulp.task('serve',['clean','minify-html','sass','reactify','copyImages','compileVendors','data','watch'], function() {
+gulp.task('serve',['clean','minify-html','sass','scripts','copyImages','compileVendors','data','watch'], function() {
   browserSync.init({
     server: {
       baseDir: paths.destroot,
@@ -40,7 +63,7 @@ gulp.task('serve',['clean','minify-html','sass','reactify','copyImages','compile
       middleware: [ historyApiFallback() ],
     }
   });
-  gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js', 'images/**/*.{ttf,woff,eof,svg,png,jpg}'], {cwd: 'app/build'}, reload);
+  gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js', 'js/**/*.jsx', 'images/**/*.{ttf,woff,eof,svg,png,jpg}'], {cwd: 'app/build'}, reload);
 });
 
 // Not all tasks need to use streams
@@ -74,18 +97,6 @@ gulp.task('sass', function() {
     .pipe(reload({ stream:true }));
 });
 
-gulp.task('reactify',['clean'], function() {
-  return browserify({entries: paths.mainScript, extensions: ['.jsx'], debug: true})
-    .transform('babelify', {presets: ['es2015', 'react']})
-    .bundle()
-    .on('error', function(error) {
-      console.log('ERROR: ' + error.toString());
-      this.emit("end");
-    })
-    .pipe(source('app.min.js'))
-    .pipe(gulp.dest('app/build/js'));
-});
-
 gulp.task('compileVendors', function(){
   return gulp.src(paths.vendors)
     .pipe(gulp.dest(paths.destvendor));
@@ -94,7 +105,7 @@ gulp.task('compileVendors', function(){
 // Rerun the task when a file changes
 gulp.task('watch', function() {
   gulp.watch(paths.vendors, ['compileVendors']);
-  gulp.watch(paths.scripts, ['reactify']);
+  gulp.watch(paths.scripts, ['scripts']);
   gulp.watch(paths.styles, ['sass']);
   gulp.watch(paths.html, ['minify-html']);
   gulp.watch(paths.data, ['data']);
@@ -102,4 +113,4 @@ gulp.task('watch', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'reactify', 'sass', 'copyImages', 'minify-html','compileVendors']);
+gulp.task('default', ['watch', 'scripts', 'sass', 'copyImages', 'minify-html','compileVendors']);

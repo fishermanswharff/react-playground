@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from './loginForm';
+import LoginForm from './loginForm.jsx';
 import { Link, IndexLink } from 'react-router';
 import classnames from 'classnames';
 
