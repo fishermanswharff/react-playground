@@ -15,7 +15,11 @@ export default class TodoItem extends React.Component {
   }
 
   getChildren(){
-    this.request.childCount(this.props.firebaseKey).then(this.handleChildCountPromise);
+    this.request.listChildCount(this.props.firebaseKey)
+      .then(this.handleChildCountPromise)
+      .catch((reason) => {
+        console.log(reason);
+      });
   }
 
   handleChildCountPromise(count){

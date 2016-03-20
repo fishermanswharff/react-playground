@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoItem from './todoItem';
 import { render } from 'react-dom';
+import TodoItem from './todoItem';
 import classnames from 'classnames';
 
 export default class TodoLists extends React.Component {

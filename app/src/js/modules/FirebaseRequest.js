@@ -12,21 +12,28 @@ export default class FirebaseRequest {
     return new Promise(
       (resolve, reject) => {
         listsRef.on('value', (dataSnapshot) => {
-          resolve(dataSnapshot.val());
+          if(dataSnapshot){
+            resolve(dataSnapshot.val());
+          } else {
+            reject('Getting all the lists failed :(');
+          }
         });
       }
     );
   }
 
-  childCount(key){
+  listChildCount(key){
     var listRef = new Firebase(`${FIREBASE_REFS.tasksRef}/${key}`);
     return new Promise(
       (resolve, reject) => {
         listRef.once('value', (dataSnapshot) => {
-          resolve(dataSnapshot.numChildren());
+          if(dataSnapshot){
+            resolve(dataSnapshot.numChildren());
+          } else {
+            reject(`Getting children for list: ${key} failed.`);
+          }
         });
       }
     )
-
   }
 }

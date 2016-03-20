@@ -1,14 +1,18 @@
+// main libraries
 import React from 'react';
+import { Router } from 'react-router';
+
+// custom react components
 import TodoLists from './todoLists';
 import TodoListsForm from './todoListsForm'
 import LoginForm from './loginForm';
 import Navbar from './navbar';
-import { Router } from 'react-router';
+
+// custom vanilla modules
 import FirebaseRequest from '../modules/FirebaseRequest';
 import Permissions from '../modules/Permissions';
 
 export default class TodoApp extends React.Component {
-
   constructor(props, context) {
     super(props, context);
     this.context = context;
@@ -26,7 +30,11 @@ export default class TodoApp extends React.Component {
 
   loadListsFromServer() {
     this.setState({items: []});
-    this.requests.getAllLists().then(this.listsPromiseHandler);
+    this.requests.getAllLists()
+      .then(this.listsPromiseHandler)
+      .catch((reason) => {
+        console.log(reason);
+      });
   }
 
   listsPromiseHandler(object){
