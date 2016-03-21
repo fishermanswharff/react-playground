@@ -12,9 +12,7 @@ const routes = (
     <Route path="/" component={TodoApp}>
       <IndexRoute component={Dashboard} />
       <Route path="/user/:userId" component={UserDashboard} />
-      <Route path="/lists" component={TodoLists}>
-        <Route path="/lists/:listId" component={TodoList} />
-      </Route>
+      <Route path="/lists/:listId" component={TodoList} />
     </Route>
   </Router>
 );

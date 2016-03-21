@@ -22,7 +22,7 @@ export default class TodoListsForm extends React.Component {
       name: this.state.newListName,
       timestamp: Date.now()
     });
-    this.setState({ name: '' });
+    this.setState({ name: null });
   }
 
   render(){

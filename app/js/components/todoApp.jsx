@@ -18,41 +18,17 @@ export default class TodoApp extends React.Component {
     this.context = context;
     this.permissions = new Permissions({props: this.props});
     this.requests = new FirebaseRequest({props: this.props});
-    this.state = {
-      items: [],
-      authData: this.permissions.getAuth(),
-    };
-
-    this.loadListsFromServer = this.loadListsFromServer.bind(this);
+    this.state = { authData: this.permissions.getAuth() };
     this.handleAuthEvent = this.handleAuthEvent.bind(this);
-    this.listsPromiseHandler = this.listsPromiseHandler.bind(this);
-
-  }
-
-  loadListsFromServer() {
-    this.setState({items: []});
-    this.requests.getAllLists()
-      .then(this.listsPromiseHandler)
-      .catch((reason) => {
-        console.log(reason);
-      });
-  }
-
-  listsPromiseHandler(object){
-    var lists = []
-    for(var key in object)
-      lists.push({key: key, list: object[key]});
-    this.setState({items: lists});
   }
 
   componentDidMount() {
     // the component is all set, and you can access the component's props and initial state
-    this.loadListsFromServer();
   }
 
   componentDidUpdate(prevProps) {}
 
-  componentWillUnmount () {}
+  componentWillUnmount() {}
 
   handleAuthEvent(authData){
     if(authData){
@@ -68,7 +44,7 @@ export default class TodoApp extends React.Component {
       <div id='todo-app'>
         <Navbar authData={ this.state.authData } onAuthEvent={this.handleAuthEvent} {...this.props} />
         <section className='list-and-form-container'>
-          <TodoLists items={ this.state.items } authData={this.state.authData} />
+          <TodoLists authData={this.state.authData} />
           <TodoListsForm authData={this.state.authData} />
         </section>
         <div className='todo-app-children'>
