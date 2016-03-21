@@ -1,4 +1,5 @@
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
+import Firebase from 'Firebase';
 
 export default class FirebaseRequest {
   constructor(options){
