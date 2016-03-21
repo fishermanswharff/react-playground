@@ -5,7 +5,6 @@ import { Router } from 'react-router';
 // custom react components
 import TodoLists from './todoLists.jsx';
 import TodoListsForm from './todoListsForm.jsx'
-import LoginForm from './loginForm.jsx';
 import Navbar from './navbar.jsx';
 
 // custom vanilla modules

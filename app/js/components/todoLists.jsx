@@ -15,6 +15,8 @@ export default class TodoLists extends React.Component {
 
     this.loadListsFromServer = this.loadListsFromServer.bind(this);
     this.listsPromiseHandler = this.listsPromiseHandler.bind(this);
+    this._valueChangeSuccess = this._valueChangeSuccess.bind(this);
+    this._valueChangeError = this._valueChangeError.bind(this);
     this.createItem = this.createItem.bind(this);
   }
 
@@ -40,6 +42,16 @@ export default class TodoLists extends React.Component {
 
   componentDidMount(){
     this.loadListsFromServer();
+    let listsRef = new Firebase('https://jwtodoapp.firebaseio.com/projects');
+    listsRef.on('value', this._valueChangeSuccess, this._valueChangeError)
+  }
+
+  _valueChangeSuccess(dataSnapshot) {
+    this.listsPromiseHandler(dataSnapshot.val());
+  }
+
+  _valueChangeError(error) {
+    console.log('todoLists on value error: ', error);
   }
 
   render() {
