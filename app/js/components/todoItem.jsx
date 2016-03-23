@@ -1,12 +1,13 @@
 import React from 'react';
 import Refire from '../firebaseModule/Refire.js';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
 export default class TodoItem extends React.Component {
 
   constructor(props){
     super(props);
-    this.request = new Refire({props: this.props});
+    this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
     this.getChildren = this.getChildren.bind(this);
     this.handleChildCountPromise = this.handleChildCountPromise.bind(this);
     this.state = {
@@ -15,11 +16,7 @@ export default class TodoItem extends React.Component {
   }
 
   getChildren(){
-    this.request.listChildCount(this.props.firebaseKey)
-      .then(this.handleChildCountPromise)
-      .catch((reason) => {
-        console.log(reason);
-      });
+    this.refire.fetchChildCount({ key: `/${this.props.firebaseKey}`, success: this.handleChildCountPromise, array: false, context: this });
   }
 
   handleChildCountPromise(count){

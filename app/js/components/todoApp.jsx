@@ -11,12 +11,15 @@ import Navbar from './navbar.jsx';
 import Refire from '../firebaseModule/Refire.js';
 import Permissions from '../modules/Permissions.js';
 
+// constants
+import { FIREBASE_REFS } from '../constants/FirebaseRefs';
+
 export default class TodoApp extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.context = context;
     this.permissions = new Permissions({props: this.props});
-    this.requests = new Refire({props: this.props});
+    this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
     this.state = { authData: this.permissions.getAuth() };
     this.handleAuthEvent = this.handleAuthEvent.bind(this);
   }

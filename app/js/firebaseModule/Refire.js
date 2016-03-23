@@ -1,4 +1,3 @@
-import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 import Firebase from 'Firebase';
 
 export default class Refire {
@@ -8,13 +7,56 @@ export default class Refire {
         this[key] = options[key];
       }
     }
+
+    this.firebase = new Firebase(this.baseUrl);
   }
 
-  fetch(){}
 
+  /**
+  */
+  fetch(options){
+    for(var k in options)
+      this[k] = options[k];
+    let refstring = `${this.baseUrl}${this.key}`;
+    this.firebase = new Firebase(refstring);
+    let promise = new Promise(
+      (resolve, reject) => {
+        this.firebase.on('value', (dataSnapshot) => {
+          resolve(dataSnapshot);
+        });
+      }
+    )
+    promise.then((dataSnapshot) => {
+      this.success.call(this.context, dataSnapshot.val());
+    }).catch((reason) => {
+      if(typeof this.fail === 'function'){
+        this.fail.call(this.context, reason);
+      }
+    });
+  }
+
+  fetchChildCount(options){
+    for(var k in options)
+      this[k] = options[k];
+    let refstring = `${this.baseUrl}${this.key}`;
+
+    this.firebase = new Firebase(refstring);
+
+    let promise = new Promise(
+      (resolve, reject) => {
+        this.firebase.once('value', function(dataSnapshot){
+          resolve(dataSnapshot);
+        });
+      }
+    )
+
+    promise.then((dataSnapshot) => {
+      this.success.call(this.context, dataSnapshot.numChildren());
+    });
+  }
 
   getAllLists(){
-    let listsRef = new Firebase(FIREBASE_REFS.projectsRef);
+    let listsRef = new Firebase(this.baseUrl);
     return new Promise(
       (resolve, reject) => {
         listsRef.on('value', (dataSnapshot) => {
@@ -29,7 +71,7 @@ export default class Refire {
   }
 
   listChildCount(key){
-    let listRef = new Firebase(`${FIREBASE_REFS.tasksRef}/${key}`);
+    let listRef = new Firebase(`${this.baseUrl}/${key}`);
     return new Promise(
       (resolve, reject) => {
         listRef.once('value', (dataSnapshot) => {
