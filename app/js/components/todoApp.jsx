@@ -8,7 +8,7 @@ import TodoListsForm from './todoListsForm.jsx'
 import Navbar from './navbar.jsx';
 
 // custom vanilla modules
-import FirebaseRequest from '../modules/FirebaseRequest.js';
+import Refire from '../firebaseModule/Refire.js';
 import Permissions from '../modules/Permissions.js';
 
 export default class TodoApp extends React.Component {
@@ -16,7 +16,7 @@ export default class TodoApp extends React.Component {
     super(props, context);
     this.context = context;
     this.permissions = new Permissions({props: this.props});
-    this.requests = new FirebaseRequest({props: this.props});
+    this.requests = new Refire({props: this.props});
     this.state = { authData: this.permissions.getAuth() };
     this.handleAuthEvent = this.handleAuthEvent.bind(this);
   }

@@ -1,7 +1,7 @@
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 import Firebase from 'Firebase';
 
-export default class FirebaseRequest {
+export default class Refire {
   constructor(options){
     for(let key in options){
       if(options.hasOwnProperty(key)){
@@ -9,6 +9,9 @@ export default class FirebaseRequest {
       }
     }
   }
+
+  fetch(){}
+
 
   getAllLists(){
     let listsRef = new Firebase(FIREBASE_REFS.projectsRef);
@@ -55,4 +58,6 @@ export default class FirebaseRequest {
       }
     );
   }
+
+
 }

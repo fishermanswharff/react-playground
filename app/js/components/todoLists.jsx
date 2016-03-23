@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import TodoItem from './todoItem.jsx';
 import classnames from 'classnames';
-import FirebaseRequest from '../modules/FirebaseRequest.js';
+import Refire from '../firebaseModule/Refire.js';
 
 export default class TodoLists extends React.Component {
 
@@ -11,7 +11,7 @@ export default class TodoLists extends React.Component {
     this.state = {
       lists: []
     };
-    this.requests = new FirebaseRequest({props: this.props});
+    this.requests = new Refire({props: this.props});
 
     this.loadListsFromServer = this.loadListsFromServer.bind(this);
     this.listsPromiseHandler = this.listsPromiseHandler.bind(this);

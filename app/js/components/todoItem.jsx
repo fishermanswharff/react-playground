@@ -1,12 +1,12 @@
 import React from 'react';
-import FirebaseRequest from '../modules/FirebaseRequest.js';
+import Refire from '../firebaseModule/Refire.js';
 import { Link } from 'react-router'
 
 export default class TodoItem extends React.Component {
 
   constructor(props){
     super(props);
-    this.request = new FirebaseRequest({props: this.props});
+    this.request = new Refire({props: this.props});
     this.getChildren = this.getChildren.bind(this);
     this.handleChildCountPromise = this.handleChildCountPromise.bind(this);
     this.state = {
