@@ -11,10 +11,20 @@ export default class Refire {
     this.firebase = new Firebase(this.baseUrl);
   }
 
-
   /**
-  */
+   * @param  {object}
+   *  key: [string],
+   *  success: [function],
+   *  array: boolean,
+   *  context: reference to the caller (React Component)
+   * @description
+   *  fetch() looks for all the values at the
+   *  location given in the options, and
+   *  returns the Promise of that data.val()
+   * @return {Promise}
+   */
   fetch(options){
+    this._validateOptions(options);
     for(var k in options)
       this[k] = options[k];
     let refstring = `${this.baseUrl}${this.key}`;
@@ -26,7 +36,7 @@ export default class Refire {
         });
       }
     )
-    promise.then((dataSnapshot) => {
+    return promise.then((dataSnapshot) => {
       this.success.call(this.context, dataSnapshot.val());
     }).catch((reason) => {
       if(typeof this.fail === 'function'){
@@ -35,13 +45,23 @@ export default class Refire {
     });
   }
 
+  /**
+   * @param  {object}
+   *  key: [string],
+   *  success: [function],
+   *  array: boolean,
+   *  context: reference to the caller (React Component)
+   * @description
+   *  fetchChildCount exposes firebase's dataSnapshot
+   *  methods, asking for the numChildren() utilizing
+   *  the once() query method
+   * @return {Promise}
+   */
   fetchChildCount(options){
     for(var k in options)
       this[k] = options[k];
     let refstring = `${this.baseUrl}${this.key}`;
-
     this.firebase = new Firebase(refstring);
-
     let promise = new Promise(
       (resolve, reject) => {
         this.firebase.once('value', function(dataSnapshot){
@@ -49,43 +69,54 @@ export default class Refire {
         });
       }
     )
-
-    promise.then((dataSnapshot) => {
+    return promise.then((dataSnapshot) => {
       this.success.call(this.context, dataSnapshot.numChildren());
     });
   }
 
-  getAllLists(){
-    let listsRef = new Firebase(this.baseUrl);
-    return new Promise(
-      (resolve, reject) => {
-        listsRef.on('value', (dataSnapshot) => {
-          if(dataSnapshot){
-            resolve(dataSnapshot.val());
-          } else {
-            reject('Getting all the lists failed :(');
-          }
-        });
+  /**
+   * @param  {object}
+   *  key: [string],
+   *  array: boolean,
+   *  context: reference to the caller (React Component),
+   *  contextKey: string (key for binding state)
+   *  success: [function], ***OPTIONAL***
+   * @description
+   *  binds the data in the firebase location to
+   *  the context's state
+   * @return {undefined}
+   */
+  bindToState(options){
+    for(var k in options)
+      this[k] = options[k];
+    let refstring = `${this.baseUrl}${this.key}`;
+    this.firebase = new Firebase(refstring);
+
+    this.firebase.on('value', (dataSnapshot) => {
+      if(this.array === true){
+        let obj = dataSnapshot.val(),
+            array = [];
+        for(var j in obj)
+          array.push({[j]: obj[j]});
+        this.context.setState({[this.contextKey]: array});
+      } else if(!!this.success) {
+        this.success.call(this.context, dataSnapshot.val());
+      } else {
+        console.log({[this.contextKey]: dataSnapshot.val()});
+        this.context.setState({[this.contextKey]: dataSnapshot.val()});
       }
-    );
+    });
   }
 
-  listChildCount(key){
-    let listRef = new Firebase(`${this.baseUrl}/${key}`);
-    return new Promise(
-      (resolve, reject) => {
-        listRef.once('value', (dataSnapshot) => {
-          if(dataSnapshot){
-            resolve(dataSnapshot.numChildren());
-          } else {
-            reject(`Getting children for list: ${key} failed.`);
-          }
-        });
-      }
-    );
+  /** ——————————————————————————————————————
+    Private Methods
+  ——————————————————————————————————————————*/
+
+  _validateOptions(object){
+    console.log(Object.keys(object));
   }
 
-  genericGetRequest(){
+  _genericGetRequest(){
     let success = true;
     return new Promise(
       (resolve, reject) => {
@@ -96,10 +127,7 @@ export default class Refire {
             reject('async failed');
           }
         }, 1000);
-        // async op goes here
       }
     );
   }
-
-
 }
