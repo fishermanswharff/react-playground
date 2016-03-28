@@ -2,14 +2,26 @@ var travis = process.env.TRAVIS;
 
 module.exports = function(config) {
   config.set({
-    frameworks: ['jasmine'],
     autowatch: true,
-    singleRun: !!travis,
-    files: [
-      'spec/**/*.spec.js'
-    ],
-    reporters: ['spec', 'failed', 'coverage'],
+    basePath: __dirname,
     browsers: [travis ? 'Firefox' : 'ChromeCanary'],
+    coverageReporter: {
+      reporters: [
+        {
+          type: 'lcovonly',
+          dir: 'coverage',
+          subdir: '.'
+        },
+        {
+          type: 'text-summary'
+        }
+      ]
+    },
+    files: ['spec/**/*.spec.js'],
+    frameworks: ['jasmine'],
+    reporters: ['spec', 'failed', 'coverage'],
+    singleRun: !!travis,
+    preprocessors: { 'spec/**/*.spec.js': ['webpack'] },
     webpack: {
       module: {
         loaders: [
@@ -28,23 +40,8 @@ module.exports = function(config) {
         ]
       }
     },
-    preprocessors: {
-      'spec/**/*.spec.js': ['webpack'],
-    },
     webpackMiddleware: {
       noInfo: true
     },
-    coverageReporter: {
-      reporters: [
-        {
-          type: 'lcovonly',
-          dir: 'coverage',
-          subdir: '.'
-        },
-        {
-          type: 'text-summary'
-        }
-      ]
-    }
   });
 }

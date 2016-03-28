@@ -1,6 +1,7 @@
 var path = require('path');
 var paths = {
   mainScript: '/app/js/app.jsx',
+  testScript: '/spec/index.js',
   scripts: '/app/js/**/*.js',
   destroot: '/dist',
   destjs: '/dist/js',
