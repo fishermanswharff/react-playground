@@ -26,7 +26,7 @@ export default class TodoLists extends React.Component {
     this.refire.bindToState({
       key: 'projects',
       context: this,
-      contextKey: 'lists',
+      state: 'lists',
       array: true,
       // success: this.listsPromiseHandler, OPTIONAL
     });

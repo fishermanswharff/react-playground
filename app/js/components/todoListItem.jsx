@@ -1,16 +1,21 @@
 import React from 'react';
 import classnames from 'classnames';
+import Refire from '../firebaseModule/Refire.js';
+import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
 export default class TodoListItem extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.handleChecked = this.handleChecked.bind(this);
     this.onItemDoneUpdate = this.onItemDoneUpdate.bind(this);
     this.convertTimestamp = this.convertTimestamp.bind(this);
     this.editTodoListItemText = this.editTodoListItemText.bind(this);
     this.updateItemText = this.updateItemText.bind(this);
     this.onItemTextUpdate = this.onItemTextUpdate.bind(this);
+
+    this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
 
     this.state = {
       done: this.props.data.done,
@@ -73,6 +78,10 @@ export default class TodoListItem extends React.Component {
   }
 
   componentDidMount(){
+    /*console.log({
+      key: `${this.props.data.project}/${this.props.id}`,
+      context: this,
+    });*/
     var itemRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`);
     itemRef.on('child_changed', (snapShot) => {
       this.setState({[snapShot.key()]: snapShot.val()});

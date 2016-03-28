@@ -91,6 +91,7 @@ export default class Refire {
       this[k] = options[k];
     let refstring = `${this.baseUrl}${this.key}`;
     this.firebase = new Firebase(refstring);
+    this.reactSetState = this.context.setState;
 
     this.firebase.on('value', (dataSnapshot) => {
       if(this.array === true){
@@ -98,14 +99,22 @@ export default class Refire {
             array = [];
         for(var j in obj)
           array.push({[j]: obj[j]});
-        this.context.setState({[this.contextKey]: array});
-      } else if(!!this.success) {
-        this.success.call(this.context, dataSnapshot.val());
+        this.context.setState({[this.state]: array});
       } else {
-        console.log({[this.contextKey]: dataSnapshot.val()});
-        this.context.setState({[this.contextKey]: dataSnapshot.val()});
+        console.log(this.reactSetState);
+        this.context.setState({[this.state]: dataSnapshot.val()});
       }
     });
+  }
+
+  /**
+   * [syncToState description]
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
+   */
+  syncToState(options){
+    for(var k in options)
+      this[k] = options[k];
   }
 
   /** ——————————————————————————————————————
