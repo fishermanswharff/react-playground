@@ -40,14 +40,21 @@ ul.todo-lists {
     a, span {
       color: $white;
       font-family: $font-family-serif;
-      font-size: $large-font-size;
+      font-size: $xxlarge-font-size;
+      line-height: 2;
       text-decoration: none;
     }
 
     a {
+      @include flex(2 0 0);
+
       &.active {
         color: $yellow;
       }
+    }
+
+    span {
+      @include flex(1 auto auto);
     }
   }
 }
