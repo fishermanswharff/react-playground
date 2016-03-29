@@ -11,12 +11,13 @@ export default class Navbar extends React.Component {
     this.handleAuth = this.handleAuth.bind(this);
     this.handleUnAuth = this.handleUnAuth.bind(this);
     this.state = {
-      active: false
+      active: this.props.active
     }
   }
 
   handleMenuClick(e){
     this.setState({ active: !this.state.active });
+    this.props.onMenuClick(e, { active: !this.state.active });
   }
 
   generateUserPath(){
@@ -31,6 +32,12 @@ export default class Navbar extends React.Component {
 
   handleAuth(authData){
     this.props.onAuthEvent(authData);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.active !== this.props.active){
+      this.setState({active: this.props.active});
+    }
   }
 
   render(){

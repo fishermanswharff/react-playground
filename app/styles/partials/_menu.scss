@@ -1,8 +1,17 @@
-/* #todo-app > section.list-and-form-container {
-  position: fixed;
-  top: -100%;
-  width: 100%;
-  z-index: 10;
+ #todo-app > section.list-and-form-container {
+  @include transition(all, .25s, ease, 0);
+
+  background-color: $white;
+  height: auto;
+  left: -100%;
   height: 100vh;
+  position: absolute;
+  top: 121px;
+  width: 100%;
+  z-index: $z-menu;
+
+  &.active {
+    left: 0;
+  }
 }
-*/
+

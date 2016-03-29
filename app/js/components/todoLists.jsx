@@ -15,6 +15,7 @@ export default class TodoLists extends React.Component {
 
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
     this.createItem = this.createItem.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   createItem(item) {
@@ -32,13 +33,17 @@ export default class TodoLists extends React.Component {
     });
   }
 
+  handleClick(e){
+    this.props.onListClicked(e);
+  }
+
   render() {
     let classes = classnames('todo-lists-container', {
       'active': this.state.open,
     });
 
     return(
-      <div>
+      <div onClick={this.handleClick}>
         <section className={classes}>
           <ul key='todo-lists' className='todo-lists'>
             {this.state.lists.map(this.createItem)}

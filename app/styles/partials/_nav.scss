@@ -3,6 +3,8 @@
   @include flexbox();
   @include flex-flow(column);
 
+  z-index: $z-nav;
+
   .nav-list {
     @include defaults();
     @include flexbox();
