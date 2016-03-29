@@ -43,7 +43,7 @@ export default class TodoApp extends React.Component {
 
   render() {
     return (
-      <div id='todo-app'>
+      <div id='todo-app' className='todo-app-main-container'>
         <Navbar authData={ this.state.authData } onAuthEvent={this.handleAuthEvent} {...this.props} />
         <section className='list-and-form-container'>
           <TodoLists authData={this.state.authData} />

@@ -11,24 +11,36 @@ import Stub from './support/testStub.js';
 
 describe('TodoApp', () => {
 
-  var component = ReactDOM.render(<Stub>{() => <TodoApp />}</Stub>, document.body),
-      componentNode,
-      utils = TestUtils;
+  let utils = TestUtils,
+      component = utils.renderIntoDocument(<Stub>{() => <TodoApp />}</Stub>),
+      node = utils.findRenderedDOMComponentWithClass(component, 'todo-app-main-container');
 
   beforeEach(() => {
-    // do some setup
+    component.setState({ authData: null });
   });
 
   it('is defined', () => {
     expect(component).toBeDefined();
   });
 
-  it('is a react component with children', () => {
+  it('has props', () => {
+    expect(component.props).toBeDefined();
+    expect(component.props).toEqual(jasmine.any(Object));
+  });
+
+  it('has state', () => {
+    expect(component.state).not.toBeNull();
+    expect(component.state.authData).toBeNull();
+  });
+
+  it('is has children components', () => {
     let nav = utils.findRenderedDOMComponentWithTag(component, 'nav');
     expect(nav).toBeDefined();
   });
 
-  it('handles an auth event', () => {});
+  it('responds to authEvents', () => {
+    // ??
+  });
 
   afterEach(() => {
     // do some teardown
