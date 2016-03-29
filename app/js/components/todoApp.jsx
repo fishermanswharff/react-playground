@@ -62,5 +62,5 @@ TodoApp.propTypes = {
 }
 
 TodoApp.contextTypes = {
-  router: React.PropTypes.func.isRequired
+  router: React.PropTypes.object.isRequired
 }

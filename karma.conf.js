@@ -21,7 +21,10 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     reporters: ['spec', 'failed', 'coverage'],
     singleRun: !!travis,
-    preprocessors: { 'spec/**/*.spec.js': ['webpack'] },
+    preprocessors: {
+      'spec/**/*.spec.js': ['webpack'],
+      'spec/support/*.js': ['webpack']
+    },
     webpack: {
       module: {
         loaders: [
