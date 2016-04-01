@@ -12,7 +12,7 @@ import Stub from './support/testStub.js';
 describe('TodoApp', () => {
 
   let utils = TestUtils,
-      component = utils.renderIntoDocument(<Stub>{() => <TodoApp />}</Stub>),
+      component = utils.renderIntoDocument(<TodoApp/>),
       node = utils.findRenderedDOMComponentWithClass(component, 'todo-app-main-container');
 
   beforeEach(() => {

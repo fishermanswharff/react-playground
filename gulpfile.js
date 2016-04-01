@@ -10,6 +10,7 @@ let path = require('path'),
     babel = require('gulp-babel'),
     historyApiFallback = require('connect-history-api-fallback'),
     reload = browserSync.reload,
+    Server = require('karma').Server,
     $ = require('gulp-load-plugins')();
 
 // set variable via $ gulp --type production
@@ -24,6 +25,7 @@ var paths = {
   mainScript: 'app/js/app.jsx',
   scripts: ['app/js/**/*.jsx', 'app/js/**/*.js'],
   vendors: ['app/vendor/**/*.js'],
+  tests: ['spec/**/*.spec.js'],
   data: ['app/data/**/*.json'],
   images: ['app/images/**/*.{ttf,woff,eof,svg,png,jpg}'],
   tmp: ['.module-cache','.sass-cache','.tmp','dist/js'],
@@ -72,6 +74,13 @@ gulp.task('clean', function() {
   });
 });
 
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
 gulp.task('copyImages', function() {
   gulp.src(paths.images)
   .pipe(gulp.dest(paths.destimages));
@@ -107,6 +116,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.html, ['minify-html']);
   gulp.watch(paths.data, ['data']);
   gulp.watch(paths.images, ['copyImages']);
+  gulp.watch(paths.tests, ['test']);
 });
 
 // The default task (called when you run `gulp` from cli)

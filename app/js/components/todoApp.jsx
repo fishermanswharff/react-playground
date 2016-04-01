@@ -1,6 +1,5 @@
 // main libraries
 import React from 'react';
-import { Router } from 'react-router';
 
 // custom react components
 import TodoLists from './todoLists.jsx';

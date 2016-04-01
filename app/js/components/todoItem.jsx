@@ -40,7 +40,7 @@ export default class TodoItem extends React.Component {
         <Link activeClassName="active" to={`/lists/${this.props.firebaseKey}`}>
           {this.props.data.name}
         </Link>
-        {this.state.numTasks}
+        <span>{this.state.numTasks}</span>
       </li>
     )
   }
