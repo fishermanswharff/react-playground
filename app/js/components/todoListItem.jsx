@@ -72,10 +72,6 @@ export default class TodoListItem extends BaseComponent {
   }
 
   componentDidMount(){
-    /*console.log({
-      key: `${this.props.data.project}/${this.props.id}`,
-      context: this,
-    });*/
     var itemRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`);
     itemRef.on('child_changed', (snapShot) => {
       this.setState({[snapShot.key()]: snapShot.val()});
