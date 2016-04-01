@@ -1,21 +1,12 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 import classnames from 'classnames';
 import Refire from '../firebaseModule/Refire.js';
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
-export default class TodoListItem extends React.Component {
+export default class TodoListItem extends BaseComponent {
 
   constructor(props) {
     super(props);
-
-    this.handleChecked = this.handleChecked.bind(this);
-    this.onItemDoneUpdate = this.onItemDoneUpdate.bind(this);
-    this.convertTimestamp = this.convertTimestamp.bind(this);
-    this.editTodoListItemText = this.editTodoListItemText.bind(this);
-    this.updateItemText = this.updateItemText.bind(this);
-    this.onItemTextUpdate = this.onItemTextUpdate.bind(this);
-
-    this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
 
     this.state = {
       done: this.props.data.done,
@@ -24,6 +15,9 @@ export default class TodoListItem extends React.Component {
       project: this.props.data.project,
       id: this.props.id
     };
+
+    this.bind('handleChecked','onItemDoneUpdate','convertTimestamp','editTodoListItemText','updateItemText','onItemTextUpdate')
+    this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
   }
 
   createMarkup(string) {

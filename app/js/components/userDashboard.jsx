@@ -1,16 +1,16 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 import ReactDOM from 'react-dom';
 import UserAttributeForm from './userAttributeForm.jsx';
 import { render } from 'react-dom';
 
-export default class UserDashboard extends React.Component {
+export default class UserDashboard extends BaseComponent {
   constructor(props){
     super(props);
     this.state = {
       authData: null
     };
-    this.loadUser = this.loadUser.bind(this);
-    this.userInfoCallback = this.userInfoCallback.bind(this);
+
+    this.bind('loadUser','userInfoCallback')
   }
 
   loadUser(){

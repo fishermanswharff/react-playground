@@ -1,16 +1,13 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 
-export default class LoginForm extends React.Component {
+export default class LoginForm extends BaseComponent {
 
   constructor(props){
     super(props);
     this.state = {
       authData: this.props.authData
     }
-    this.onEmailStateChange = this.onEmailStateChange.bind(this);
-    this.onPasswordStateChange = this.onPasswordStateChange.bind(this);
-    this.unAuth = this.unAuth.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.bind('onEmailStateChange', 'onPasswordStateChange', 'unAuth', 'handleSubmit');
   }
 
   onEmailStateChange(e) {

@@ -1,11 +1,11 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 import { render } from 'react-dom';
 import TodoItem from './todoItem.jsx';
 import classnames from 'classnames';
 import Refire from '../firebaseModule/Refire.js';
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
-export default class TodoLists extends React.Component {
+export default class TodoLists extends BaseComponent {
 
   constructor(props) {
     super(props);
@@ -14,8 +14,7 @@ export default class TodoLists extends React.Component {
     };
 
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.createItem = this.createItem.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.bind('createItem','handleClick');
   }
 
   createItem(item) {

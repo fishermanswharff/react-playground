@@ -1,12 +1,12 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 
-export default class UserAttributeForm extends React.Component {
+export default class UserAttributeForm extends BaseComponent {
 
   constructor(props){
     super(props);
     this.state = {}
-    this.handleChange = this.handleChange.bind(this);
-    this.onUserAttrChange = this.onUserAttrChange.bind(this);
+
+    this.bind('handleChange','onUserAttrChange');
   }
 
   componentDidMount(){

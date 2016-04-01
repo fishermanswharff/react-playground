@@ -1,18 +1,16 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 import LoginForm from './loginForm.jsx';
 import { Link, IndexLink } from 'react-router';
 import classnames from 'classnames';
 
-export default class Navbar extends React.Component {
+export default class Navbar extends BaseComponent {
+
   constructor(props) {
     super(props);
-    this.generateUserPath = this.generateUserPath.bind(this);
-    this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleAuth = this.handleAuth.bind(this);
-    this.handleUnAuth = this.handleUnAuth.bind(this);
     this.state = {
       active: this.props.active
-    }
+    };
+    this.bind('handleMenuClick', 'generateUserPath', 'handleUnAuth', 'handleAuth');
   }
 
   handleMenuClick(e){

@@ -1,18 +1,19 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 import Refire from '../firebaseModule/Refire.js';
 import { Link } from 'react-router';
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
-export default class TodoItem extends React.Component {
+export default class TodoItem extends BaseComponent {
 
   constructor(props){
     super(props);
-    this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
-    this.getChildren = this.getChildren.bind(this);
-    this.handleChildCountPromise = this.handleChildCountPromise.bind(this);
     this.state = {
       numTasks: 0
     }
+
+    this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
+
+    this.bind('getChildren', 'handleChildCountPromise');
   }
 
   getChildren(){

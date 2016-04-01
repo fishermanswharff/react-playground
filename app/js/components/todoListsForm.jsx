@@ -1,6 +1,6 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 
-export default class TodoListsForm extends React.Component {
+export default class TodoListsForm extends BaseComponent {
 
   constructor(props){
     super(props);
@@ -8,8 +8,7 @@ export default class TodoListsForm extends React.Component {
       newListName: '',
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.bind('handleSubmit', 'onChange')
   }
 
   onChange(e) {

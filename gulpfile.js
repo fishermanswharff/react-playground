@@ -26,14 +26,12 @@ var paths = {
   scripts: ['app/js/**/*.jsx', 'app/js/**/*.js'],
   vendors: ['app/vendor/**/*.js'],
   tests: ['spec/**/*.spec.js'],
-  data: ['app/data/**/*.json'],
   images: ['app/images/**/*.{ttf,woff,eof,svg,png,jpg}'],
   tmp: ['.module-cache','.sass-cache','.tmp','dist/js'],
   destroot: 'dist',
   destimages: 'dist/images',
   destjs: 'dist/js',
   destcss: 'dist/css',
-  destdata: 'dist/data',
   destvendor: 'dist/vendor'
 };
 
@@ -50,7 +48,7 @@ gulp.task('scripts', function(){
 });
 
 // watch files for changes and reload
-gulp.task('serve',['clean','minify-html','sass','scripts','copyImages','compileVendors','data','watch'], function() {
+gulp.task('serve',['clean','minify-html','sass','scripts','copyImages','compileVendors','watch'], function() {
   browserSync.init({
     server: {
       baseDir: paths.destroot,
@@ -86,11 +84,6 @@ gulp.task('copyImages', function() {
   .pipe(gulp.dest(paths.destimages));
 });
 
-gulp.task('data',function(){
-  return gulp.src(paths.data)
-    .pipe(gulp.dest(paths.destdata));
-});
-
 gulp.task('minify-html', function () {
   return gulp.src(paths.html)
     .pipe(minifyHtml())
@@ -114,7 +107,6 @@ gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['scripts']);
   gulp.watch(paths.styles, ['sass']);
   gulp.watch(paths.html, ['minify-html']);
-  gulp.watch(paths.data, ['data']);
   gulp.watch(paths.images, ['copyImages']);
   gulp.watch(paths.tests, ['test']);
 });

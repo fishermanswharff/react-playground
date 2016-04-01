@@ -1,5 +1,5 @@
 // main libraries
-import React from 'react';
+import BaseComponent from './base.jsx';
 
 // custom react components
 import TodoLists from './todoLists.jsx';
@@ -16,16 +16,15 @@ import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 // for dynamic classes
 import classnames from 'classnames';
 
-export default class TodoApp extends React.Component {
+export default class TodoApp extends BaseComponent {
   constructor(props, context) {
     super(props, context);
     this.context = context;
     this.permissions = new Permissions({props: this.props});
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
     this.state = { authData: this.permissions.getAuth(), menuActive: false };
-    this.handleAuthEvent = this.handleAuthEvent.bind(this);
-    this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleListClicked = this.handleListClicked.bind(this);
+
+    this.bind('handleAuthEvent', 'handleMenuClick', 'handleListClicked');
   }
 
   componentDidMount() {

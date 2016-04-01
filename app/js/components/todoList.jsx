@@ -1,8 +1,8 @@
-import React from 'react';
+import BaseComponent from './base.jsx';
 import TodoListItem from './todoListItem.jsx'
 import { Link } from 'react-router'
 
-export default class TodoList extends React.Component {
+export default class TodoList extends BaseComponent {
 
   constructor(props) {
     super(props);
@@ -11,11 +11,7 @@ export default class TodoList extends React.Component {
       newItemText: ''
     };
 
-    this.loadListFromServer = this.loadListFromServer.bind(this);
-    this.createItem = this.createItem.bind(this);
-    this.newItemSubmit = this.newItemSubmit.bind(this);
-    this.newItemChange = this.newItemChange.bind(this);
-
+    this.bind('loadListFromServer', 'createItem', 'newItemSubmit', 'newItemChange');
   }
 
   createItem(object,index,array) {
