@@ -46,7 +46,12 @@ export default class TodoListNotes extends BaseComponent {
 
   render(){
     return (
-      <ReactQuill theme="snow" onChange={this.onTextChange} value={this.state.text} />
+      <section id={`${this.props.params.listId}-notes`} >
+        <header>
+          <h3>{this.props.listName} Notes</h3>
+        </header>
+        <ReactQuill theme="snow" onChange={this.onTextChange} value={this.state.text} />
+      </section>
     );
   }
 }

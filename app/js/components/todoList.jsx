@@ -10,10 +10,11 @@ export default class TodoList extends BaseComponent {
     this.state = {
       items: [],
       notes: '',
-      newItemText: ''
+      newItemText: '',
+      listName: ''
     };
-
-    this.bind('loadListFromServer', 'createItem', 'newItemSubmit', 'newItemChange', 'createNotes');
+    this.firebase = {}
+    this.bind('loadListFromServer', 'createItem', 'newItemSubmit', 'newItemChange', 'createNotes', 'loadListData');
   }
 
   createItem(object,index,array) {
@@ -21,25 +22,42 @@ export default class TodoList extends BaseComponent {
   }
 
   createNotes(){
-    return <TodoListNotes {...this.props} />
+    return <TodoListNotes {...this.props} listName={this.state.listName} />
+  }
+
+  resetData(){
+    this.firebase = {
+      projectRef: new Firebase(`https://jwtodoapp.firebaseio.com/projects/${this.props.params.listId}`),
+      todosRef: new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`),
+      notesRef: new Firebase(`https://jwtodoapp.firebaseio.com/notes/${this.props.params.listId}`),
+      membersRef: new Firebase(`https://jwtodoapp.firebaseio.com/members/${this.props.params.listId}`)
+    }
+
+    this.loadListData();
+    this.loadListFromServer();
   }
 
   loadListFromServer() {
     this.setState({ items: [] });
-    var listitems = [],
-        todosRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
+    var listitems = [];
 
-    todosRef.on('child_added', (snapshot, prev) => {
+    this.firebase.todosRef.on('child_added', (snapshot, prev) => {
       listitems.push({key: snapshot.key(), item: snapshot.val()});
       this.setState({ items: listitems });
       return snapshot;
     });
   }
 
+  loadListData(){
+    this.firebase.projectRef.once('value', (snapshot) => {
+      let name = snapshot.val().name;
+      this.setState({ listName: name });
+    });
+  }
+
   componentDidMount() {
-    this.loadListFromServer();
-    var listRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    listRef.on('child_removed', (datasnapshot) => {
+    this.resetData();
+    this.firebase.todosRef.on('child_removed', (datasnapshot) => {
       this.loadListFromServer();
     }, (errorObject) => {
       console.log(errorObject);
@@ -49,18 +67,16 @@ export default class TodoList extends BaseComponent {
   componentDidUpdate(prevProps) {
     let oldId = prevProps.params.listId;
     let newId = this.props.params.listId;
-    if (newId !== oldId) this.loadListFromServer();
+    if (newId !== oldId) this.resetData();
   }
 
   componentWillUnmount() {
-    var listRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    listRef.off();
+    this.firebase.todosRef.off();
   }
 
   newItemSubmit(e) {
     e.preventDefault();
-    var todoRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    var promise = todoRef.push({
+    var promise = this.firebase.todosRef.push({
       done: false,
       project: this.props.params.listId,
       text: this.state.newItemText,
