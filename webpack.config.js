@@ -29,7 +29,8 @@ module.exports.getConfig = function(type){
           loader: 'babel-loader',
           query: { cacheDirectory: true, presets: ['react', 'es2015'] }
         }
-      ]
+      ],
+      noParse: /node_modules\/quill\/dist/
     },
     resolve: {
       extensions: ['', '.js', '.jsx']

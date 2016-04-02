@@ -1,6 +1,7 @@
 import BaseComponent from './base.jsx';
-import TodoListItem from './todoListItem.jsx'
-import { Link } from 'react-router'
+import TodoListItem from './todoListItem.jsx';
+import { Link } from 'react-router';
+import TodoListNotes from './todoListNotes.jsx';
 
 export default class TodoList extends BaseComponent {
 
@@ -8,21 +9,27 @@ export default class TodoList extends BaseComponent {
     super(props);
     this.state = {
       items: [],
+      notes: '',
       newItemText: ''
     };
 
-    this.bind('loadListFromServer', 'createItem', 'newItemSubmit', 'newItemChange');
+    this.bind('loadListFromServer', 'createItem', 'newItemSubmit', 'newItemChange', 'createNotes');
   }
 
   createItem(object,index,array) {
     return <TodoListItem key={object.key} data={object.item} id={object.key} />
   }
 
+  createNotes(){
+    return <TodoListNotes {...this.props} />
+  }
+
   loadListFromServer() {
     this.setState({ items: [] });
-    var listitems = [];
-    var firebaseRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
-    var todos = firebaseRef.on('child_added', (snapshot, prev) => {
+    var listitems = [],
+        todosRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`);
+
+    todosRef.on('child_added', (snapshot, prev) => {
       listitems.push({key: snapshot.key(), item: snapshot.val()});
       this.setState({ items: listitems });
       return snapshot;
@@ -93,9 +100,11 @@ export default class TodoList extends BaseComponent {
             </div>
           </form>
         </div>
+        {this.createNotes()}
         <form onSubmit={ this.archiveDoneItems } >
           <input type='submit' value='Remove Done Items' />
         </form>
+
       </section>
     )
   }

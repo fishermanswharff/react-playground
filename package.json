@@ -62,6 +62,7 @@
     "firebase": "^2.4.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-quill": "^0.4.1",
     "react-router": "^2.0.0"
   }
 }
