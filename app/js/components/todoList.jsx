@@ -51,6 +51,12 @@ export default class TodoList extends BaseComponent {
     this.loadListData();
     this.loadListFromServer();
     this.state.authData = this.firebase.baseRef.getAuth();
+
+    this.firebase.todosRef.on('child_removed', (datasnapshot) => {
+      this.loadListFromServer();
+    }, (errorObject) => {
+      console.log(errorObject);
+    });
   }
 
   loadListFromServer() {
@@ -73,11 +79,6 @@ export default class TodoList extends BaseComponent {
 
   componentDidMount() {
     this.resetData();
-    this.firebase.todosRef.on('child_removed', (datasnapshot) => {
-      this.loadListFromServer();
-    }, (errorObject) => {
-      console.log(errorObject);
-    });
   }
 
   componentDidUpdate(prevProps) {
