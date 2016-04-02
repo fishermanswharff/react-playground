@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill';
 export default class TodoListNotes extends BaseComponent {
   constructor(props){
     super(props);
-    this.bind('onTextChange', 'createMarkup', 'loadTextFromServer','onTextDoneUpdate');
+    this.bind('onTextChange', 'createMarkup','loadTextFromServer','onTextDoneUpdate');
     this.state = {
       text: ''
     }
@@ -16,21 +16,13 @@ export default class TodoListNotes extends BaseComponent {
 
   loadTextFromServer(){
     var notesRef = new Firebase(`https://jwtodoapp.firebaseio.com/notes/${this.props.params.listId}/text`);
-    let promise = new Promise(
-      (resolve, reject) => {
-        notesRef.on('value', (snapshot) => {
-          resolve(snapshot);
-        });
-      }
-    )
-
-    promise.then((snapshot) => {
+    notesRef.on('value', (snapshot) => {
       this.setState({text: snapshot.val()});
     });
   }
 
   componentDidMount(){
-    this.loadTextFromServer();
+    this.loadTextFromServer()
   }
 
   componentDidUpdate(prevProps) {
@@ -41,7 +33,7 @@ export default class TodoListNotes extends BaseComponent {
 
   onTextChange(value){
     var notesRef = new Firebase(`https://jwtodoapp.firebaseio.com/notes/${this.props.params.listId}/text`);
-    notesRef.set(this.state.text, this.onTextDoneUpdate);
+    notesRef.set(value, this.onTextDoneUpdate);
   }
 
   onTextDoneUpdate(error){
