@@ -2,6 +2,7 @@ import BaseComponent from './base.jsx';
 import TodoListItem from './todoListItem.jsx';
 import { Link } from 'react-router';
 import TodoListNotes from './todoListNotes.jsx';
+import TodoListItemForm from './todoListItemForm.jsx';
 
 export default class TodoList extends BaseComponent {
 
@@ -11,10 +12,11 @@ export default class TodoList extends BaseComponent {
       items: [],
       notes: '',
       newItemText: '',
-      listName: ''
+      listName: '',
+      authData: null
     };
     this.firebase = {}
-    this.bind('loadListFromServer', 'createItem', 'newItemSubmit', 'newItemChange', 'createNotes', 'loadListData');
+    this.bind('loadListFromServer', 'createItem', 'createNotes', 'loadListData');
   }
 
   createItem(object,index,array) {
@@ -22,11 +24,24 @@ export default class TodoList extends BaseComponent {
   }
 
   createNotes(){
-    return <TodoListNotes {...this.props} listName={this.state.listName} />
+    if(this.state.authData){
+      return <TodoListNotes {...this.props} listName={this.state.listName} />
+    } else {
+      return <div></div>
+    }
+  }
+
+  createNewTodoForm(){
+    if(this.state.authData){
+      return <TodoListItemForm {...this.props} listName={this.state.listName} firebase={this.firebase} />
+    } else {
+      return <div></div>
+    }
   }
 
   resetData(){
     this.firebase = {
+      baseRef: new Firebase(`https://jwtodoapp.firebaseio.com`),
       projectRef: new Firebase(`https://jwtodoapp.firebaseio.com/projects/${this.props.params.listId}`),
       todosRef: new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.params.listId}`),
       notesRef: new Firebase(`https://jwtodoapp.firebaseio.com/notes/${this.props.params.listId}`),
@@ -35,6 +50,7 @@ export default class TodoList extends BaseComponent {
 
     this.loadListData();
     this.loadListFromServer();
+    this.state.authData = this.firebase.baseRef.getAuth();
   }
 
   loadListFromServer() {
@@ -74,55 +90,27 @@ export default class TodoList extends BaseComponent {
     this.firebase.todosRef.off();
   }
 
-  newItemSubmit(e) {
-    e.preventDefault();
-    var promise = this.firebase.todosRef.push({
-      done: false,
-      project: this.props.params.listId,
-      text: this.state.newItemText,
-      timestamp: Date.now()
-    }, (error) => {
-      if(error){
-        console.log('sync failed :(');
-      } else {
-        this.setState({newItemText: null});
-      }
-    });
-
-    promise.then(function(val){
-      console.log(val.key(), val);
-    });
-  }
-
-  newItemChange(e) {
-    this.setState({ newItemText: e.target.value });
-  }
-
   render() {
-    return (
-      <section className='todo-list-container'>
+
+    var view;
+
+    if(this.state.authData){
+      view = <section className='todo-list-container'>
         <header></header>
         <ul className='todo-list'>
           { this.state.items.map(this.createItem) }
         </ul>
-        <div className='form-container'>
-          <form id='new-list-item' onSubmit={ this.newItemSubmit }>
-            <div className='form-group'>
-              <input id='new-list-item' type='text' onChange={ this.newItemChange } value={ this.state.newItemText } required/>
-              <label htmlFor='new-list-item'>new todo:</label>
-            </div>
-            <div className='form-group'>
-              <button type='submit'>Add Item</button>
-            </div>
-          </form>
-        </div>
+        {this.createNewTodoForm()}
         {this.createNotes()}
         <form onSubmit={ this.archiveDoneItems } >
           <input type='submit' value='Remove Done Items' />
         </form>
-
       </section>
-    )
+    } else {
+      view = <div></div>
+    }
+
+    return view;
   }
 }
 
