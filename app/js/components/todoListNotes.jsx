@@ -1,17 +1,15 @@
 import BaseComponent from './base.jsx';
+import Refire from '../firebaseModule/Refire.js';
+import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 import ReactQuill from 'react-quill';
 
 export default class TodoListNotes extends BaseComponent {
   constructor(props){
     super(props);
-    this.bind('onTextChange', 'createMarkup','loadTextFromServer','onTextDoneUpdate');
+    this.bind('onTextChange', 'loadTextFromServer','onTextDoneUpdate');
     this.state = {
       text: ''
     }
-  }
-
-  createMarkup(string) {
-    return { __html: string };
   }
 
   loadTextFromServer(){
@@ -22,7 +20,9 @@ export default class TodoListNotes extends BaseComponent {
   }
 
   componentDidMount(){
-    this.loadTextFromServer()
+    // this.loadTextFromServer()
+
+
   }
 
   componentDidUpdate(prevProps) {

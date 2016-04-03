@@ -1,4 +1,6 @@
 import BaseComponent from './base.jsx';
+import Refire from '../firebaseModule/Refire.js';
+import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
 export default class TodoListsForm extends BaseComponent {
 
@@ -8,7 +10,8 @@ export default class TodoListsForm extends BaseComponent {
       newListName: '',
     };
 
-    this.bind('handleSubmit', 'onChange')
+    this.bind('handleSubmit', 'onChange', 'onSubmitSuccess', 'createNewMember');
+    this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
   }
 
   onChange(e) {
@@ -17,11 +20,35 @@ export default class TodoListsForm extends BaseComponent {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.firebaseRef.push({
+    this.refire.push({
+      key: 'projects',
+      data: {
+        name: this.state.newListName,
+        timestamp: Date.now()
+      },
+      success: this.onSubmitSuccess
+    });
+    /*this.props.firebaseRef.push({
       name: this.state.newListName,
       timestamp: Date.now()
-    });
+    });*/
     this.setState({ newListName: null });
+  }
+
+  onSubmitSuccess(value){
+    this.createNewMember(value);
+  }
+
+  createNewMember(value){
+    this.refire.post({
+      key: `members/${value.key()}`,
+      data: { [this.props.authData.uid]: true },
+      success: this.onNewMemberSuccess
+    });
+  }
+
+  onNewMemberSuccess(value){
+    console.log(value.key(), value);
   }
 
   render(){

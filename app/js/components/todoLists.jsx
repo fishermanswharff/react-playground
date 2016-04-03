@@ -27,8 +27,7 @@ export default class TodoLists extends BaseComponent {
       key: 'projects',
       context: this,
       state: 'lists',
-      array: true,
-      // success: this.listsPromiseHandler, OPTIONAL
+      array: true
     });
   }
 

@@ -16,27 +16,11 @@ export default class TodoList extends BaseComponent {
       authData: null
     };
     this.firebase = {}
-    this.bind('loadListFromServer', 'createItem', 'createNotes', 'loadListData');
+    this.bind('loadListFromServer', 'createItem', 'loadListData', 'addListeners');
   }
 
   createItem(object,index,array) {
     return <TodoListItem key={object.key} data={object.item} id={object.key} />
-  }
-
-  createNotes(){
-    if(this.state.authData){
-      return <TodoListNotes {...this.props} listName={this.state.listName} />
-    } else {
-      return <div></div>
-    }
-  }
-
-  createNewTodoForm(){
-    if(this.state.authData){
-      return <TodoListItemForm {...this.props} listName={this.state.listName} firebase={this.firebase} />
-    } else {
-      return <div></div>
-    }
   }
 
   resetData(){
@@ -51,7 +35,9 @@ export default class TodoList extends BaseComponent {
     this.loadListData();
     this.loadListFromServer();
     this.state.authData = this.firebase.baseRef.getAuth();
+  }
 
+  addListeners(){
     this.firebase.todosRef.on('child_removed', (datasnapshot) => {
       this.loadListFromServer();
     }, (errorObject) => {
@@ -79,6 +65,7 @@ export default class TodoList extends BaseComponent {
 
   componentDidMount() {
     this.resetData();
+    this.addListeners();
   }
 
   componentDidUpdate(prevProps) {
@@ -101,8 +88,8 @@ export default class TodoList extends BaseComponent {
         <ul className='todo-list'>
           { this.state.items.map(this.createItem) }
         </ul>
-        {this.createNewTodoForm()}
-        {this.createNotes()}
+        <TodoListItemForm {...this.props} listName={this.state.listName} firebase={this.firebase} />
+        <TodoListNotes {...this.props} listName={this.state.listName} />
         <form onSubmit={ this.archiveDoneItems } >
           <input type='submit' value='Remove Done Items' />
         </form>

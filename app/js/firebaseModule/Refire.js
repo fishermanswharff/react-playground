@@ -107,6 +107,28 @@ export default class Refire {
     });
   }
 
+  push(options){
+    for(var k in options)
+      this[k] = options[k];
+    let refstring = `${this.baseUrl}${this.key}`
+    this.firebase = new Firebase(refstring);
+    let promise = this.firebase.push(this.data);
+    return promise.then((value) => {
+      this.success.call(this, value);
+    })
+  }
+
+  post(options){
+    for(var k in options)
+      this[k] = options[k];
+    let refstring = `${this.baseUrl}${this.key}`
+    this.firebase = new Firebase(refstring);
+    let promise = this.firebase.set(this.data);
+    return promise.then((value) => {
+      this.success.call(this, value);
+    })
+  }
+
   /**
    * [syncToState description]
    * @param  {[type]} options [description]
