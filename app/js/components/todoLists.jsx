@@ -14,7 +14,7 @@ export default class TodoLists extends BaseComponent {
     };
 
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.bind('createItem','handleClick');
+    this.bind('createItem','handleClick','bindData');
   }
 
   createItem(item) {
@@ -23,6 +23,10 @@ export default class TodoLists extends BaseComponent {
   }
 
   componentDidMount(){
+    this.bindData();
+  }
+
+  bindData(){
     this.refire.bindToState({
       key: 'projects',
       context: this,

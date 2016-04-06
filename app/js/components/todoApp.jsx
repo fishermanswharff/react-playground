@@ -42,18 +42,19 @@ export default class TodoApp extends BaseComponent {
     if(authData){
       this.setState({ authData: authData });
       this.forceUpdate();
+      this._menu.bindData();
     } else {
       this.setState({ authData: null });
-      this.context.router.push('/')
+      this.context.router.push('/');
+      this._menu.setState({lists: []});
     }
   }
 
   handleMenuClick(event, options) {
     this.setState({ menuActive: options.active });
-    debugger;
   }
 
-  handleListClicked(event) {
+  handleListClicked(event, context) {
     this.setState({ menuActive: !this.state.menuActive });
   }
 
@@ -73,7 +74,7 @@ export default class TodoApp extends BaseComponent {
           {...this.props}
         />
         <section className={menuClasses}>
-          <TodoLists authData={this.state.authData} onListClicked={this.handleListClicked} />
+          <TodoLists ref={(menu) => this._menu = menu} authData={this.state.authData} onListClicked={this.handleListClicked} />
           <TodoListsForm authData={this.state.authData} />
         </section>
         <div className='todo-app-children'>
