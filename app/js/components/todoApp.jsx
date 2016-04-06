@@ -64,6 +64,10 @@ export default class TodoApp extends BaseComponent {
       'active': this.state.menuActive,
     });
 
+    React.Children.map(this.props.children,
+      (child) => { console.log(child); }
+    );
+
     return (
       <div id='todo-app' className='todo-app-main-container'>
         <Navbar
