@@ -49,32 +49,6 @@
   background: url($url) no-repeat center center;
 }
 
-@mixin animation($name,$propStart,$valStart,$propEnd,$valEnd){
-  @-webkit-keyframes $name {
-    0%   { $propStart: $valStart; }
-    100% { $propEnd: $valEnd; }
-  }
-  @-moz-keyframes $name {
-    0%   { $propStart: $valStart; }
-    100% { $propEnd: $valEnd; }
-  }
-  @-o-keyframes $name {
-    0%   { $propStart: $valStart; }
-    100% { $propEnd: $valEnd; }
-  }
-  @keyframes $name {
-    0%   { $propStart: $valStart; }
-    100% { $propEnd: $valEnd; }
-  }
-}
-
-@mixin implementAnim($name,$timing,$repeat){
-  -webkit-animation: $name $timing $repeat; /* Safari 4+ */
-  -moz-animation:    $name $timing $repeat; /* Fx 5+ */
-  -o-animation:      $name $timing $repeat; /* Opera 12+ */
-  animation:         $name $timing $repeat; /* IE 10+, Fx 29+ */
-}
-
 @mixin notification {
   position:absolute;
   top: 70px;
@@ -231,7 +205,7 @@
   }
 }
 
-@keyframes whale {
+@keyframes tilt {
   0% {
     transform: translate3d(500px,275%,0) rotateZ(60deg);
   }

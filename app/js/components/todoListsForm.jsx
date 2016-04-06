@@ -28,14 +28,10 @@ export default class TodoListsForm extends BaseComponent {
       },
       success: this.onSubmitSuccess
     });
-    /*this.props.firebaseRef.push({
-      name: this.state.newListName,
-      timestamp: Date.now()
-    });*/
-    this.setState({ newListName: null });
   }
 
   onSubmitSuccess(value){
+    this.setState({ newListName: null });
     this.createNewMember(value);
   }
 

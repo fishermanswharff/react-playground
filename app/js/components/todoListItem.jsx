@@ -16,7 +16,7 @@ export default class TodoListItem extends BaseComponent {
       id: this.props.id
     };
 
-    this.bind('handleChecked','onItemDoneUpdate','convertTimestamp','editTodoListItemText','updateItemText','onItemTextUpdate')
+    this.bind('handleChecked','onItemDoneUpdate','convertTimestamp','editTodoListItemText','updateItemText','onItemTextUpdate');
     this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
   }
 

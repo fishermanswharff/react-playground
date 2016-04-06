@@ -22,7 +22,10 @@ export default class TodoApp extends BaseComponent {
     this.context = context;
     this.permissions = new Permissions({props: this.props});
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.state = { authData: this.permissions.getAuth(), menuActive: false };
+    this.state = {
+      authData: this.permissions.getAuth(),
+      menuActive: false
+    };
 
     this.bind('handleAuthEvent', 'handleMenuClick', 'handleListClicked');
   }
@@ -38,6 +41,7 @@ export default class TodoApp extends BaseComponent {
   handleAuthEvent(authData){
     if(authData){
       this.setState({ authData: authData });
+      this.forceUpdate();
     } else {
       this.setState({ authData: null });
       this.context.router.push('/')
@@ -46,6 +50,7 @@ export default class TodoApp extends BaseComponent {
 
   handleMenuClick(event, options) {
     this.setState({ menuActive: options.active });
+    debugger;
   }
 
   handleListClicked(event) {
@@ -79,10 +84,8 @@ export default class TodoApp extends BaseComponent {
   }
 }
 
-TodoApp.propTypes = {
-  items: React.PropTypes.array
-}
-
+TodoApp.propTypes = {}
+TodoApp.defaultProps = {}
 TodoApp.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
