@@ -1,3 +1,4 @@
+import React from 'react';
 import BaseComponent from './base.jsx';
 import { render } from 'react-dom';
 import TodoItem from './todoItem.jsx';

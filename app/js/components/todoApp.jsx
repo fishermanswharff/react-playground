@@ -1,4 +1,5 @@
 // main libraries
+import React from 'react';
 import BaseComponent from './base.jsx';
 
 // custom react components
@@ -63,10 +64,6 @@ export default class TodoApp extends BaseComponent {
     let menuClasses = classnames('list-and-form-container', {
       'active': this.state.menuActive,
     });
-
-    React.Children.map(this.props.children,
-      (child) => { console.log(child); }
-    );
 
     return (
       <div id='todo-app' className='todo-app-main-container'>

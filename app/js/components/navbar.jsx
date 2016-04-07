@@ -1,3 +1,4 @@
+import React from 'react';
 import BaseComponent from './base.jsx';
 import LoginForm from './loginForm.jsx';
 import { Link, IndexLink } from 'react-router';

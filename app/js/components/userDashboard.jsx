@@ -1,3 +1,4 @@
+import React from 'react';
 import BaseComponent from './base.jsx';
 import ReactDOM from 'react-dom';
 import UserAttributeForm from './userAttributeForm.jsx';

@@ -1,3 +1,4 @@
+import React from 'react';
 import BaseComponent from './base.jsx';
 import Refire from '../firebaseModule/Refire.js';
 import { Link } from 'react-router';

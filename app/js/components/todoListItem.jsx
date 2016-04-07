@@ -1,3 +1,4 @@
+import React from 'react';
 import BaseComponent from './base.jsx';
 import classnames from 'classnames';
 import Refire from '../firebaseModule/Refire.js';

@@ -1,3 +1,4 @@
+import React from 'react';
 import BaseComponent from './base.jsx';
 
 export default class UserAttributeForm extends BaseComponent {
