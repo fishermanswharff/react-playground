@@ -19,7 +19,6 @@ export default class Dashboard extends BaseComponent {
   }
 
   fetchData(){
-    console.log('hello from Dashboard:fetchData');
     this.refire.fetch({
       key: '',
       context: this,
@@ -29,7 +28,6 @@ export default class Dashboard extends BaseComponent {
   }
 
   handleDataSnapshot(snapshot){
-    // console.log(snapshot);
     this.setState(snapshot);
   }
 
