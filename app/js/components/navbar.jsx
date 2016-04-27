@@ -49,7 +49,7 @@ export default class Navbar extends BaseComponent {
       <nav className='navbar'>
         <ul className='nav-list links'>
           <li className='nav-list-item menu'>
-            <a href='#' id='menu-button' className={menuIconClasses} onClick={this.handleMenuClick}>
+            <a href='javascript:void(0)' id='menu-button' className={menuIconClasses} onClick={this.handleMenuClick}>
               <span className='menu-icon__text'></span>
               <span className='display_text'></span>
             </a>

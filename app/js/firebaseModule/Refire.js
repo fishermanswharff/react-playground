@@ -37,9 +37,11 @@ export default class Refire {
       }
     )
     return promise.then((dataSnapshot) => {
+      this.firebase.off();
       this.success.call(this.context, dataSnapshot.val());
     }).catch((reason) => {
       if(typeof this.fail === 'function'){
+        this.firebase.off();
         this.fail.call(this.context, reason);
       }
     });
@@ -144,7 +146,7 @@ export default class Refire {
   ——————————————————————————————————————————*/
 
   _validateOptions(object){
-    console.log(Object.keys(object));
+    // console.log(Object.keys(object));
   }
 
   _genericGetRequest(){
