@@ -1,6 +1,8 @@
 'use strict';
 
 let path = require('path'),
+    fs = require('fs'),
+    gutil = require('gulp-util'),
     AWS = require('aws-sdk'),
     gulp = require('gulp'),
     minifyHtml = require('gulp-minify-html'),
@@ -110,47 +112,39 @@ gulp.task('watch', function() {
 gulp.task('default', ['watch', 'scripts', 'sass', 'copyImages', 'minify-html']);
 
 gulp.task('awsS3', () => {
-  //let credentials = new AWS.SharedIniFileCredentials({profile: 'personal'});
-  // AWS.config.credentials = credentials;
-  AWS.config.update({region: 'us-west-2'});
+  // let credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+  AWS.config.update({ region: 'us-west-2' });
   let s3 = new AWS.S3();
   s3.putObject({
     Bucket: 'jw-s3-react-test',
     Key: 'index.html',
-    Body: fs.readFileSync(paths.dist.root + '/index.html'),
+    Body: fs.readFileSync(paths.destroot + '/index.html'),
     ContentType: 'text/html'
   }, (err, data) => {
-    if(err){
-      gutil.log('you did it wrong', err.stack);
-    } else {
-      gutil.log('yay!!! you did it', data);
-    }
+    if(err){ gutil.log('you did it wrong', err.stack); }
+    else { gutil.log('yay!!! you did it', data); }
   });
+
   s3.putObject({
-    Bucket: 'temperature-converter',
+    Bucket: 'jw-s3-react-test',
     Key: 'css/main.css',
-    Body: fs.readFileSync(paths.dist.css + '/main.css'),
+    Body: fs.readFileSync(paths.destcss + '/main.css'),
     ContentType: 'text/css'
   }, (err, data) => {
-    if(err){
-      gutil.log('you did it wrong', err.stack);
-    } else {
-      gutil.log('yay!!! you did it', data);
-    }
+    if(err){ gutil.log('you did it wrong', err.stack); }
+    else { gutil.log('yay!!! you did it', data); }
   });
-  let jsFiles = fs.readdirSync(paths.dist.js);
+
+  let jsFiles = fs.readdirSync(paths.destjs);
   jsFiles.forEach(file => {
     s3.putObject({
-      Bucket: 'temperature-converter',
+      Bucket: 'jw-s3-react-test',
       Key: `js/${file}`,
-      Body: fs.readFileSync(paths.dist.js + `/${file}`),
+      Body: fs.readFileSync(paths.destjs + `/${file}`),
       ContentType: 'text/javascript'
     }, (err, data) => {
-    if(err){
-      gutil.log('you did it wrong', err.stack);
-    } else {
-      gutil.log('yay!!! you did it', data);
-    }
-  });
+      if(err){ gutil.log('you did it wrong', err.stack); }
+      else { gutil.log('yay!!! you did it', data); }
+    });
   });
 });
