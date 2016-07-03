@@ -1,6 +1,7 @@
 'use strict';
 
 let path = require('path'),
+    AWS = require('aws-sdk'),
     gulp = require('gulp'),
     minifyHtml = require('gulp-minify-html'),
     browserSync = require('browser-sync').create('chuck norris'),
@@ -48,7 +49,7 @@ gulp.task('scripts', function(){
 });
 
 // watch files for changes and reload
-gulp.task('serve',['clean','minify-html','sass','scripts','copyImages','compileVendors','watch'], function() {
+gulp.task('serve',['clean','minify-html','sass','scripts','copyImages','watch'], function() {
   browserSync.init({
     server: {
       baseDir: paths.destroot,
@@ -96,14 +97,8 @@ gulp.task('sass', function() {
     .pipe(reload({ stream:true }));
 });
 
-gulp.task('compileVendors', function(){
-  return gulp.src(paths.vendors)
-    .pipe(gulp.dest(paths.destvendor));
-});
-
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-  gulp.watch(paths.vendors, ['compileVendors']);
   gulp.watch(paths.scripts, ['scripts']);
   gulp.watch(paths.styles, ['sass']);
   gulp.watch(paths.html, ['minify-html']);
@@ -112,4 +107,50 @@ gulp.task('watch', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'scripts', 'sass', 'copyImages', 'minify-html','compileVendors']);
+gulp.task('default', ['watch', 'scripts', 'sass', 'copyImages', 'minify-html']);
+
+gulp.task('awsS3', () => {
+  //let credentials = new AWS.SharedIniFileCredentials({profile: 'personal'});
+  // AWS.config.credentials = credentials;
+  AWS.config.update({region: 'us-west-2'});
+  let s3 = new AWS.S3();
+  s3.putObject({
+    Bucket: 'jw-s3-react-test',
+    Key: 'index.html',
+    Body: fs.readFileSync(paths.dist.root + '/index.html'),
+    ContentType: 'text/html'
+  }, (err, data) => {
+    if(err){
+      gutil.log('you did it wrong', err.stack);
+    } else {
+      gutil.log('yay!!! you did it', data);
+    }
+  });
+  s3.putObject({
+    Bucket: 'temperature-converter',
+    Key: 'css/main.css',
+    Body: fs.readFileSync(paths.dist.css + '/main.css'),
+    ContentType: 'text/css'
+  }, (err, data) => {
+    if(err){
+      gutil.log('you did it wrong', err.stack);
+    } else {
+      gutil.log('yay!!! you did it', data);
+    }
+  });
+  let jsFiles = fs.readdirSync(paths.dist.js);
+  jsFiles.forEach(file => {
+    s3.putObject({
+      Bucket: 'temperature-converter',
+      Key: `js/${file}`,
+      Body: fs.readFileSync(paths.dist.js + `/${file}`),
+      ContentType: 'text/javascript'
+    }, (err, data) => {
+    if(err){
+      gutil.log('you did it wrong', err.stack);
+    } else {
+      gutil.log('yay!!! you did it', data);
+    }
+  });
+  });
+});
