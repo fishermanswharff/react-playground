@@ -17,7 +17,7 @@ export default class TodoList extends BaseComponent {
       authData: null
     };
     this.firebase = {}
-    this.bind('loadListFromServer', 'createItem', 'loadListData', 'addListeners');
+    this.bind('loadListFromServer','createItem','loadListData','addListeners','archiveDoneItems');
   }
 
   createItem(object,index,array) {
@@ -61,6 +61,29 @@ export default class TodoList extends BaseComponent {
     this.firebase.projectRef.once('value', (snapshot) => {
       let name = snapshot.val().name;
       this.setState({ listName: name });
+    });
+  }
+
+  archiveDoneItems(e){
+    e.preventDefault();
+    let doneTodos = this.state.items.filter(obj => { return obj.item.done });
+    console.log('hello world');
+    doneTodos.forEach(obj => {
+      let todoKey = obj.key,
+          projectKey = obj.item.project,
+          childRef = this.firebase.todosRef.child(`${obj.key}`);
+
+      childRef.remove(err => {
+        if(err) { console.log(`Todo ${todoKey}/${obj.item.text} was not removed.`) }
+        else {
+          let archiveRef = new Firebase(`https://jwtodoapp.firebaseio.com/archive/${this.props.params.listId}/${obj.key}`);
+          archiveRef.set(obj.item, (err) => {
+            if(err) { console.log('Failed to write to archive: ', err); }
+            else { console.log('Success writing archive.'); }
+            this.resetData();
+          });
+        }
+      });
     });
   }
 
