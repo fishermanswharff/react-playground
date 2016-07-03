@@ -8,10 +8,14 @@ export default class UserDashboard extends BaseComponent {
   constructor(props){
     super(props);
     this.state = {
-      authData: null
+      authData: null,
+      uifeedback: null,
+      emailConfirmation: null,
+      oldPassword: null,
+      newPassword: null
     };
 
-    this.bind('loadUser','userInfoCallback')
+    this.bind('loadUser','userInfoCallback','changePassword','onChangeHandler');
   }
 
   loadUser(){
@@ -21,6 +25,51 @@ export default class UserDashboard extends BaseComponent {
 
   userInfoCallback(datasnapshot){
     this.setState({user: datasnapshot.val()});
+  }
+
+  changePassword(event){
+    event.preventDefault();
+    let ref = new Firebase('https://jwtodoapp.firebaseio.com');
+    ref.changePassword({
+      email: this.state.emailConfirmation,
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword
+    }, (err) => {
+      if (err) {
+        switch(err.code) {
+          case 'INVALID_PASSWORD':
+            this.setState({
+              uifeedback: 'The specified user account password is incorrect.'
+            })
+            // console.log("The specified user account password is incorrect.");
+            break;
+          case 'INVALID_USER':
+            this.setState({
+              uifeedback: 'The specified user account does not exist.'
+            })
+            console.log("The specified user account does not exist.");
+            break;
+          default:
+            this.setState({
+              uifeedback: err.toString()
+            })
+            console.log("Error changing password:", err);
+        }
+      } else {
+        this.setState({
+          emailConfirmation: '',
+          oldPassword: '',
+          newPassword: '',
+          uifeedback: 'User password changed successfully!'
+        });
+        console.log("User password changed successfully!");
+      }
+    });
+  }
+
+  onChangeHandler(event){
+    event.preventDefault();
+    this.setState({[`${event.target.id}`]: event.target.value});
   }
 
   componentDidMount(){
@@ -37,7 +86,28 @@ export default class UserDashboard extends BaseComponent {
 
     return(
       <section id='userDashboard' >
+        <div>{this.state.uifeedback}</div>
         <ul className='user-attributes'>{ attributes }</ul>
+        <div className='form-container'>
+          <form onSubmit={this.changePassword}>
+            <h3>Change your password</h3>
+            <div className='form-group'>
+              <input type='email' id='emailConfirmation' value={this.state.emailConfirmation} onChange={this.onChangeHandler} required/>
+              <label htmlFor='email'>Email</label>
+            </div>
+            <div className='form-group'>
+              <input type='password' id='oldPassword' value={this.state.oldPassword} onChange={this.onChangeHandler} required/>
+              <label htmlFor='oldPassword'>Old Password</label>
+            </div>
+            <div className='form-group'>
+              <input type='password' id='newPassword' value={this.state.newPassword} onChange={this.onChangeHandler} required/>
+              <label htmlFor='newPassword'>New Password</label>
+            </div>
+            <div className='form-group'>
+              <input type='submit' value='Change Password'/>
+            </div>
+          </form>
+        </div>
       </section>
     )
   }

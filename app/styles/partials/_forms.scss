@@ -45,6 +45,7 @@ label {
 form {
   &:invalid{ border:none; }
   &:valid{ border:none; }
+  h3 { color: $white; margin: 0; padding-top: 1em; font-family: $font-family-serif; }
   h5 { color: $lightgreen; }
   div.form-group {
     position: relative;
