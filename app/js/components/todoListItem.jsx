@@ -75,10 +75,8 @@ export default class TodoListItem extends BaseComponent {
   }
 
   listenForChanges(){
-    // console.log('>>>>>>>>>>>>>>> todo-list-item did mount');
     var itemRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`);
     itemRef.on('child_changed', (snapShot) => {
-      console.log('item changed: ', snapShot.key(), snapShot.val());
       // this.setState({[snapShot.key()]: snapShot.val()});
     });
   }
@@ -110,7 +108,7 @@ export default class TodoListItem extends BaseComponent {
       'success': this.state.ajaxSuccess,
       'fail': this.state.ajaxFail,
       'in-progress': this.state.inProgress
-    })
+    });
 
     let iconClasses = classnames('fa', {
       'fa-check': this.state.ajaxSuccess,
