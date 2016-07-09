@@ -26,7 +26,7 @@ export default class TodoListItemForm extends BaseComponent {
     });
 
     promise.then(function(val){
-      console.log(val.key(), val);
+      // console.log(val.key(), val);
     });
   }
 

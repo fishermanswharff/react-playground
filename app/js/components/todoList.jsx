@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import BaseComponent from './base.jsx';
 import TodoListItem from './todoListItem.jsx';
 import { Link } from 'react-router';
@@ -17,11 +18,18 @@ export default class TodoList extends BaseComponent {
       authData: null
     };
     this.firebase = {}
-    this.bind('loadListFromServer','createItem','loadListData','addListeners','archiveDoneItems');
+    this.bind('loadListFromServer','createItem','loadListData','archiveDoneItems');
   }
 
   createItem(object,index,array) {
-    return <TodoListItem key={object.key} data={object.item} id={object.key} />
+    return <TodoListItem
+            {...this.props}
+            key={object.key}
+            data={object.item}
+            id={object.key}
+            ref={object.key}
+            onDone={this.loadListFromServer}
+          />
   }
 
   resetData(){
@@ -35,10 +43,7 @@ export default class TodoList extends BaseComponent {
 
     this.loadListData();
     this.loadListFromServer();
-    this.state.authData = this.firebase.baseRef.getAuth();
-  }
-
-  addListeners(){
+    this.setState({authData: this.firebase.baseRef.getAuth()});
     this.firebase.todosRef.on('child_removed', (datasnapshot) => {
       this.loadListFromServer();
     }, (errorObject) => {
@@ -67,7 +72,7 @@ export default class TodoList extends BaseComponent {
   archiveDoneItems(e){
     e.preventDefault();
     let doneTodos = this.state.items.filter(obj => { return obj.item.done });
-    console.log('hello world');
+    console.log('>>>>>>>> doneTodos: ', doneTodos);
     doneTodos.forEach(obj => {
       let todoKey = obj.key,
           projectKey = obj.item.project,
@@ -76,11 +81,12 @@ export default class TodoList extends BaseComponent {
       childRef.remove(err => {
         if(err) { console.log(`Todo ${todoKey}/${obj.item.text} was not removed.`) }
         else {
+          // console.log('removed the childRef');
+          // this.resetData();
           let archiveRef = new Firebase(`https://jwtodoapp.firebaseio.com/archive/${this.props.params.listId}/${obj.key}`);
           archiveRef.set(obj.item, (err) => {
             if(err) { console.log('Failed to write to archive: ', err); }
             else { console.log('Success writing archive.'); }
-            this.resetData();
           });
         }
       });
@@ -89,7 +95,6 @@ export default class TodoList extends BaseComponent {
 
   componentDidMount() {
     this.resetData();
-    this.addListeners();
   }
 
   componentDidUpdate(prevProps) {

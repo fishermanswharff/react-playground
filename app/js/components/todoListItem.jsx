@@ -17,7 +17,7 @@ export default class TodoListItem extends BaseComponent {
       id: this.props.id
     };
 
-    this.bind('handleChecked','onItemDoneUpdate','convertTimestamp','editTodoListItemText','updateItemText','onItemTextUpdate');
+    this.bind('handleChecked','onItemDoneUpdate','convertTimestamp','editTodoListItemText','updateItemText','onItemTextUpdate','listenForChanges');
     this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
   }
 
@@ -28,6 +28,7 @@ export default class TodoListItem extends BaseComponent {
   handleChecked(event) {
     event.preventDefault();
     var doneRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}/done`);
+    console.log('>>>>>>>>> setting done on todoslistitem: ', !this.state.done);
     doneRef.set(!this.state.done, this.onItemDoneUpdate);
   }
 
@@ -36,6 +37,7 @@ export default class TodoListItem extends BaseComponent {
       this.setState({ajaxFail: true})
     } else {
       this.setState({ajaxSuccess: true})
+      this.props.onDone();
     }
   }
 
@@ -72,16 +74,27 @@ export default class TodoListItem extends BaseComponent {
     }
   }
 
-  componentDidMount(){
+  listenForChanges(){
+    // console.log('>>>>>>>>>>>>>>> todo-list-item did mount');
     var itemRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`);
     itemRef.on('child_changed', (snapShot) => {
-      this.setState({[snapShot.key()]: snapShot.val()});
+      console.log('item changed: ', snapShot.key(), snapShot.val());
+      // this.setState({[snapShot.key()]: snapShot.val()});
     });
   }
 
-  componentDidUpdate(prevProps){}
+  componentDidMount(){
+    this.listenForChanges();
+  }
 
-  componentWillUnmount(){}
+  componentDidUpdate(prevProps, prevState){
+    // do something when the component updated
+  }
+
+  componentWillUnmount(){
+    console.log('—————————————— unmounting component ——————————————', this);
+    // do something when the component will unmount
+  }
 
   render() {
 
