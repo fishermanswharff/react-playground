@@ -28,7 +28,6 @@ export default class TodoListItem extends BaseComponent {
   handleChecked(event) {
     event.preventDefault();
     var doneRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}/done`);
-    console.log('>>>>>>>>> setting done on todoslistitem: ', !this.state.done);
     doneRef.set(!this.state.done, this.onItemDoneUpdate);
   }
 

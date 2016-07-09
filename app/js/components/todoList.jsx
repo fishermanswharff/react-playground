@@ -117,7 +117,9 @@ export default class TodoList extends BaseComponent {
         <TodoListItemForm {...this.props} listName={this.state.listName} firebase={this.firebase} />
         <TodoListNotes {...this.props} listName={this.state.listName} />
         <form onSubmit={ this.archiveDoneItems } >
-          <input type='submit' value='Remove Done Items' />
+          <div className='form-group'>
+            <button type='submit'>Remove Done Items</button>
+          </div>
         </form>
       </section>
     } else {

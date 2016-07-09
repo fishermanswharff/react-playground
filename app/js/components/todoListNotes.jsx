@@ -21,9 +21,7 @@ export default class TodoListNotes extends BaseComponent {
   }
 
   componentDidMount(){
-    // this.loadTextFromServer()
-
-
+    this.loadTextFromServer()
   }
 
   componentDidUpdate(prevProps) {
