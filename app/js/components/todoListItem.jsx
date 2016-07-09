@@ -92,7 +92,6 @@ export default class TodoListItem extends BaseComponent {
   }
 
   componentWillUnmount(){
-    console.log('—————————————— unmounting component ——————————————', this);
     // do something when the component will unmount
   }
 
