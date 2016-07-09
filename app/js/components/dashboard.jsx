@@ -40,10 +40,9 @@ export default class Dashboard extends BaseComponent {
   }
 
   render(){
-    console.log(this.state);
+    // console.log(this.state);
     return(
-      <div>
-      </div>
+      <div></div>
     )
   }
 }

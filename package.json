@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development gulp serve --type=development"
+    "dev": "NODE_ENV=development gulp serve --type=development",
+    "deploy": "NODE_ENV=production gulp awsS3 --type=production"
   },
   "keywords": [
     "react",

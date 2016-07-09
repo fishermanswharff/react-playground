@@ -38,22 +38,13 @@ export default class UserDashboard extends BaseComponent {
       if (err) {
         switch(err.code) {
           case 'INVALID_PASSWORD':
-            this.setState({
-              uifeedback: 'The specified user account password is incorrect.'
-            })
-            // console.log("The specified user account password is incorrect.");
+            this.setState({ uifeedback: 'The specified user account password is incorrect.' });
             break;
           case 'INVALID_USER':
-            this.setState({
-              uifeedback: 'The specified user account does not exist.'
-            })
-            console.log("The specified user account does not exist.");
+            this.setState({ uifeedback: 'The specified user account does not exist.' });
             break;
           default:
-            this.setState({
-              uifeedback: err.toString()
-            })
-            console.log("Error changing password:", err);
+            this.setState({ uifeedback: err.toString() });
         }
       } else {
         this.setState({
@@ -62,7 +53,6 @@ export default class UserDashboard extends BaseComponent {
           newPassword: '',
           uifeedback: 'User password changed successfully!'
         });
-        console.log("User password changed successfully!");
       }
     });
   }
