@@ -15,7 +15,7 @@ export default class Dashboard extends BaseComponent {
       users: {}
     };
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.bind('fetchData','handleDataSnapshot','buildMemberLists','removeProject','addMember','removeMember','onNewMemberSuccess');
+    this.bind('fetchData','handleDataSnapshot','buildMemberLists','removeProject','addMember','removeMember');
   }
 
   fetchData(){
@@ -34,17 +34,14 @@ export default class Dashboard extends BaseComponent {
     this.refire.update({
       key: `members/${projectKey}`,
       data: { [uuid]: true },
-      success: this.onNewMemberSuccess
+      success: (error => {
+        if(error){
+          console.error(error);
+        } else {
+          this.fetchData();
+        }
+      })
     });
-  }
-
-  onNewMemberSuccess(error){
-    if(error) {
-      console.error('————————— error: ', error);
-    } else {
-      this.fetchData();
-      console.log('————————— created new member on project');
-    }
   }
 
   removeMember(event){
@@ -57,12 +54,10 @@ export default class Dashboard extends BaseComponent {
         if(error) {
           console.log(error);
         } else {
-          console.log(`removed member ${uuid} from: ${projectKey}`);
           this.fetchData();
         }
       }
     })
-    console.log('————————— removing member: ', projectKey, uuid);
   }
 
   removeProject(event){
