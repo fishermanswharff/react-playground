@@ -15,7 +15,7 @@ export default class Dashboard extends BaseComponent {
       users: {}
     };
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.bind('fetchData','handleDataSnapshot', 'createProject','buildMemberLists','removeProject','addMember','removeMember');
+    this.bind('fetchData','handleDataSnapshot','buildMemberLists','removeProject','addMember','removeMember');
   }
 
   fetchData(){
@@ -100,10 +100,6 @@ export default class Dashboard extends BaseComponent {
 
   handleDataSnapshot(snapshot){
     this.setState(snapshot);
-  }
-
-  createProject(project){
-    return <div></div>
   }
 
   componentDidMount(){
