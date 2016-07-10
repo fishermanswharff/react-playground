@@ -15,7 +15,7 @@ export default class Dashboard extends BaseComponent {
       users: {}
     };
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.bind('fetchData','handleDataSnapshot','buildMemberLists','removeProject','addMember','removeMember');
+    this.bind('fetchData','handleDataSnapshot','buildMemberLists','removeProject','addMember','removeMember','onNewMemberSuccess');
   }
 
   fetchData(){
@@ -28,16 +28,46 @@ export default class Dashboard extends BaseComponent {
   }
 
   addMember(event){
-    console.log('————————— adding member: ', event.currentTarget);
+    let projectKey = event.currentTarget.className.replace(/\-nonmember$/gim, ''),
+        uuid = event.currentTarget.dataset.uuid;
+
+    this.refire.update({
+      key: `members/${projectKey}`,
+      data: { [uuid]: true },
+      success: this.onNewMemberSuccess
+    });
+  }
+
+  onNewMemberSuccess(error){
+    if(error) {
+      console.error('————————— error: ', error);
+    } else {
+      this.fetchData();
+      console.log('————————— created new member on project');
+    }
   }
 
   removeMember(event){
-    console.log('————————— removing member: ', event.currentTarget);
+    let projectKey = event.currentTarget.className.replace(/\-member/gim, ''),
+        uuid = event.currentTarget.dataset.uuid;
+
+    this.refire.remove({
+      key: `members/${projectKey}/${uuid}`,
+      success: (error) => {
+        if(error) {
+          console.log(error);
+        } else {
+          console.log(`removed member ${uuid} from: ${projectKey}`);
+          this.fetchData();
+        }
+      }
+    })
+    console.log('————————— removing member: ', projectKey, uuid);
   }
 
   removeProject(event){
     let projectKey = event.currentTarget.id.replace(/\-remove$/gim, '');
-    console.log('————————— removing project: ', event.currentTarget);
+    console.log('————————— removing project: ', event.currentTarget, projectKey);
   }
 
   buildMemberLists(projectKey,index,array){
@@ -72,7 +102,7 @@ export default class Dashboard extends BaseComponent {
               return <li key={`${index + 1}-${projectKey}-member`}>
                 <span className='member-email'>{memberObject.user.email}</span>
                 <span className='remove-member'>
-                  <a href='javascript:void(0)' id={`${projectKey}-${index+1}-member`} data-uuid={memberObject.uuid} onClick={this.removeMember}>
+                  <a href='javascript:void(0)' className={`${projectKey}-member`} data-uuid={memberObject.uuid} onClick={this.removeMember}>
                     <i className='fa fa-minus-square-o'></i>
                   </a>
                 </span>
@@ -86,7 +116,7 @@ export default class Dashboard extends BaseComponent {
               return <li key={`${index+1}-${projectKey}-nonMember`}>
                 <span className='non-member-email'>{ userObject.user.email }</span>
                 <span className='add-member'>
-                  <a href='javascript:void(0)' id={`${projectKey}-${index+1}-nonmember`} data-uuid={userObject.uuid} onClick={this.addMember}>
+                  <a href='javascript:void(0)' className={`${projectKey}-nonmember`} data-uuid={userObject.uuid} onClick={this.addMember}>
                     <i className='fa fa-plus-square-o'></i>
                   </a>
                 </span>
