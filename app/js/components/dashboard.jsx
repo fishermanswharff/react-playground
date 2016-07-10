@@ -5,8 +5,8 @@ import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
 export default class Dashboard extends BaseComponent {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       members: {},
       notes: {},
@@ -15,7 +15,7 @@ export default class Dashboard extends BaseComponent {
       users: {}
     };
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.bind('fetchData','handleDataSnapshot', 'createProject','buildMemberLists');
+    this.bind('fetchData','handleDataSnapshot', 'createProject','buildMemberLists','removeProject');
   }
 
   fetchData(){
@@ -25,6 +25,10 @@ export default class Dashboard extends BaseComponent {
       array: false,
       success: this.handleDataSnapshot
     });
+  }
+
+  removeProject(event){
+    console.log('————————— removing project: ', event, event.target);
   }
 
   buildMemberLists(projectKey,index,array){
@@ -45,18 +49,27 @@ export default class Dashboard extends BaseComponent {
 
     return(
       <li key={projectKey}>
-        { projectObject.name }
-        <ul>Members:
+        <div className='project-title'>
+          <span className='project-name'>{ projectObject.name }</span>
+          <span className='remove-project'><a href='javascript:void(0)' onClick={this.removeProject}><i className='fa fa-minus-square-o'></i></a></span>
+        </div>
+        <ul><span className='list-title'>Members:</span>
           {
             projectMembers.map((member,index) => {
-              return <li key={`${index + 1}-${projectKey}-member`}>{member.email}</li>;
+              return <li key={`${index + 1}-${projectKey}-member`}>
+                <span className='member-email'>{member.email}</span>
+                <span className='remove-member'><a href='javascript:void(0)'><i className='fa fa-minus-square-o'></i></a></span>
+              </li>;
             })
           }
         </ul>
-        <ul>Non-members
+        <ul><span className='list-title'>Non-members</span>
           {
             nonMembers.map((user, index) => {
-              return <li key={`${index+1}-${projectKey}-nonMember`}>{user.email}</li>
+              return <li key={`${index+1}-${projectKey}-nonMember`}>
+                <span className='non-member-email'>{ user.email }</span>
+                <span className='add-member'><a href='javascript:void(0)'><i className='fa fa-plus-square-o'></i></a></span>
+              </li>
             })
           }
         </ul>
@@ -77,10 +90,11 @@ export default class Dashboard extends BaseComponent {
   }
 
   render(){
+
     return(
-      <div>
-        <ul>{ Object.keys(this.state.projects).map(this.buildMemberLists) }</ul>
-      </div>
+      <section className='dashboard'>
+        <ul className='project-lists'>{ Object.keys(this.state.projects).map(this.buildMemberLists) }</ul>
+      </section>
     )
   }
 }
