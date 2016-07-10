@@ -62,7 +62,23 @@ export default class Dashboard extends BaseComponent {
 
   removeProject(event){
     let projectKey = event.currentTarget.id.replace(/\-remove$/gim, '');
-    console.log('————————— removing project: ', event.currentTarget, projectKey);
+
+    if(this.state.tasks[projectKey] === undefined){
+      ['notes','projects','members'].forEach(key => {
+        this.refire.remove({
+          key: `${key}/${projectKey}`,
+          success: (err => {
+            if(err){ console.error(err) }
+            else {
+              this.fetchData();
+              console.log(`deleted ${key} for project: ${projectKey}`);
+            }
+          })
+        });
+      });
+    } else {
+      console.error('can’t delete a list that has tasks');
+    }
   }
 
   buildMemberLists(projectKey,index,array){
