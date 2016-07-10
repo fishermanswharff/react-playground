@@ -15,7 +15,7 @@ export default class Dashboard extends BaseComponent {
       users: {}
     };
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.bind('fetchData','handleDataSnapshot', 'createProject','buildMemberLists','removeProject');
+    this.bind('fetchData','handleDataSnapshot', 'createProject','buildMemberLists','removeProject','addMember','removeMember');
   }
 
   fetchData(){
@@ -27,8 +27,17 @@ export default class Dashboard extends BaseComponent {
     });
   }
 
+  addMember(event){
+    console.log('————————— adding member: ', event.currentTarget);
+  }
+
+  removeMember(event){
+    console.log('————————— removing member: ', event.currentTarget);
+  }
+
   removeProject(event){
-    console.log('————————— removing project: ', event, event.target);
+    let projectKey = event.currentTarget.id.replace(/\-remove$/gim, '');
+    console.log('————————— removing project: ', event.currentTarget);
   }
 
   buildMemberLists(projectKey,index,array){
@@ -38,12 +47,12 @@ export default class Dashboard extends BaseComponent {
         nonMembers = [];
 
     for(let member in membersObject){
-      projectMembers.push(this.state.users[member])
+      projectMembers.push({uuid: member, user: this.state.users[member]})
     };
 
     for(let user in this.state.users){
       if(!(membersObject[user])){
-        nonMembers.push(this.state.users[user]);
+        nonMembers.push({uuid: user, user: this.state.users[user]});
       }
     };
 
@@ -51,24 +60,36 @@ export default class Dashboard extends BaseComponent {
       <li key={projectKey}>
         <div className='project-title'>
           <span className='project-name'>{ projectObject.name }</span>
-          <span className='remove-project'><a href='javascript:void(0)' onClick={this.removeProject}><i className='fa fa-minus-square-o'></i></a></span>
+          <span className='remove-project'>
+            <a href='javascript:void(0)' id={`${projectKey}-remove`} onClick={this.removeProject}>
+              <i className='fa fa-minus-square-o'></i>
+            </a>
+          </span>
         </div>
         <ul><span className='list-title'>Members:</span>
           {
-            projectMembers.map((member,index) => {
+            projectMembers.map((memberObject,index) => {
               return <li key={`${index + 1}-${projectKey}-member`}>
-                <span className='member-email'>{member.email}</span>
-                <span className='remove-member'><a href='javascript:void(0)'><i className='fa fa-minus-square-o'></i></a></span>
+                <span className='member-email'>{memberObject.user.email}</span>
+                <span className='remove-member'>
+                  <a href='javascript:void(0)' id={`${projectKey}-${index+1}-member`} data-uuid={memberObject.uuid} onClick={this.removeMember}>
+                    <i className='fa fa-minus-square-o'></i>
+                  </a>
+                </span>
               </li>;
             })
           }
         </ul>
         <ul><span className='list-title'>Non-members</span>
           {
-            nonMembers.map((user, index) => {
+            nonMembers.map((userObject, index) => {
               return <li key={`${index+1}-${projectKey}-nonMember`}>
-                <span className='non-member-email'>{ user.email }</span>
-                <span className='add-member'><a href='javascript:void(0)'><i className='fa fa-plus-square-o'></i></a></span>
+                <span className='non-member-email'>{ userObject.user.email }</span>
+                <span className='add-member'>
+                  <a href='javascript:void(0)' id={`${projectKey}-${index+1}-nonmember`} data-uuid={userObject.uuid} onClick={this.addMember}>
+                    <i className='fa fa-plus-square-o'></i>
+                  </a>
+                </span>
               </li>
             })
           }
