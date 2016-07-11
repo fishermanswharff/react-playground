@@ -1,11 +1,12 @@
-var path = require('path');
-var paths = {
-  mainScript: '/app/js/app.jsx',
-  testScript: '/spec/index.js',
-  scripts: '/app/js/**/*.js',
-  destroot: '/dist',
-  destjs: '/dist/js',
-};
+var path = require('path'),
+    webpack = require('webpack'),
+    paths = {
+      mainScript: '/app/js/app.jsx',
+      testScript: '/spec/index.js',
+      scripts: '/app/js/**/*.js',
+      destroot: '/dist',
+      destjs: '/dist/js',
+    };
 
 module.exports.getConfig = function(type){
   var isDev = type === 'development';
@@ -29,6 +30,16 @@ module.exports.getConfig = function(type){
           loader: 'babel-loader',
           query: { cacheDirectory: true, presets: ['react', 'es2015'] }
         }
+      ],
+      plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+          minimize: true
+        }),
+        new webpack.DefinePlugin({
+          'process.env': {
+            'NODE_ENV': JSON.stringify(type)
+          }
+        })
       ],
       noParse: /node_modules\/quill\/dist/
     },

@@ -5,7 +5,7 @@
   "repository": "https://github.com/fishermanswharff/react-playground",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test gulp test --type=test",
     "dev": "NODE_ENV=development gulp serve --type=development",
     "deploy": "NODE_ENV=production gulp awsS3 --type=production"
   },

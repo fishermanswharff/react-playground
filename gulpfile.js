@@ -112,8 +112,10 @@ gulp.task('watch', function() {
 gulp.task('default', ['watch', 'scripts', 'sass', 'copyImages', 'minify-html']);
 
 gulp.task('awsS3', () => {
-  // let credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+  let credentials = new AWS.SharedIniFileCredentials({profile: 'personal'});
   AWS.config.update({ region: 'us-west-2' });
+  AWS.config.credentials = credentials;
+
   let s3 = new AWS.S3();
   s3.putObject({
     Bucket: 'jw-s3-react-test',
