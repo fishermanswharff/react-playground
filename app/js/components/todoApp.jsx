@@ -7,9 +7,10 @@ import TodoLists from './todoLists.jsx';
 import TodoListsForm from './todoListsForm.jsx'
 import Navbar from './navbar.jsx';
 
-// custom vanilla modules
+// custom modules
 import Refire from '../firebaseModule/Refire.js';
 import Permissions from '../modules/Permissions.js';
+import SessionController from '../modules/SessionController';
 
 // constants
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
@@ -23,12 +24,21 @@ export default class TodoApp extends BaseComponent {
     this.context = context;
     this.permissions = new Permissions({props: this.props});
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
+    this.sessionController = new SessionController({context: this});
     this.state = {
       authData: this.permissions.getAuth(),
       menuActive: false
     };
+    // console.log(`\n———————————— routeParams: ${JSON.stringify(this.props.routeParams)}\n———————————— route: ${JSON.stringify(this.props.route)}\n———————————— params: ${JSON.stringify(this.props.params)}\n———————————— location: ${JSON.stringify(this.props.location)}\n———————————— history:  ${JSON.stringify(this.props.history)}`);
+    this.bind('handleAuthEvent', 'handleMenuClick', 'handleListClicked', 'routeChange');
+    this.context.router.listen(this.routeChange);
+  }
 
-    this.bind('handleAuthEvent', 'handleMenuClick', 'handleListClicked');
+  routeChange(routeObject){
+    // save the routeObject to window storage
+    // save the data for that location in localstorage as JSON
+    // upon loading, check for local storage first, and load the data there first.
+    this.sessionController.setLocalStorage({route: routeObject, data: {}});
   }
 
   componentDidMount() {
