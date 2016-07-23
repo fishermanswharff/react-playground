@@ -1,6 +1,7 @@
 // main libraries
 import React from 'react';
 import BaseComponent from './base.jsx';
+import { browserHistory } from 'react-router';
 
 // custom react components
 import TodoLists from './todoLists.jsx';
@@ -29,25 +30,30 @@ export default class TodoApp extends BaseComponent {
       authData: this.permissions.getAuth(),
       menuActive: false
     };
-    // console.log(`\n———————————— routeParams: ${JSON.stringify(this.props.routeParams)}\n———————————— route: ${JSON.stringify(this.props.route)}\n———————————— params: ${JSON.stringify(this.props.params)}\n———————————— location: ${JSON.stringify(this.props.location)}\n———————————— history:  ${JSON.stringify(this.props.history)}`);
+    this.mounted = false;
     this.bind('handleAuthEvent', 'handleMenuClick', 'handleListClicked', 'routeChange');
-    this.context.router.listen(this.routeChange);
   }
 
   routeChange(routeObject){
     // save the routeObject to window storage
-    // save the data for that location in localstorage as JSON
+    // save the data for that location in localstorage as JSON (should this come from the child component?)
     // upon loading, check for local storage first, and load the data there first.
-    this.sessionController.setLocalStorage({route: routeObject, data: {}});
+    if(this.mounted) this.sessionController.setLocalStorage({route: routeObject});
   }
 
   componentDidMount() {
-    // the component is all set, and you can access the component's props and initial state
+    this.mounted = true;
+    let storage = this.sessionController.getLocalStorage();
+    if(!!storage && !!storage.route && !(window.location.pathname === storage.route.pathname)){
+      browserHistory.push(storage.route.pathname);
+    }
   }
 
   componentDidUpdate(prevProps) {}
 
   componentWillUnmount() {}
+
+  componentWillUpdate(nextProps,nextState){}
 
   handleAuthEvent(authData){
     if(authData){
@@ -70,10 +76,11 @@ export default class TodoApp extends BaseComponent {
   }
 
   render() {
-
     let menuClasses = classnames('list-and-form-container', {
       'active': this.state.menuActive,
     });
+
+    this.context.router.listen(this.routeChange);
 
     return (
       <div id='todo-app' className='todo-app-main-container'>
@@ -88,7 +95,7 @@ export default class TodoApp extends BaseComponent {
           <TodoLists ref={(menu) => this._menu = menu} authData={this.state.authData} onListClicked={this.handleListClicked} />
           <TodoListsForm authData={this.state.authData} />
         </section>
-        <div className='todo-app-children'>
+        <div className='todo-app-children' ref={(ref) => this._children = ref}>
           {this.props.children}
         </div>
       </div>

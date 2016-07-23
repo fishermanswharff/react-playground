@@ -147,6 +147,10 @@ export default class Dashboard extends BaseComponent {
     this.fetchData();
   }
 
+  componentWillUnmount() {
+    
+  }
+
   render(){
 
     return(

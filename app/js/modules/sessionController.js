@@ -5,13 +5,21 @@ export default class SessionController {
     }
     this.context = options.context;
     this.key = 'jwtodoapp:reactstyle';
-    window.localStorage.setItem(this.key, JSON.stringify({}));
   }
 
   setLocalStorage(data){
-    let storageObj = JSON.parse(window.localStorage.getItem(this.key));
+    let storageObj = JSON.parse(window.localStorage.getItem(this.key)) || {};
     for(let key in data)
-      storageObj[key] = data[key];
+      Object.defineProperty(storageObj, key, {
+        enumerable: true,
+        configurable: true,
+        writable: true,
+        value: data[key]
+      })
     window.localStorage.setItem(this.key, JSON.stringify(storageObj));
+  }
+
+  getLocalStorage(){
+    return JSON.parse(window.localStorage.getItem(this.key));
   }
 }

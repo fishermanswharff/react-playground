@@ -5,6 +5,7 @@ import TodoListItem from './todoListItem.jsx';
 import { Link } from 'react-router';
 import TodoListNotes from './todoListNotes.jsx';
 import TodoListItemForm from './todoListItemForm.jsx';
+import SessionController from '../modules/SessionController';
 
 export default class TodoList extends BaseComponent {
 
@@ -17,7 +18,8 @@ export default class TodoList extends BaseComponent {
       listName: '',
       authData: null
     };
-    this.firebase = {}
+    this.firebase = {};
+    this.sessionController = new SessionController({context: this});
     this.bind('loadListFromServer','createItem','loadListData','archiveDoneItems');
   }
 
@@ -58,7 +60,7 @@ export default class TodoList extends BaseComponent {
     this.firebase.todosRef.on('child_added', (snapshot, prev) => {
       listitems.push({key: snapshot.key(), item: snapshot.val()});
       this.setState({ items: listitems });
-      return snapshot;
+      this.sessionController.setLocalStorage({ data: listitems });
     });
   }
 
