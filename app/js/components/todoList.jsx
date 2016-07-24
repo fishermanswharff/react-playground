@@ -15,8 +15,10 @@ export default class TodoList extends BaseComponent {
     this.sessionController = new SessionController({context: this});
     this.bind('loadListFromServer','createItem','loadListData','archiveDoneItems');
 
+    let session = this.sessionController.getLocalStorage(),
+        data = !!session ? session.data : [];
     this.state = {
-      items: this.sessionController.getLocalStorage().data || [],
+      items: data,
       notes: '',
       newItemText: '',
       listName: '',
