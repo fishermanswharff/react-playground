@@ -40,14 +40,14 @@ var paths = {
 
 gulp.task('scripts', function(){
   return gulp.src(webpackConfig.entry)
-    .on('error', function(error) {
-      console.log('ERROR: ' + error.toString());
-      this.emit("end");
-    })
     .pipe($.webpack(webpackConfig))
     .pipe(isProduction ? $.uglify() : $.util.noop())
     .pipe(gulp.dest(paths.destjs))
-    .pipe(reload({ stream:true }));
+    .pipe(reload({ stream:true }))
+    .on('error', function(error) {
+      console.log('ERROR: ' + error.toString());
+      this.emit("end");
+    });
 });
 
 // watch files for changes and reload

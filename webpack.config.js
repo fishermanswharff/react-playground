@@ -33,7 +33,42 @@ module.exports.getConfig = function(type){
       ],
       plugins: [
         new webpack.optimize.UglifyJsPlugin({
-          minimize: true
+          compress: {
+            sequences     : false,
+            properties    : false,
+            dead_code     : false,
+            drop_debugger : false,
+            unsafe        : false,
+            unsafe_comps  : false,
+            conditionals  : false,
+            comparisons   : false,
+            evaluate      : false,
+            booleans      : false,
+            loops         : false,
+            unused        : false,
+            hoist_funs    : false,
+            keep_fargs    : true,
+            keep_fnames   : false,
+            hoist_vars    : false,
+            if_return     : false,
+            join_vars     : false,
+            collapse_vars : false,
+            cascade       : false,
+            side_effects  : false,
+            pure_getters  : false,
+            pure_funcs    : null,
+            negate_iife   : false,
+            screw_ie8     : true,
+            drop_console  : false,
+            angular       : false,
+            warnings      : true,
+            global_defs   : {},
+            passes        : 1,
+          },
+          mangle: {
+            except: ['$super', '$', 'exports', 'require']
+          },
+          minimize: true,
         }),
         new webpack.DefinePlugin({
           'process.env': {
@@ -46,7 +81,9 @@ module.exports.getConfig = function(type){
     resolve: {
       extensions: ['', '.js', '.jsx']
     }
+  };
+  if(isDev){
+    config.devtool = 'eval';
   }
-  if(isDev) config.devtool = 'eval';
   return config;
 };
