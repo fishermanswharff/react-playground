@@ -7,6 +7,7 @@
   "scripts": {
     "test": "NODE_ENV=test gulp test --type=test",
     "dev": "NODE_ENV=development gulp serve --type=development",
+    "build": "NODE_ENV=production gulp --type=production",
     "deploy": "NODE_ENV=production gulp awsS3 --type=production"
   },
   "keywords": [

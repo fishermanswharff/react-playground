@@ -109,7 +109,7 @@ gulp.task('watch', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'scripts', 'sass', 'copyImages', 'minify-html']);
+gulp.task('default', ['scripts', 'sass', 'copyImages', 'minify-html']);
 
 gulp.task('awsS3', () => {
   let credentials = new AWS.SharedIniFileCredentials({profile: 'personal'});
