@@ -11,16 +11,17 @@ export default class TodoList extends BaseComponent {
 
   constructor(props) {
     super(props);
+    this.firebase = {};
+    this.sessionController = new SessionController({context: this});
+    this.bind('loadListFromServer','createItem','loadListData','archiveDoneItems');
+
     this.state = {
-      items: [],
+      items: this.sessionController.getLocalStorage().data || [],
       notes: '',
       newItemText: '',
       listName: '',
       authData: null
     };
-    this.firebase = {};
-    this.sessionController = new SessionController({context: this});
-    this.bind('loadListFromServer','createItem','loadListData','archiveDoneItems');
   }
 
   createItem(object,index,array) {
