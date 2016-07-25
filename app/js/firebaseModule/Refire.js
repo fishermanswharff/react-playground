@@ -109,6 +109,11 @@ export default class Refire {
     });
   }
 
+  /**
+   * [push description]
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
+   */
   push(options){
     for(var k in options)
       this[k] = options[k];
@@ -120,6 +125,11 @@ export default class Refire {
     })
   }
 
+  /**
+   * [post description]
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
+   */
   post(options){
     for(var k in options)
       this[k] = options[k];
@@ -131,6 +141,11 @@ export default class Refire {
     });
   }
 
+  /**
+   * [update description]
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
+   */
   update(options){
     for(var k in options)
       this[k] = options[k];
@@ -142,6 +157,11 @@ export default class Refire {
     });
   }
 
+  /**
+   * [remove description]
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
+   */
   remove(options){
     for(var k in options)
       this[k] = options[k];

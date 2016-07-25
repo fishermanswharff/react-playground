@@ -2,6 +2,7 @@ import React from 'react';
 import BaseComponent from './base.jsx';
 import Refire from '../firebaseModule/Refire.js';
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
+import { Link } from 'react-router';
 
 export default class Dashboard extends BaseComponent {
 
@@ -15,7 +16,25 @@ export default class Dashboard extends BaseComponent {
       users: {}
     };
     this.refire = new Refire({baseUrl: FIREBASE_REFS.rootRef, props: this.props});
-    this.bind('fetchData','handleDataSnapshot','buildMemberLists','removeProject','addMember','removeMember');
+    this.bind('fetchData','handleDataSnapshot','buildMemberLists','removeProject','addMember','removeMember','hashChange');
+  }
+
+  hashChange(routeObject){
+    if(!!routeObject && routeObject.hash){
+      switch(routeObject.hash){
+        case('#members'):
+          console.log('on #members hash');
+          break;
+        case('#account'):
+          console.log('on #account hash');
+          break;
+        case('#manage-users'):
+          console.log('on #manage-users hash');
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   fetchData(){
@@ -145,18 +164,29 @@ export default class Dashboard extends BaseComponent {
 
   componentDidMount(){
     this.fetchData();
+    this.context.router.listen(this.hashChange);
   }
 
   componentWillUnmount() {
-    
   }
 
   render(){
 
     return(
       <section className='dashboard'>
+        <ul>
+          <li><Link to={'#members'}>Members</Link></li>
+          <li><Link to={'#account'}>Your Account</Link></li>
+          <li><Link to={'#manage-users'}>Manage Users</Link></li>
+        </ul>
         <ul className='project-lists'>{ Object.keys(this.state.projects).map(this.buildMemberLists) }</ul>
       </section>
     )
   }
+}
+
+Dashboard.propTypes = {}
+Dashboard.defaultProps = {}
+Dashboard.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }

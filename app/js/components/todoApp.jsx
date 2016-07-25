@@ -35,9 +35,6 @@ export default class TodoApp extends BaseComponent {
   }
 
   routeChange(routeObject){
-    // save the routeObject to window storage
-    // save the data for that location in localstorage as JSON (should this come from the child component?)
-    // upon loading, check for local storage first, and load the data there first.
     if(this.mounted) this.sessionController.setLocalStorage({route: routeObject});
   }
 
