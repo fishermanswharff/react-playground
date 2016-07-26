@@ -15,10 +15,4 @@ export default class Permissions {
   getAuth(){
     return new Firebase(FIREBASE_REFS.rootRef).getAuth();
   }
-  authorized(){}
-  getProjects(){}
-  getTasks(projectId){}
-  getMembers(projectId){}
-  getUsers(){}
-  getUser(userId){}
 }

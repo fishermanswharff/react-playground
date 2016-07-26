@@ -3,23 +3,28 @@ import BaseComponent from './base.jsx';
 import ReactDOM from 'react-dom';
 import UserAttributeForm from './userAttributeForm.jsx';
 import { render } from 'react-dom';
+import Refire from '../firebaseModule/Refire.js';
+import Permissions from '../modules/Permissions.js';
 
 export default class UserDashboard extends BaseComponent {
   constructor(props){
     super(props);
+    this.permissions = new Permissions({props: this.props});
+    this.bind('loadUser','userInfoCallback','changePassword','onChangeHandler');
+
     this.state = {
       authData: null,
       uifeedback: null,
       emailConfirmation: null,
       oldPassword: null,
-      newPassword: null
+      newPassword: null,
+      user: {},
+      authData: this.permissions.getAuth()
     };
-
-    this.bind('loadUser','userInfoCallback','changePassword','onChangeHandler');
   }
 
   loadUser(){
-    let userRef = new Firebase(`https://jwtodoapp.firebaseio.com/users/${this.props.params.userId}`);
+    let userRef = new Firebase(`https://jwtodoapp.firebaseio.com/users/${this.state.authData.uid}`);
     userRef.on('value', this.userInfoCallback);
   }
 
@@ -71,7 +76,7 @@ export default class UserDashboard extends BaseComponent {
     var attributes = [];
 
     for(var attr in this.state.user){
-      attributes.push(<UserAttributeForm key={attr} attribute={attr} value={this.state.user[attr]} uid={this.props.params.userId} />)
+      attributes.push(<UserAttributeForm key={attr} attribute={attr} value={this.state.user[attr]} uid={this.state.authData.uid} />)
     }
 
     return(

@@ -98,6 +98,10 @@
       &.large {
         @include flex(3 0 0);
       }
+
+      &.home {
+        text-align: right;
+      }
     }
 
     &.links {
