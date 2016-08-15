@@ -103,7 +103,7 @@ export default class Refire {
           array.push({[j]: obj[j]});
         this.context.setState({[this.state]: array});
       } else {
-        console.log(this.reactSetState);
+        // console.log(this.reactSetState);
         this.context.setState({[this.state]: dataSnapshot.val()});
       }
     });

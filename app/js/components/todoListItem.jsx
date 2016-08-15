@@ -18,7 +18,8 @@ export default class TodoListItem extends BaseComponent {
     };
 
     this.bind('handleChecked','onItemDoneUpdate','convertTimestamp','editTodoListItemText','updateItemText','onItemTextUpdate','listenForChanges');
-    this.refire = new Refire({baseUrl: FIREBASE_REFS.tasksRef, props: this.props});
+    this.donerefire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
+    this.textrefire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
   }
 
   createMarkup(string) {
@@ -27,8 +28,7 @@ export default class TodoListItem extends BaseComponent {
 
   handleChecked(event) {
     event.preventDefault();
-    var doneRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}/done`);
-    doneRef.set(!this.state.done, this.onItemDoneUpdate);
+    this.setState({done: !this.state.done});
   }
 
   onItemDoneUpdate(error){
@@ -36,7 +36,6 @@ export default class TodoListItem extends BaseComponent {
       this.setState({ajaxFail: true})
     } else {
       this.setState({ajaxSuccess: true})
-      this.props.onDone();
     }
   }
 
@@ -60,9 +59,9 @@ export default class TodoListItem extends BaseComponent {
   }
 
   updateItemText(event){
-    this.setState({inProgress: true});
-    var textRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}/text`);
-    textRef.set(event.target.textContent, this.onItemTextUpdate);
+    this.setState({
+      text: event.target.textContent,
+    });
   }
 
   onItemTextUpdate(error){
@@ -74,9 +73,18 @@ export default class TodoListItem extends BaseComponent {
   }
 
   listenForChanges(){
-    var itemRef = new Firebase(`https://jwtodoapp.firebaseio.com/tasks/${this.props.data.project}/${this.props.id}`);
-    itemRef.on('child_changed', (snapShot) => {
-      // this.setState({[snapShot.key()]: snapShot.val()});
+    this.donerefire.bindToState({
+      key: 'done',
+      context: this,
+      state: 'done',
+      array: false
+    });
+
+    this.textrefire.bindToState({
+      key: 'text',
+      context: this,
+      state: 'text',
+      array: false
     });
   }
 
