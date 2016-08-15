@@ -36,12 +36,6 @@ export default class Dashboard extends BaseComponent {
     }
   }
 
-  generateUserPath(){
-    var path = ''
-    !!this.props.authData ? path = `/user/${this.props.authData.uid}` : path = '/';
-    return path;
-  }
-
   componentDidMount(){
     this.context.router.listen(this.hashChange);
   }

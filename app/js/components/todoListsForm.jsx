@@ -45,7 +45,7 @@ export default class TodoListsForm extends BaseComponent {
   }
 
   onNewMemberSuccess(value){
-    console.log(value.key(), value);
+    // console.log(value.key(), value);
   }
 
   render(){
