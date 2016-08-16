@@ -181,6 +181,25 @@ export default class Refire {
   syncToState(options){
     for(var k in options)
       this[k] = options[k];
+    let refstring = `${this.baseUrl}${this.key}`;
+    options.firebase = new Firebase(refstring);
+    options.reactSetState = options.context.setState;
+    options.context.setState = function(data, cb){
+      options.reactSetState.call(options.context, data, cb);
+    };
+
+    this.firebase.on('value', (dataSnapshot) => {
+      if(this.array === true){
+        let obj = dataSnapshot.val(),
+            array = [];
+        for(var j in obj)
+          array.push({[j]: obj[j]});
+        this.context.setState({[this.state]: array});
+      } else {
+        // console.log(this.reactSetState);
+        this.context.setState({[this.state]: dataSnapshot.val()});
+      }
+    });
   }
 
   /** ——————————————————————————————————————

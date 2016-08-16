@@ -17,7 +17,7 @@ export default class TodoListItem extends BaseComponent {
       id: this.props.id
     };
 
-    this.bind('handleChecked','onItemDoneUpdate','convertTimestamp','editTodoListItemText','updateItemText','onItemTextUpdate','listenForChanges');
+    this.bind('handleChecked','convertTimestamp','editTodoListItemText','updateItemText','listenForChanges');
     this.donerefire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
     this.textrefire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
   }
@@ -29,14 +29,6 @@ export default class TodoListItem extends BaseComponent {
   handleChecked(event) {
     event.preventDefault();
     this.setState({done: !this.state.done});
-  }
-
-  onItemDoneUpdate(error){
-    if(error){
-      this.setState({ajaxFail: true})
-    } else {
-      this.setState({ajaxSuccess: true})
-    }
   }
 
   convertTimestamp(timestamp){
@@ -64,23 +56,15 @@ export default class TodoListItem extends BaseComponent {
     });
   }
 
-  onItemTextUpdate(error){
-    if(error){
-      this.setState({ itemUpdated: false, ajaxFail: true, inProgress: false });
-    } else {
-      this.setState({ itemUpdated: true, ajaxSuccess: true, inProgress: false });
-    }
-  }
-
   listenForChanges(){
-    this.donerefire.bindToState({
+    this.donerefire.syncToState({
       key: 'done',
       context: this,
       state: 'done',
       array: false
     });
 
-    this.textrefire.bindToState({
+    this.textrefire.syncToState({
       key: 'text',
       context: this,
       state: 'text',
