@@ -89,22 +89,19 @@ export default class Refire {
    * @return {undefined}
    */
   bindToState(options){
-    for(var k in options)
-      this[k] = options[k];
-    let refstring = `${this.baseUrl}${this.key}`;
-    this.firebase = new Firebase(refstring);
-    this.reactSetState = this.context.setState;
+    let refstring = `${this.baseUrl}${options.key}`;
+    options.firebase = new Firebase(refstring);
+    options.reactSetState = options.context.setState;
 
-    this.firebase.on('value', (dataSnapshot) => {
-      if(this.array === true){
+    options.firebase.on('value', (dataSnapshot) => {
+      if(options.array === true){
         let obj = dataSnapshot.val(),
             array = [];
         for(var j in obj)
           array.push({[j]: obj[j]});
-        this.context.setState({[this.state]: array});
+        options.context.setState({[options.state]: array});
       } else {
-        // console.log(this.reactSetState);
-        this.context.setState({[this.state]: dataSnapshot.val()});
+        options.context.setState({[options.state]: dataSnapshot.val()});
       }
     });
   }
@@ -183,7 +180,7 @@ export default class Refire {
       this[k] = options[k];
     let refstring = `${this.baseUrl}${this.key}`;
     options.firebase = new Firebase(refstring);
-    // options.reactSetState = options.context.setState;
+    options.reactSetState = options.context.setState;
     /*
     options.context.setState = function(data, cb){
       options.reactSetState.call(options.context, data, cb);

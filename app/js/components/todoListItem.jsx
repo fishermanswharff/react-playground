@@ -19,7 +19,6 @@ export default class TodoListItem extends BaseComponent {
 
     this.bind('handleChecked','convertTimestamp','editTodoListItemText','updateItemText','listenForChanges','onItemDoneUpdate','onItemTextUpdate');
     this.refire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
-    this.textrefire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
   }
 
   createMarkup(string) {
@@ -31,21 +30,17 @@ export default class TodoListItem extends BaseComponent {
     this.refire.update({
       key: '',
       data: { done: !this.state.done },
-      success: (error => {
-        if(error){
-          console.error(error);
-        } else {
-          console.log('succcess updating done');
-        }
-      })
+      success: this.onItemDoneUpdate
     });
   }
 
   onItemDoneUpdate(error){
     if(error){
-      this.setState({ajaxFail: true})
+      this.setState({ajaxFail: true});
+      return;
     } else {
-      this.setState({ajaxSuccess: true})
+      this.setState({ajaxSuccess: true});
+      return
     }
   }
 
@@ -70,7 +65,7 @@ export default class TodoListItem extends BaseComponent {
 
   updateItemText(event){
     this.setState({ inProgress: true });
-    this.textrefire.update({
+    this.refire.update({
       key: '',
       data: { text: event.target.textContent },
       success: this.onItemTextUpdate
@@ -80,8 +75,10 @@ export default class TodoListItem extends BaseComponent {
   onItemTextUpdate(error){
     if(error){
       this.setState({ itemUpdated: false, ajaxFail: true, inProgress: false });
+      return;
     } else {
       this.setState({ itemUpdated: true, ajaxSuccess: true, inProgress: false });
+      return;
     }
   }
 
@@ -93,7 +90,7 @@ export default class TodoListItem extends BaseComponent {
       array: false
     });
 
-    this.textrefire.bindToState({
+    this.refire.bindToState({
       key: 'text',
       context: this,
       state: 'text',
