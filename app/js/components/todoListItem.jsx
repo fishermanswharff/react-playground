@@ -17,8 +17,8 @@ export default class TodoListItem extends BaseComponent {
       id: this.props.id
     };
 
-    this.bind('handleChecked','convertTimestamp','editTodoListItemText','updateItemText','listenForChanges');
-    this.donerefire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
+    this.bind('handleChecked','convertTimestamp','editTodoListItemText','updateItemText','listenForChanges','onItemDoneUpdate','onItemTextUpdate');
+    this.refire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
     this.textrefire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
   }
 
@@ -28,7 +28,25 @@ export default class TodoListItem extends BaseComponent {
 
   handleChecked(event) {
     event.preventDefault();
-    this.setState({done: !this.state.done});
+    this.refire.update({
+      key: '',
+      data: { done: !this.state.done },
+      success: (error => {
+        if(error){
+          console.error(error);
+        } else {
+          console.log('succcess updating done');
+        }
+      })
+    });
+  }
+
+  onItemDoneUpdate(error){
+    if(error){
+      this.setState({ajaxFail: true})
+    } else {
+      this.setState({ajaxSuccess: true})
+    }
   }
 
   convertTimestamp(timestamp){
@@ -51,20 +69,31 @@ export default class TodoListItem extends BaseComponent {
   }
 
   updateItemText(event){
-    this.setState({
-      text: event.target.textContent,
+    this.setState({ inProgress: true });
+    this.textrefire.update({
+      key: '',
+      data: { text: event.target.textContent },
+      success: this.onItemTextUpdate
     });
   }
 
+  onItemTextUpdate(error){
+    if(error){
+      this.setState({ itemUpdated: false, ajaxFail: true, inProgress: false });
+    } else {
+      this.setState({ itemUpdated: true, ajaxSuccess: true, inProgress: false });
+    }
+  }
+
   listenForChanges(){
-    this.donerefire.syncToState({
+    this.refire.bindToState({
       key: 'done',
       context: this,
       state: 'done',
       array: false
     });
 
-    this.textrefire.syncToState({
+    this.textrefire.bindToState({
       key: 'text',
       context: this,
       state: 'text',
