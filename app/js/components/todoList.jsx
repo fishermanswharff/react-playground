@@ -74,8 +74,8 @@ export default class TodoList extends BaseComponent {
     });
   }
 
-  archiveDoneItems(e){
-    e.preventDefault();
+  archiveDoneItems(event){
+    event.preventDefault();
     let doneTodos = this.state.items.filter(obj => { return obj.item.done });
     doneTodos.forEach(obj => {
       let todoKey = obj.key,
@@ -91,6 +91,7 @@ export default class TodoList extends BaseComponent {
             else { console.log('Success writing archive.'); }
           });
         }
+        this.forceUpdate();
       });
     });
   }
@@ -121,11 +122,9 @@ export default class TodoList extends BaseComponent {
         </ul>
         <TodoListItemForm {...this.props} listName={this.state.listName} firebase={this.firebase} />
         <TodoListNotes {...this.props} listName={this.state.listName} />
-        <form onSubmit={ this.archiveDoneItems } >
-          <div className='form-group'>
-            <button type='submit'>Remove Done Items</button>
-          </div>
-        </form>
+        <div className='form-group'>
+          <button onClick={ this.archiveDoneItems }>Remove Done Items</button>
+        </div>
       </section>
     } else {
       view = <div></div>

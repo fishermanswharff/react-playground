@@ -2,6 +2,7 @@ import React from 'react';
 import BaseComponent from './base.jsx';
 import classnames from 'classnames';
 import Refire from '../firebaseModule/Refire.js';
+import ContentEditable from './contentEditable.jsx';
 import { FIREBASE_REFS } from '../constants/FirebaseRefs';
 
 export default class TodoListItem extends BaseComponent {
@@ -14,15 +15,18 @@ export default class TodoListItem extends BaseComponent {
       text: this.props.data.text,
       timestamp: this.props.data.timestamp,
       project: this.props.data.project,
-      id: this.props.id
+      id: this.props.id,
+      textClasses: `label ${this.props.data.done ? 'done-true' : ''}`
     };
 
-    this.bind('handleChecked','convertTimestamp','editTodoListItemText','updateItemText','listenForChanges','onItemDoneUpdate','onItemTextUpdate');
-    this.refire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
-  }
+    this.bind(
+      'handleChecked',
+      'convertTimestamp',
+      'listenForChanges',
+      'onItemDoneUpdate'
+    );
 
-  createMarkup(string) {
-    return { __html: string };
+    this.refire = new Refire({baseUrl: `${FIREBASE_REFS.tasksRef}/${this.props.data.project}/${this.props.id}/`, props: this.props});
   }
 
   handleChecked(event) {
@@ -32,15 +36,17 @@ export default class TodoListItem extends BaseComponent {
       data: { done: !this.state.done },
       success: this.onItemDoneUpdate
     });
+    this.props.onDone();
   }
 
   onItemDoneUpdate(error){
     if(error){
       this.setState({ajaxFail: true});
-      return;
     } else {
-      this.setState({ajaxSuccess: true});
-      return
+      this.setState({
+        ajaxSuccess: true,
+        textClasses: classnames('label', { 'done-true': this.state.done == true })
+      });
     }
   }
 
@@ -56,30 +62,6 @@ export default class TodoListItem extends BaseComponent {
       minutes = string;
     }
     return hours + ':' + minutes + ' ' + month + '/' + day;
-  }
-
-  editTodoListItemText(event){
-    event.preventDefault();
-    event.target.addEventListener('keyup', this.updateItemText);
-  }
-
-  updateItemText(event){
-    this.setState({ inProgress: true });
-    this.refire.update({
-      key: '',
-      data: { text: event.target.textContent },
-      success: this.onItemTextUpdate
-    });
-  }
-
-  onItemTextUpdate(error){
-    if(error){
-      this.setState({ itemUpdated: false, ajaxFail: true, inProgress: false });
-      return;
-    } else {
-      this.setState({ itemUpdated: true, ajaxSuccess: true, inProgress: false });
-      return;
-    }
   }
 
   listenForChanges(){
@@ -100,14 +82,6 @@ export default class TodoListItem extends BaseComponent {
 
   componentDidMount(){
     this.listenForChanges();
-  }
-
-  componentDidUpdate(prevProps, prevState){
-    // do something when the component updated
-  }
-
-  componentWillUnmount(){
-    // do something when the component will unmount
   }
 
   render() {
@@ -144,13 +118,12 @@ export default class TodoListItem extends BaseComponent {
             defaultChecked={this.state.done}
             defaultValue={this.state.done}
           />
-          <span
-            contentEditable
-            onClick={this.editTodoListItemText}
-            onFocus={this.editTodoListItemText}
-            className={textClasses}
-            dangerouslySetInnerHTML={this.createMarkup(this.state.text)}
-          ></span>
+          <ContentEditable
+            {...this.props.data}
+            id={this.state.id}
+            text={this.state.text}
+            classnames={this.state.textClasses}
+          />
           <div className='todo-list-item-metadata'>
             <span className='timestamp'>{this.convertTimestamp(this.state.timestamp)}</span>
             <span className={ajaxClasses}><i className={iconClasses}></i></span>
@@ -163,3 +136,4 @@ export default class TodoListItem extends BaseComponent {
 
 TodoListItem.propTypes = {}
 TodoListItem.defaultProps = {}
+
